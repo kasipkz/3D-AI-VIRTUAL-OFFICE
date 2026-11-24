@@ -1,201 +1,47 @@
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Тойға Ерекше Шақырту — AI VIRTUAL OFFICE</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<!-- HERO — СУРЕТТЕГІДЕЙ КЕҢСЕ -->
+<section class="hero-office">
+  <img src="office.jpg" class="office-bg" alt="AI Office">
+
+  <div class="hero-text">
+    <h1>Тойға Ерекше<br><span>Шақырту</span></h1>
+    <p>AI VIRTUAL OFFICE</p>
+    <div class="slogan">«Сіздің тойыңызға, сіздің AI көмекшіңіз!»</div>
+  </div>
+
+  <!-- 3 ҚЫЗМЕТКЕР — суреттегі орында -->
+  <button class="hotspot left" onclick="openAgent('aidana')">
+    <b>АЙДАНА</b><span>● WORKING • Leads</span>
+  </button>
+
+  <button class="hotspot center" onclick="openAgent('daniyar')">
+    <b>ДАНИЯР</b><span>● ONLINE • Sales</span>
+  </button>
+
+  <button class="hotspot right" onclick="openAgent('meruert')">
+    <b>МӘУЕРТ</b><span>● WORKING • CRM</span>
+  </button>
+</section>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#3b82f6;--purple:#a855f7;--gold:#fbbf24;--bg:#050816;--glass:rgba(255,255,255,.08);--line:rgba(255,255,255,.14)}
-body{font-family:Manrope,sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:inherit;border:0}
-/* TOP */
-.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(5,8,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{font-family:Unbounded,sans-serif;font-size:15px;line-height:1.1}.logo span{color:var(--gold)}
-.badge{font-size:11px;background:linear-gradient(90deg,#22c55e,#3b82f6);padding:5px 10px;border-radius:99px;font-weight:700}
-.demo{font-size:11px;background:#f59e0b;color:#000;padding:5px 9px;border-radius:99px;font-weight:800}
-/* LAYOUT */
-.wrap{display:grid;grid-template-columns:220px 1fr 300px;gap:14px;padding:14px;max-width:1500px;margin:0 auto}
-.card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:14px;backdrop-filter:blur(12px)}
-h2{font-size:15px;margin-bottom:10px} h3{font-size:14px} p{font-size:13px;color:#cbd5e1;line-height:1.5}
-.menu button{display:flex;gap:10px;width:100%;text-align:left;background:transparent;color:#e2e8f0;padding:11px 10px;border-radius:12px;font-size:14px;font-weight:600}
-.menu button.active,.menu button:hover{background:linear-gradient(90deg,rgba(59,130,246,.35),rgba(168,85,247,.35));border:1px solid var(--line)}
-.menu small{display:block;color:#94a3b8;font-size:11px;font-weight:400}
-/* HERO / OFFICE */
-.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(251,191,36,.35);min-height:520px;background:radial-gradient(600px 300px at 20% 0%,rgba(168,85,247,.45),transparent),radial-gradient(600px 300px at 90% 20%,rgba(59,130,246,.45),transparent),linear-gradient(180deg,#0b122e,#050816)}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.65));z-index:1}
-.city{position:absolute;top:18px;left:16px;right:16px;display:flex;justify-content:space-between;z-index:2;font-size:11px;letter-spacing:.12em;color:#fde68a}
-.hero-inner{position:relative;z-index:3;padding:28px 20px 18px;text-align:center}
-.hero-inner h1{font-family:Unbounded,sans-serif;font-size:clamp(24px,4vw,44px);line-height:1.05;text-shadow:0 10px 40px rgba(0,0,0,.6)}
-.hero-inner h1 i{color:var(--gold);font-style:normal}
-.hero-inner .slogan{margin-top:10px;display:inline-block;background:rgba(0,0,0,.45);border:1px solid var(--line);padding:8px 14px;border-radius:99px;font-size:13px}
-/* AGENTS */
-.office{display:flex;gap:14px;justify-content:center;margin-top:22px;flex-wrap:wrap}
-.agent{width:210px;background:rgba(255,255,255,.92);color:#0f172a;border-radius:22px;overflow:hidden;text-align:left;box-shadow:0 20px 50px rgba(0,0,0,.45);transition:.2s}
-.agent:hover{transform:translateY(-4px) scale(1.02)}
-.agent .ava{height:170px;display:flex;align-items:flex-end;justify-content:center;font-size:90px;background:linear-gradient(180deg,#dbeafe,#c4b5fd)}
-.agent .info{padding:12px}
-.agent .info b{font-size:16px}.agent .info span{font-size:12px;color:#64748b}
-.status{display:inline-flex;gap:6px;align-items:center;margin-top:8px;font-size:11px;font-weight:800;padding:5px 8px;border-radius:99px;background:#dcfce7;color:#166534}
-.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.2)}
-.agent button{width:100%;margin-top:10px;padding:10px;border-radius:12px;font-weight:800;background:#0f172a;color:#fff}
-.agent:nth-child(2) button{background:linear-gradient(90deg,#3b82f6,#a855f7)}
-.agent:nth-child(3) button{background:#b45309}
-/* PANELS */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.stat{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:left}
-.stat b{font-size:22px}.stat span{font-size:12px;color:#94a3b8;display:block}
-.tariffs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
-.tariff{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;color:#111;text-align:center}
-.tariff.gold{border:2px solid var(--gold);transform:scale(1.03);box-shadow:0 0 0 4px rgba(251,191,36,.15)}
-.tariff b{font-size:18px}.tariff .price{font-size:20px;font-weight:800;margin:6px 0}
-.tariff button{width:100%;padding:9px;border-radius:10px;background:#111;color:#fff;font-weight:700;margin-top:6px}
-.workflow{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px;font-size:12px;font-weight:700}
-.wf{background:#fff;color:#111;padding:9px 10px;border-radius:12px}.wf small{display:block;color:#64748b;font-weight:400}
-.arrow{color:var(--gold);font-size:18px}
-input,select,textarea{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:#fff;margin-top:8px;outline:none}
-.btn{padding:11px 14px;border-radius:12px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#a855f7);color:#fff}
-.btn-gold{background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#000}
-.list-item{display:flex;justify-content:space-between;gap:8px;padding:10px;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:rgba(0,0,0,.25)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
-.modal.open{display:flex}
-.modal-box{background:#0f172a;border:1px solid var(--line);border-radius:20px;max-width:520px;width:100%;padding:18px;max-height:90vh;overflow:auto}
-@media(max-width:1100px){.wrap{grid-template-columns:180px 1fr}.wrap aside:last-child{display:none}}
-@media(max-width:760px){.wrap{grid-template-columns:1fr;padding:10px}.menu{display:flex;overflow:auto;gap:6px}.menu button{white-space:nowrap;width:auto}.grid2{grid-template-columns:1fr}.tariffs{grid-template-columns:1fr}.office{flex-direction:column;align-items:center}.agent{width:100%;max-width:340px}}
+.hero-office{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(251,191,36,.4);height:560px;background:#050816}
+.office-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-text{position:absolute;top:18px;left:0;right:0;text-align:center;z-index:3;text-shadow:0 4px 20px #000}
+.hero-text h1{font-family:Unbounded,sans-serif;font-size:38px;line-height:1.05}
+.hero-text h1 span{color:#fbbf24}
+.hero-text p{letter-spacing:.3em;font-size:12px;margin-top:6px}
+.slogan{display:inline-block;margin-top:10px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);padding:8px 14px;border-radius:99px;font-size:13px}
+.hotspot{position:absolute;bottom:38px;z-index:4;background:rgba(255,255,255,.95);color:#111;border:0;padding:10px 14px;border-radius:14px;text-align:left;box-shadow:0 10px 30px rgba(0,0,0,.5);cursor:pointer}
+.hotspot b{display:block;font-size:14px}
+.hotspot span{font-size:11px;color:#16a34a;font-weight:800}
+.hotspot.left{left:8%}
+.hotspot.center{left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#3b82f6,#a855f7);color:#fff}
+.hotspot.center span{color:#bbf7d0}
+.hotspot.right{right:8%}
+@media(max-width:760px){
+  .hero-office{height:460px}
+  .hero-text h1{font-size:26px}
+  .hotspot{bottom:18px;padding:8px 10px}
+  .hotspot.left{left:4%}
+  .hotspot.right{right:4%}
+}
 </style>
-</head>
-<body>
-
-<header class="top">
-  <div class="logo">ТОЙҒА ЕРЕКШЕ<br><span>ШАҚЫРТУ • AI OFFICE</span></div>
-  <div style="display:flex;gap:8px;align-items:center"><span class="demo">DEMO • Firebase қосылмаған</span><span class="badge">● ONLINE</span></div>
-</header>
-
-<div class="wrap">
-  <!-- LEFT -->
-  <aside class="card menu" id="menu">
-    <button class="active" data-page="home">🏠 Басты бет<small>3D кеңсе</small></button>
-    <button data-page="crm">👥 Клиенттер<small>CRM • <span data-count="leads">0</span></small></button>
-    <button data-page="leads">🔍 Лид іздеу<small>Айдана</small></button>
-    <button data-page="agents">🤖 AI қызметкерлер<small>3 агент</small></button>
-    <button data-page="chat">💬 Клиентпен сөйлесу<small>Данияр • мақұлдау керек</small></button>
-    <button data-page="tasks">📋 Тапсырмалар<small>Меруерт</small></button>
-    <button data-page="sales">💰 Сатылымдар<small>ҚОЛА / КҮМІС / АЛТЫН</small></button>
-    <button data-page="reports">📊 Есептер<small>Күндік / Айлық</small></button>
-    <button data-page="telegram">📩 Telegram<small>Хабарландыру</small></button>
-    <button data-page="settings">⚙️ Баптаулар<small>Firebase</small></button>
-    <div style="margin-top:12px" class="card"><b>⚠️ Маңызды ереже</b><p style="margin-top:6px">Клиентке ешқандай хабарлама сенің мақұлдауыңсыз жіберілмейді.</p></div>
-  </aside>
-
-  <!-- CENTER -->
-  <main>
-    <section id="page-home">
-      <div class="hero">
-        <div class="city"><span>✦ TOYGA • ALMATY NIGHT</span><span>19:42 • 3 AI ONLINE</span></div>
-        <div class="hero-inner">
-          <h1>Тойға Ерекше<br><i>Шақырту</i></h1>
-          <div style="margin-top:8px;letter-spacing:.25em;font-size:12px">AI VIRTUAL OFFICE</div>
-          <div class="slogan">«Сіздің тойыңызға, сіздің AI көмекшіңіз!»</div>
-
-          <div class="office">
-            <div class="agent"><div class="ava">👩🏻‍💼</div><div class="info"><b>АЙДАНА</b> <span>• Leads Hunter</span><p>Клиент іздейді, лид жинайды, той түрін анықтайды.</p><span class="status"><span class="dot"></span> WORKING • Іздеуде</span><button onclick="openAgent('aidana')">Айдананың панелі →</button></div></div>
-            <div class="agent"><div class="ava">🧑🏻‍💼</div><div class="info"><b>ДАНИЯР</b> <span>• Sales AI</span><p>Жеке ұсыныс жасайды, ҚОЛА / КҮМІС / АЛТЫН ұсынады.</p><span class="status"><span class="dot"></span> ONLINE • Дайын</span><button onclick="openAgent('daniyar')">Даниярдың панелі →</button></div></div>
-            <div class="agent"><div class="ava">👩🏻‍💼</div><div class="info"><b>МӘУЕРТ</b> <span>• CRM Manager</span><p>CRM, сатылым, есеп, тапсырмаларды басқарады.</p><span class="status"><span class="dot"></span> WORKING • Есептеп жатыр</span><button onclick="openAgent('meruert')">Меруерттің панелі →</button></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px"><h2>⚡ Жұмыс ағыны — Workflow</h2>
-        <div class="workflow"><div class="wf">АЙДАНА<small>Лид іздеу</small></div><span class="arrow">→</span><div class="wf">ДАНИЯР<small>Жеке ұсыныс</small></div><span class="arrow">→</span><div class="wf" style="background:var(--gold)">АДАМНЫҢ МАҚҰЛДАУЫ<small>Рұқсат керек!</small></div><span class="arrow">→</span><div class="wf">МӘУЕРТ<small>CRM + Сатылым</small></div></div>
-        <p style="margin-top:10px">Клиентке хабарлама тек сен «Жіберуге рұқсат» деп басқаннан кейін ғана жіберіледі.</p>
-      </div>
-
-      <div class="card" style="margin-top:14px"><h2>💬 Данияр — Ұсыныс генераторы (Демо)</h2>
-        <input id="clientName" placeholder="Клиент аты: мысалы, Аружан">
-        <select id="tariffSelect"><option value="ҚОЛА — 3000₸">ҚОЛА — 3 000 ₸</option><option value="КҮМІС — 5000₸" selected>КҮМІС — 5 000 ₸ (НЕГІЗГІ)</option><option value="АЛТЫН — 10000₸">АЛТЫН — 10 000 ₸</option></select>
-        <button class="btn" style="margin-top:10px" onclick="makeProposal()">✨ Ұсыныс жасау</button>
-        <button class="btn btn-gold" style="margin-top:10px" onclick="approve()">✅ Жіберуге мақұлдаймын</button>
-        <div id="proposalOut" class="list-item" style="display:none"></div>
-        <p id="approveMsg" style="margin-top:8px;color:#4ade80;font-weight:700;display:none">✅ Мақұлданды! Енді ғана жіберуге болады. (Демо режимде нақты жіберілмейді)</p>
-      </div>
-    </section>
-
-    <section id="page-crm" style="display:none" class="card"><h2>👥 Клиенттер (CRM)</h2>
-      <input id="leadName" placeholder="Аты"><input id="leadPhone" placeholder="Телефон / Telegram"><select id="leadType"><option>Үйлену тойы</option><option>Қыз ұзату</option><option>Сүндет той</option><option>Туыған күн</option></select>
-      <button class="btn" style="margin-top:10px" onclick="addLead()">+ Клиент қосу</button><div id="leadsList"></div>
-    </section>
-
-    <section id="page-leads" style="display:none" class="card"><h2>🔍 Лид іздеу — Айдана</h2><p>Айдана тек ашық деректен ұсыныс жасайды. Нақты іздеу үшін аты / қаланы жаз.</p><input id="searchQ" placeholder="Мысалы: Алматы, тойхана, фотограф"><button class="btn" style="margin-top:10px" onclick="fakeSearch()">🔍 Іздеу</button><div id="searchOut"></div></section>
-    <section id="page-agents" style="display:none" class="card"><h2>🤖 AI қызметкерлер</h2><div class="grid2"><div class="stat"><b>АЙДАНА</b><span>Статус: Working • Табылған лид: <span data-count="leads">0</span></span></div><div class="stat"><b>ДАНИЯР</b><span>Статус: Online • Ұсыныс: <span data-count="proposals">0</span></span></div><div class="stat"><b>МӘУЕРТ</b><span>Статус: Working • Сатылым: <span data-count="sales">0</span></span></div><div class="stat"><b>Жалпы табыс</b><span><span data-count="revenue">0</span> ₸</span></div></div></section>
-    <section id="page-chat" style="display:none" class="card"><h2>💬 Клиентпен сөйлесу</h2><p>Бұл жерде тек жоба (draft) жасалады. Жіберу — тек сенің қолыңда.</p><textarea rows="4" id="chatDraft" placeholder="Клиентке жазатын мәтін..."></textarea><button class="btn" style="margin-top:10px" onclick="saveDraft()">💾 Жобаны сақтау</button><div id="drafts"></div></section>
-    <section id="page-tasks" style="display:none" class="card"><h2>📋 Тапсырмалар</h2><input id="taskText" placeholder="Тапсырма: мысалы, Аружанға қоңырау шалу"><button class="btn" style="margin-top:10px" onclick="addTask()">+ Тапсырма қосу</button><div id="tasksList"></div></section>
-    <section id="page-sales" style="display:none" class="card"><h2>💰 Сатылымдар</h2><select id="saleTariff"><option value="3000">ҚОЛА — 3000₸</option><option value="5000">КҮМІС — 5000₸</option><option value="10000">АЛТЫН — 10000₸</option></select><button class="btn" style="margin-top:10px" onclick="addSale()">+ Сатылым қосу</button><div id="salesList"></div></section>
-    <section id="page-reports" style="display:none" class="card"><h2>📊 Есептер</h2><div id="reportBox" class="grid2"></div></section>
-    <section id="page-telegram" style="display:none" class="card"><h2>📩 Telegram хабарландырулары</h2><p>Telegram Bot Token-ді Баптаулар бөліміне енгіз. Демо режимде хабарландыру жіберілмейді.</p><input id="tgMsg" placeholder="Хабарландыру мәтіні"><button class="btn" style="margin-top:10px" onclick="alert('Демо: Telegram қосылмаған. Баптаулардан Token енгіз.')">📩 Тест жіберу</button></section>
-    <section id="page-settings" style="display:none" class="card"><h2>⚙️ Баптаулар — Firebase</h2><p>Project ID: <b>qosshy-joly</b><br>Деректер: <code>aiOffice/crm/leads, tasks, sales, agents, settings</code> — такси жобасына тиіспейді.<br><br>Firebase конфигурациясын <code>firebase.js</code> файлына өзің енгізесің. Бұл файлда құпия кілт жоқ.</p><input placeholder="Firebase apiKey (өзің енгіз)"><input placeholder="Telegram Bot Token (міндетті емес)"><button class="btn" style="margin-top:10px" onclick="alert('Сақталды (демо). Нақты Firebase үшін firebase.js қолдан.)')">Сақтау</button><br><br><button onclick="localStorage.clear();location.reload()" style="background:#ef4444;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700">🗑 Демо деректерді тазалау</button></section>
-  </main>
-
-  <!-- RIGHT -->
-  <aside>
-    <div class="card"><h2>📊 Dashboard</h2><div class="grid2">
-      <div class="stat"><b data-count="leads">0</b><span>Жаңа лидтер</span></div>
-      <div class="stat"><b data-count="proposals">0</b><span>Дайын ұсыныстар</span></div>
-      <div class="stat"><b data-count="sales">0</b><span>Сатылған шақырту</span></div>
-      <div class="stat"><b><span data-count="revenue">0</span> ₸</b><span>Жалпы табыс</span></div>
-    </div><p style="margin-top:10px">Нақты дерек жоқ кезде — 0 көрсетіледі. Жалған статистика жоқ.</p></div>
-
-    <div class="card" style="margin-top:14px"><h2>💎 Тарифтер</h2><div class="tariffs" style="grid-template-columns:1fr">
-      <div class="tariff"><b>🥉 ҚОЛА</b><div class="price">3 000 ₸</div><p>Қарапайым шақырту</p><button onclick="pick('ҚОЛА')">Таңдау</button></div>
-      <div class="tariff gold"><b>🥈 КҮМІС • НЕГІЗГІ</b><div class="price">5 000 ₸</div><p>Әдемі дизайн + музыка</p><button onclick="pick('КҮМІС')">Таңдау</button></div>
-      <div class="tariff"><b>🥇 АЛТЫН</b><div class="price">10 000 ₸</div><p>Премиум + видео</p><button onclick="pick('АЛТЫН')">Таңдау</button></div>
-    </div></div>
-  </aside>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal"><div class="modal-box"><div style="display:flex;justify-content:space-between"><h2 id="mTitle">Агент</h2><button onclick="closeModal()" style="background:#334155;color:#fff;padding:6px 10px;border-radius:8px">✕</button></div><div id="mBody"></div></div></div>
-
-<script>
-// DEMO STORE — localStorage, Firebase жоқ кезде. Нақты Firebase үшін firebase.js қос.
-let db = JSON.parse(localStorage.getItem('aiOffice_demo')||'{"leads":[],"tasks":[],"sales":[],"proposals":[],"drafts":[]}');
-function save(){localStorage.setItem('aiOffice_demo',JSON.stringify(db));render();}
-function render(){
-  document.querySelectorAll('[data-count="leads"]').forEach(e=>e.textContent=db.leads.length);
-  document.querySelectorAll('[data-count="proposals"]').forEach(e=>e.textContent=db.proposals.length);
-  document.querySelectorAll('[data-count="sales"]').forEach(e=>e.textContent=db.sales.length);
-  let rev=db.sales.reduce((s,x)=>s+Number(x.amount||0),0);
-  document.querySelectorAll('[data-count="revenue"]').forEach(e=>e.textContent=rev.toLocaleString('kk-KZ'));
-  document.getElementById('leadsList').innerHTML=db.leads.map((l,i)=>`<div class="list-item"><span><b>${l.name}</b> • ${l.phone} • ${l.type}</span><button onclick="delLead(${i})" style="background:#ef4444;color:#fff;padding:6px 10px;border-radius:8px">✕</button></div>`).join('')||'<p style="margin-top:10px">Әлі клиент жоқ — 0</p>';
-  document.getElementById('tasksList').innerHTML=db.tasks.map((t,i)=>`<div class="list-item"><span>${t.done?'✅ ':''}${t.text}</span><button onclick="toggleTask(${i})" style="background:#22c55e;color:#fff;padding:6px 10px;border-radius:8px">${t.done?'Қайтару':'Орындалды'}</button></div>`).join('')||'<p style="margin-top:10px">Тапсырма жоқ</p>';
-  document.getElementById('salesList').innerHTML=db.sales.map(s=>`<div class="list-item"><span>${s.tariff} — ${Number(s.amount).toLocaleString('kk-KZ')} ₸</span><span>${s.date}</span></div>`).join('')||'<p style="margin-top:10px">Сатылым жоқ — 0 ₸</p>';
-  document.getElementById('drafts').innerHTML=db.drafts.map(d=>`<div class="list-item"><span>${d}</span></div>`).join('')||'';
-  document.getElementById('reportBox').innerHTML=`<div class="stat"><b>${db.leads.length}</b><span>Барлық лид</span></div><div class="stat"><b>${db.sales.length}</b><span>Сатылым саны</span></div><div class="stat"><b>${rev.toLocaleString('kk-KZ')} ₸</b><span>Жалпы табыс</span></div><div class="stat"><b>${db.tasks.filter(t=>!t.done).length}</b><span>Орындалмаған тапсырма</span></div>`;
-}
-function addLead(){let n=document.getElementById('leadName').value.trim(),p=document.getElementById('leadPhone').value.trim(),t=document.getElementById('leadType').value;if(!n)return alert('Атын жаз');db.leads.push({name:n,phone:p||'-',type:t});save();document.getElementById('leadName').value='';document.getElementById('leadPhone').value='';alert('Клиент қосылды ✅')}
-function delLead(i){db.leads.splice(i,1);save()}
-function addTask(){let v=document.getElementById('taskText').value.trim();if(!v)return;db.tasks.push({text:v,done:false});save();document.getElementById('taskText').value=''}
-function toggleTask(i){db.tasks[i].done=!db.tasks[i].done;save()}
-function addSale(){let a=document.getElementById('saleTariff').value;let label=a==3000?'ҚОЛА':a==5000?'КҮМІС':'АЛТЫН';db.sales.push({tariff:label,amount:Number(a),date:new Date().toLocaleDateString('kk-KZ')});save()}
-function makeProposal(){let n=document.getElementById('clientName').value.trim()||'Құрметті клиент';let t=document.getElementById('tariffSelect').value;let txt=`Сәлеметсіз бе, ${n}! 💍 Тойға Ерекше Шақырту дайындадық. Тариф: ${t}. Дизайн — сіздің тойыңызға арнайы. Мақұлдасаңыз, бүгін жасаймыз!`;let el=document.getElementById('proposalOut');el.style.display='flex';el.textContent=txt;db.proposals.push(txt);save();document.getElementById('approveMsg').style.display='none'}
-function approve(){document.getElementById('approveMsg').style.display='block'}
-function pick(name){document.getElementById('tariffSelect').value=name=='ҚОЛА'?'ҚОЛА — 3000₸':name=='КҮМІС'?'КҮМІС — 5000₸':'АЛТЫН — 10000₸';document.getElementById('page-home').scrollIntoView({behavior:'smooth'});alert(name+' таңдалды ✅')}
-function saveDraft(){let v=document.getElementById('chatDraft').value.trim();if(!v)return;db.drafts.push(v);save();document.getElementById('chatDraft').value='';alert('Жоба сақталды. Жіберу үшін сенің рұқсатың керек.')}
-function fakeSearch(){let q=document.getElementById('searchQ').value||'Алматы';document.getElementById('searchOut').innerHTML=`<div class="list-item"><span>🔍 Айдана ұсынысы: <b>${q}</b> бойынша ашық деректен 3 ықтимал клиент табылды (демо). Нақты клиентті өзің тексеріп, CRM-ге қос.</span></div>`}
-function openAgent(who){
-  let data={aidana:{t:'АЙДАНА — Leads Hunter',b:'<p>Міндеті: клиент іздеу, лид жинау, той түрін анықтау.</p><p style="margin-top:8px">Табылған лид: <b>'+db.leads.length+'</b></p><button class="btn" style="margin-top:10px" onclick="goPage(\'leads\')">Лид іздеуге өту</button>'},daniyar:{t:'ДАНИЯР — Sales AI',b:'<p>Міндеті: жеке ұсыныс, ҚОЛА/КҮМІС/АЛТЫН, сөйлесу сценарийі.</p><p style="margin-top:8px">Дайын ұсыныс: <b>'+db.proposals.length+'</b></p><button class="btn" style="margin-top:10px" onclick="goPage(\'home\')">Ұсыныс жасау</button>'},meruert:{t:'МӘУЕРТ — CRM Manager',b:'<p>Міндеті: CRM, сатылым, есеп, тапсырма.</p><p style="margin-top:8px">Сатылым: <b>'+db.sales.length+'</b></p><button class="btn" style="margin-top:10px" onclick="goPage(\'sales\')">Сатылымға өту</button>'}};
-  document.getElementById('mTitle').textContent=data[who].t;document.getElementById('mBody').innerHTML=data[who].b;document.getElementById('modal').classList.add('open');
-}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-function goPage(p){closeModal();document.querySelector(`[data-page="${p}"]`)?.click()}
-document.querySelectorAll('#menu button[data-page]').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#menu button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-  document.querySelectorAll('main section').forEach(s=>s.style.display='none');
-  document.getElementById('page-'+b.dataset.page).style.display='block';
-  window.scrollTo({top:0,behavior:'smooth'});
-});
-render();
-</script>
-</body>
-  </html>
