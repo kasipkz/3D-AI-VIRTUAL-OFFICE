@@ -1,146 +1,577 @@
+
 <!DOCTYPE html>
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Тойға Ерекше Шақырту — AI VIRTUAL OFFICE</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<title>AI Virtual Office | Тойға Ерекше Шақырту</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Manrope,sans-serif;background:#050816;color:#fff;overflow-x:hidden}
-button{cursor:pointer;font-family:inherit;border:0}
-.topbar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(5,8,22,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.12)}
-.logo{font-family:Unbounded,sans-serif;font-size:14px;line-height:1.2}.logo span{color:#fbbf24}
-.pill{font-size:11px;font-weight:800;padding:6px 10px;border-radius:99px;background:#f59e0b;color:#000}
-.pill.green{background:#22c55e;color:#fff}
-.wrap{display:grid;grid-template-columns:210px 1fr 240px;gap:12px;padding:12px;max-width:1500px;margin:0 auto}
-.card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:13px;backdrop-filter:blur(10px)}
-.card h2{font-size:15px;margin-bottom:8px}.card p{font-size:13px;color:#cbd5e1;line-height:1.5}
-.menu button{display:block;width:100%;text-align:left;background:transparent;color:#e2e8f0;padding:11px 10px;border-radius:12px;font-size:14px;font-weight:700}
-.menu button.active,.menu button:hover{background:linear-gradient(90deg,rgba(59,130,246,.4),rgba(168,85,247,.4));border:1px solid rgba(255,255,255,.15)}
-.menu small{display:block;color:#94a3b8;font-size:11px;font-weight:400}
-.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(251,191,36,.45);min-height:560px;background:#050816}
-.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 35%,rgba(0,0,0,.35) 75%,rgba(5,8,22,.85))}
-.hero-top{position:absolute;top:16px;left:0;right:0;z-index:5;text-align:center;text-shadow:0 4px 20px #000}
-.hero-top h1{font-family:Unbounded,sans-serif;font-size:clamp(24px,4vw,40px);line-height:1.05}
-.hero-top h1 span{color:#fbbf24}
-.hero-top .sub{letter-spacing:.28em;font-size:11px;margin-top:6px}
-.slogan{display:inline-block;margin-top:10px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.3);padding:8px 14px;border-radius:99px;font-size:13px}
-.hot{position:absolute;bottom:72px;z-index:6;background:rgba(255,255,255,.96);color:#111;padding:10px 12px;border-radius:14px;text-align:left;min-width:150px;box-shadow:0 12px 30px rgba(0,0,0,.5);transition:.2s}
-.hot:hover{transform:translateY(-3px)}
-.hot b{font-size:14px;display:block}.hot i{font-size:11px;color:#64748b;font-style:normal;display:block;margin-top:2px}.hot span{font-size:11px;font-weight:800;color:#16a34a}
-.hot small{display:block;font-size:11px;color:#64748b}
-.hot button{width:100%;margin-top:8px;padding:8px;border-radius:10px;background:#0f172a;color:#fff;font-weight:800;font-size:12px}
-.hot.a{left:6%}.hot.b{left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#3b82f6,#a855f7);color:#fff}.hot.b small,.hot.b i{color:#e0e7ff}.hot.b span{color:#bbf7d0}.hot.b button{background:#fff;color:#111}.hot.c{right:6%}
-.hero-bottom{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:6;display:flex;gap:8px;align-items:center;background:rgba(8,15,40,.92);border:1px solid rgba(56,189,248,.5);border-radius:14px;padding:9px 12px;font-size:12px;font-weight:700;white-space:nowrap}
-.hero-bottom small{display:block;color:#94a3b8;font-weight:400}.hero-bottom .ok{color:#22c55e}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:11px}.stat b{font-size:20px}.stat span{font-size:12px;color:#94a3b8;display:block}
-.tariff{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.18);font-size:13px;font-weight:700}.tariff:last-child{border:0}.tariff.gold{color:#fbbf24}
-input,select,textarea{width:100%;padding:11px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.35);color:#fff;margin-top:8px;outline:none}
-.btn{padding:11px 14px;border-radius:12px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#a855f7);color:#fff;margin-top:10px}
-.btn-gold{background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#000}
-.list{display:flex;justify-content:space-between;gap:8px;padding:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px;margin-top:8px;background:rgba(0,0,0,.25);font-size:13px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}.modal.open{display:flex}.mbox{background:#0f172a;border:1px solid rgba(255,255,255,.2);border-radius:20px;max-width:520px;width:100%;padding:18px}
-@media(max-width:1100px){.wrap{grid-template-columns:180px 1fr}.wrap aside:last-child{display:none}}
-@media(max-width:760px){
-.wrap{grid-template-columns:1fr;padding:10px}.menu{display:flex;overflow:auto;gap:6px}.menu button{white-space:nowrap;width:auto}.menu small{display:none}
-.hero{min-height:500px}.hero-top h1{font-size:24px}.hot{min-width:105px;padding:8px;bottom:70px}.hot i,.hot small{display:none}.hot.a{left:3%}.hot.c{right:3%}
-.hero-bottom{bottom:10px;max-width:94%;overflow:auto;font-size:11px}
+:root {
+  --bg:#080d1b;
+  --panel:#111c34;
+  --panel2:#172542;
+  --blue:#43a5ff;
+  --purple:#9874ff;
+  --gold:#e8bd69;
+  --green:#36d69b;
+  --text:#f4f7ff;
+  --muted:#9baaca;
+  --border:rgba(130,165,255,.18);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:radial-gradient(ellipse at 70% 0%,#1d3261 0%,#080d1b 55%);
+  color:var(--text);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{
+  width:245px;flex-shrink:0;
+  background:rgba(8,15,32,.95);
+  border-right:1px solid var(--border);
+  padding:25px 16px;
+  position:sticky;top:0;height:100vh;
+}
+.logo{font-size:19px;font-weight:900;line-height:1.5}
+.logo span{color:var(--gold)}
+.logo small{display:block;font-size:10px;color:var(--muted);letter-spacing:3px}
+.nav{margin-top:35px;display:grid;gap:8px}
+.nav button{
+  text-align:left;color:#aebbd8;background:transparent;
+  border:1px solid transparent;padding:13px;border-radius:12px;
+}
+.nav button:hover,.nav button.active{
+  background:#1b3156;color:white;border-color:#3768a8;
+}
+.sidebar-bottom{position:absolute;bottom:25px;color:var(--muted);font-size:12px}
+.online{color:var(--green)}
+main{flex:1;min-width:0;padding:25px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.topbar h1{font-size:22px;margin:0}
+.topbar p{color:var(--muted);font-size:12px;margin:7px 0 0}
+.user{
+  border:1px solid var(--border);padding:10px 14px;
+  border-radius:12px;background:var(--panel);
+}
+.hero{
+  border:1px solid var(--border);border-radius:22px;
+  padding:28px;
+  background:linear-gradient(120deg,#182d55,#20254c 60%,#35275b);
+  position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"✧";position:absolute;right:8%;top:-50px;
+  font-size:230px;color:#ffffff09;
+}
+.hero h2{font-size:clamp(23px,4vw,37px);margin:0 0 10px}
+.hero p{color:#c5d4f2;max-width:600px;line-height:1.6}
+.gold{color:var(--gold)}
+.btn{
+  border:0;border-radius:10px;padding:12px 17px;
+  background:linear-gradient(110deg,#328cf0,#8b6bfa);
+  color:white;font-weight:700;
+}
+.btn:hover{filter:brightness(1.15)}
+.btn.secondary{background:#263958;border:1px solid var(--border)}
+.btn.goldbtn{background:linear-gradient(110deg,#b9873c,#f0d28a);color:#211707}
+.btn.danger{background:#71394c}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:14px;margin:20px 0;
+}
+.card{
+  background:linear-gradient(145deg,#152442,#101a30);
+  border:1px solid var(--border);
+  border-radius:17px;padding:19px;
+  box-shadow:0 12px 35px #0002;
+}
+.stat-label{color:var(--muted);font-size:12px}
+.stat-number{font-size:27px;font-weight:800;margin-top:10px}
+.stat-icon{font-size:22px;float:right}
+.section-title{font-size:19px;margin:28px 0 15px}
+.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.agent{
+  text-align:center;cursor:pointer;transition:.25s;
+  background:linear-gradient(150deg,#1c3156,#111b32);
+  border:1px solid var(--border);border-radius:19px;padding:22px 12px;
+}
+.agent:hover{transform:translateY(-5px);border-color:var(--blue)}
+.avatar{
+  width:85px;height:85px;margin:auto auto 13px;
+  border-radius:25px;display:grid;place-items:center;
+  font-size:45px;
+  background:linear-gradient(135deg,#315d9d,#7251a8);
+  box-shadow:0 0 30px #4b91ff35;
+}
+.agent h3{margin:8px 0}
+.agent p{color:var(--muted);font-size:12px;line-height:1.5}
+.status{font-size:11px;color:var(--green)}
+.agent-detail{
+  margin-top:12px;background:#0b1428;padding:10px;
+  border-radius:10px;font-size:12px;color:#c5d4f2;
+}
+.workflow{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:10px;margin-top:15px;
+}
+.step{
+  background:#101c34;border:1px solid var(--border);
+  padding:15px;border-radius:13px;text-align:center;
+}
+.step b{display:block;margin:8px 0;font-size:13px}
+.step small{color:var(--muted)}
+.tariffs{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.price{font-size:25px;font-weight:900;margin:12px 0}
+.featured{border:1px solid var(--gold);box-shadow:0 0 25px #d9ad4b18}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1px}
+.page{display:none}
+.page.active{display:block}
+.panel{
+  background:#111d35;border:1px solid var(--border);
+  border-radius:17px;padding:20px;margin-bottom:15px;
+}
+input,select,textarea{
+  background:#0b1427;border:1px solid #314365;
+  color:white;border-radius:9px;padding:12px;width:100%;
+  outline:none;margin:7px 0 13px;
+}
+label{font-size:12px;color:var(--muted)}
+textarea{min-height:100px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:540px}
+th,td{text-align:left;padding:13px;border-bottom:1px solid var(--border);font-size:12px}
+th{color:var(--muted)}
+.pill{padding:5px 9px;border-radius:20px;background:#203d61;color:#9dcaff;font-size:10px}
+.pill.green{background:#123e35;color:#72edba}
+.pill.orange{background:#49371e;color:#f4ca7a}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions button{padding:8px 11px;font-size:11px}
+.empty{color:var(--muted);text-align:center;padding:30px}
+.approval{
+  border:1px solid #bd9148;background:#2c261a;
+  border-radius:12px;padding:14px;margin-top:12px;
+}
+#toast{
+  position:fixed;bottom:20px;right:20px;background:#173c35;
+  color:white;padding:14px 20px;border-radius:12px;
+  display:none;z-index:99;box-shadow:0 5px 30px #0008;
+}
+.mobile-menu{display:none}
+@media(max-width:900px){
+ .sidebar{width:190px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .agents{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .layout{display:block}
+ .sidebar{
+  position:fixed;left:-260px;top:0;z-index:20;
+  width:245px;transition:.3s;
+ }
+ .sidebar.open{left:0}
+ main{padding:15px}
+ .mobile-menu{display:block}
+ .topbar h1{font-size:17px}
+ .hero{padding:20px}
+ .stats{gap:8px}
+ .card{padding:13px}
+ .stat-number{font-size:21px}
+ .workflow{grid-template-columns:1fr 1fr}
+ .tariffs{grid-template-columns:1fr}
+ .form-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+<div class="layout">
 
-<header class="topbar">
-<div class="logo">ТОЙҒА ЕРЕКШЕ<br><span>ШАҚЫРТУ • AI OFFICE</span></div>
-<div style="display:flex;gap:8px"><span class="pill">DEMO</span><span class="pill green">● ONLINE</span></div>
-</header>
-
-<div class="wrap">
-<aside class="card menu" id="menu">
-<button class="active" data-page="home">🏠 Басты бет<small>3D кеңсе</small></button>
-<button data-page="crm">👥 Клиенттер<small>CRM • <span data-c="leads">0</span></small></button>
-<button data-page="leads">🔍 Лид іздеу<small>Айдана</small></button>
-<button data-page="agents">🤖 AI қызметкерлер<small>3 агент</small></button>
-<button data-page="chat">💬 Сөйлесу<small>Данияр • мақұлдау керек</small></button>
-<button data-page="tasks">📋 Тапсырмалар<small>Меруерт</small></button>
-<button data-page="sales">💰 Сатылымдар<small>ҚОЛА / КҮМІС / АЛТЫН</small></button>
-<button data-page="reports">📊 Есептер<small>Күндік / Айлық</small></button>
-<button data-page="telegram">📩 Telegram<small>Хабарландыру</small></button>
-<button data-page="settings">⚙️ Баптаулар<small>Firebase</small></button>
-<div class="card" style="margin-top:10px"><b style="font-size:13px">⚠️ Ереже</b><p style="margin-top:6px">Клиентке хабарлама сенің мақұлдауыңсыз жіберілмейді.</p></div>
+<aside class="sidebar" id="sidebar">
+  <div class="logo">💍 ТОЙҒА <span>ЕРЕКШЕ</span><small>AI VIRTUAL OFFICE</small></div>
+  <div class="nav">
+    <button class="active" data-page="home">🏠 Басты бет</button>
+    <button data-page="crm">👥 Клиенттер (CRM)</button>
+    <button data-page="leads">🔍 Лид іздеу</button>
+    <button data-page="agents">🤖 AI қызметкерлер</button>
+    <button data-page="sales">💰 Сатылымдар</button>
+    <button data-page="reports">📊 Есептер</button>
+    <button data-page="settings">⚙️ Баптаулар</button>
+  </div>
+  <div class="sidebar-bottom">
+    <span class="online">●</span> Демо жүйе белсенді<br>
+    <span>AI команда басқару орталығы</span>
+  </div>
 </aside>
 
 <main>
-<section id="page-home">
-<div class="hero">
-<img class="bg" src="office.jpg" alt="AI Virtual Office">
-<div class="hero-top"><h1>Тойға Ерекше<br><span>Шақырту</span></h1><div class="sub">AI VIRTUAL OFFICE</div><div class="slogan">«Сіздің тойыңызға, сіздің AI көмекшіңіз!»</div></div>
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="btn secondary mobile-menu" onclick="toggleMenu()">☰</button>
+    <div>
+      <h1 id="pageTitle">AI басқару орталығы</h1>
+      <p>Тойға Ерекше Шақырту | Сату кеңсесі</p>
+    </div>
+  </div>
+  <div class="user">👤 Әкімші</div>
+</header>
 
-<div class="hot a"><b>🔍 АЙДАНА</b><i>Leads Hunter</i><span>● WORKING</span><small>Лид іздеу • Той түрін анықтау</small><button onclick="openAgent('aidana')">Панелін ашу →</button></div>
-<div class="hot b"><b>✉️ ДАНИЯР</b><i>Sales AI</i><span>● ONLINE</span><small>Жеке ұсыныс • ҚОЛА / КҮМІС / АЛТЫН</small><button onclick="openAgent('daniyar')">Панелін ашу →</button></div>
-<div class="hot c"><b>📊 МӘУЕРТ</b><i>CRM Manager</i><span>● WORKING</span><small>CRM • Сатылым • Есеп</small><button onclick="openAgent('meruert')">Панелін ашу →</button></div>
+<!-- HOME -->
+<section class="page active" id="home">
+  <div class="hero">
+    <div class="tag">NEXT GENERATION SALES OFFICE</div>
+    <h2>Қош келдіңіз!<br><span class="gold">AI Virtual Office</span></h2>
+    <p>Үш виртуалды қызметкер. Бір ортақ мақсат. Көбірек клиент, көбірек тапсырыс.</p>
+    <button class="btn goldbtn" onclick="showPage('agents')">Командамен танысу →</button>
+  </div>
 
-<div class="hero-bottom"><span>🔍 Лид<small>Айдана</small></span><span style="color:#fbbf24">→</span><span>💬 Ұсыныс<small>Данияр</small></span><span style="color:#fbbf24">→</span><span><span class="ok">✅ Мақұлдау</span><small>Сіз</small></span><span style="color:#fbbf24">→</span><span>📊 Есеп<small>Меруерт</small></span></div>
-</div>
+  <div class="stats">
+    <div class="card"><span class="stat-icon">👥</span><div class="stat-label">Барлық клиент</div><div class="stat-number" id="statLeads">0</div></div>
+    <div class="card"><span class="stat-icon">📨</span><div class="stat-label">Ұсыныстар</div><div class="stat-number" id="statOffers">0</div></div>
+    <div class="card"><span class="stat-icon">🛍️</span><div class="stat-label">Сатылым</div><div class="stat-number" id="statSales">0</div></div>
+    <div class="card"><span class="stat-icon">💰</span><div class="stat-label">Жалпы табыс</div><div class="stat-number" id="statRevenue">0 ₸</div></div>
+  </div>
 
-<div class="card" style="margin-top:12px"><h2>💬 Данияр — Ұсыныс генераторы</h2>
-<input id="cName" placeholder="Клиент аты: Аружан">
-<select id="cTariff"><option>ҚОЛА — 3 000 ₸</option><option selected>КҮМІС — 5 000 ₸ (НЕГІЗГІ)</option><option>АЛТЫН — 10 000 ₸</option></select>
-<button class="btn" onclick="make()">✨ Ұсыныс жасау</button>
-<button class="btn btn-gold" onclick="approve()">✅ Жіберуге мақұлдаймын</button>
-<div id="out"></div><p id="okMsg" style="display:none;color:#4ade80;font-weight:800;margin-top:10px">✅ Мақұлданды! Енді ғана жіберуге болады. (Демо — нақты жіберілмейді)</p></div>
+  <h2 class="section-title">🤖 Біздің AI командамыз</h2>
+  <div class="agents">
+    <div class="agent" onclick="agentInfo('Айдана')">
+      <div class="avatar">👩🏻‍💼</div>
+      <h3>Айдана</h3>
+      <span class="status">● Лид іздеуші</span>
+      <p>Потенциалды клиенттерді табу және CRM-ге енгізу</p>
+      <div class="agent-detail">🔎 Клиент іздеу | 📋 Лидтер</div>
+    </div>
+    <div class="agent" onclick="agentInfo('Данияр')">
+      <div class="avatar">👨🏻‍💼</div>
+      <h3>Данияр</h3>
+      <span class="status">● Сату маманы</span>
+      <p>Жеке ұсыныс дайындау және клиентпен сөйлесу</p>
+      <div class="agent-detail">💬 AI ұсыныс | 💎 Тарифтер</div>
+    </div>
+    <div class="agent" onclick="agentInfo('Меруерт')">
+      <div class="avatar">👩🏻‍💻</div>
+      <h3>Меруерт</h3>
+      <span class="status">● CRM басқарушы</span>
+      <p>Сатылым, статистика және есеп жүргізу</p>
+      <div class="agent-detail">📊 CRM | 📈 Аналитика</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🔄 Сату процесі</h2>
+  <div class="workflow">
+    <div class="step">🔎<b>Айдана</b><small>Клиент іздеу</small></div>
+    <div class="step">💬<b>Данияр</b><small>Ұсыныс дайындау</small></div>
+    <div class="step">🛡️<b>Сен</b><small>Мақұлдау</small></div>
+    <div class="step">📊<b>Меруерт</b><small>Есеп жүргізу</small></div>
+  </div>
+
+  <h2 class="section-title">💎 Біздің тарифтер</h2>
+  <div class="tariffs">
+    <div class="card"><div class="tag">START</div><h3>ҚОЛА</h3><div class="price">3 000 ₸</div><small>Бастапқы пакет</small></div>
+    <div class="card featured"><div class="tag">★ НЕГІЗГІ ҰСЫНЫС</div><h3>КҮМІС</h3><div class="price gold">5 000 ₸</div><small>Танымал пакет</small></div>
+    <div class="card"><div class="tag">VIP</div><h3>АЛТЫН</h3><div class="price">10 000 ₸</div><small>Премиум пакет</small></div>
+  </div>
 </section>
 
-<section id="page-crm" style="display:none" class="card"><h2>👥 Клиенттер (CRM)</h2><input id="lName" placeholder="Аты"><input id="lPhone" placeholder="Телефон / Telegram"><select id="lType"><option>Үйлену тойы</option><option>Қыз ұзату</option><option>Сүндет той</option><option>Туыған күн</option></select><button class="btn" onclick="addLead()">+ Клиент қосу</button><div id="leads"></div></section>
-<section id="page-leads" style="display:none" class="card"><h2>🔍 Лид іздеу — Айдана</h2><p>Айдана тек ашық деректен ұсыныс жасайды. Нақты клиентті өзің тексер.</p><input id="q" placeholder="Мысалы: Алматы, тойхана"><button class="btn" onclick="search()">🔍 Іздеу</button><div id="searchOut"></div></section>
-<section id="page-agents" style="display:none" class="card"><h2>🤖 AI қызметкерлер</h2><div class="grid2"><div class="stat"><b>АЙДАНА</b><span>Working • Лид: <span data-c="leads">0</span></span></div><div class="stat"><b>ДАНИЯР</b><span>Online • Ұсыныс: <span data-c="props">0</span></span></div><div class="stat"><b>МӘУЕРТ</b><span>Working • Сатылым: <span data-c="sales">0</span></span></div><div class="stat"><b><span data-c="revenue">0</span> ₸</b><span>Жалпы табыс</span></div></div></section>
-<section id="page-chat" style="display:none" class="card"><h2>💬 Клиентпен сөйлесу</h2><p>Мұнда тек жоба (draft) жасалады. Жіберу — тек сенің қолыңда.</p><textarea rows="4" id="draft" placeholder="Клиентке жазатын мәтін..."></textarea><button class="btn" onclick="saveDraft()">💾 Жобаны сақтау</button><div id="drafts"></div></section>
-<section id="page-tasks" style="display:none" class="card"><h2>📋 Тапсырмалар</h2><input id="tText" placeholder="Тапсырма: Аружанға қоңырау"><button class="btn" onclick="addTask()">+ Қосу</button><div id="tasks"></div></section>
-<section id="page-sales" style="display:none" class="card"><h2>💰 Сатылымдар</h2><select id="sTariff"><option value="3000">ҚОЛА — 3000₸</option><option value="5000">КҮМІС — 5000₸</option><option value="10000">АЛТЫН — 10000₸</option></select><button class="btn" onclick="addSale()">+ Сатылым қосу</button><div id="sales"></div></section>
-<section id="page-reports" style="display:none" class="card"><h2>📊 Есептер</h2><div id="rep"></div></section>
-<section id="page-telegram" style="display:none" class="card"><h2>📩 Telegram</h2><p>Bot Token-ді Баптаулардан енгіз. Демо режимде жіберілмейді.</p><input id="tg" placeholder="Хабарландыру мәтіні"><button class="btn" onclick="alert('Демо: Telegram қосылмаған')">📩 Тест жіберу</button></section>
-<section id="page-settings" style="display:none" class="card"><h2>⚙️ Баптаулар — Firebase</h2><p>Project: <b>qosshy-joly</b><br>Дерек: <code>aiOffice/crm/leads, tasks, sales, agents, settings</code> — таксиге тиіспейді.<br>Нақты Firebase үшін <code>firebase.js</code> қос. Бұл файлда құпия кілт жоқ.</p><button class="btn" style="background:#ef4444" onclick="localStorage.clear();location.reload()">🗑 Демо тазалау</button></section>
+<!-- CRM -->
+<section class="page" id="crm">
+  <h2 class="section-title">👥 Клиенттер базасы</h2>
+  <div class="panel">
+    <h3>➕ Жаңа клиент қосу</h3>
+    <div class="form-grid">
+      <div><label>Клиент аты</label><input id="clientName" placeholder="Мысалы: Аружан"></div>
+      <div><label>Телефон</label><input id="clientPhone" placeholder="+7 7XX XXX XX XX"></div>
+      <div><label>Той түрі</label><select id="eventType"><option>Үйлену тойы</option><option>Қыз ұзату</option><option>Сүндет той</option><option>Бесік той</option><option>Туған күн</option><option>Мерейтой</option></select></div>
+      <div><label>Тариф</label><select id="clientTariff"><option value="5000">КҮМІС — 5000 ₸</option><option value="3000">ҚОЛА — 3000 ₸</option><option value="10000">АЛТЫН — 10000 ₸</option></select></div>
+    </div>
+    <button class="btn" onclick="addClient()">Клиентті сақтау</button>
+  </div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+      <h3>CRM тізімі</h3>
+      <input style="max-width:200px" id="search" placeholder="Іздеу..." oninput="renderClients()">
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Клиент</th><th>Той түрі</th><th>Тариф</th><th>Статус</th><th>Әрекет</th></tr></thead>
+      <tbody id="clientTable"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- LEADS -->
+<section class="page" id="leads">
+  <h2 class="section-title">🔎 Айдана — Клиент іздеу орталығы</h2>
+  <div class="panel">
+    <h3>Жаңа әлеуетті клиентті тіркеу</h3>
+    <p style="color:var(--muted);font-size:13px">Айдана тапқан немесе өзің анықтаған клиентті осында енгіз. Бұл демо нұсқада интернеттен автоматты іздеу қосылмаған.</p>
+    <label>Клиент немесе серіктес атауы</label>
+    <input id="leadName" placeholder="Мысалы: Аружан / Astana Wedding">
+    <label>Дереккөз</label>
+    <select id="leadSource"><option>Instagram</option><option>TikTok</option><option>Серіктес</option><option>Сайт</option><option>Басқа</option></select>
+    <label>Ашық байланыс дерегі немесе профиль сілтемесі</label>
+    <input id="leadContact" placeholder="Сілтеме немесе байланыс дерегі">
+    <button class="btn" onclick="addLead()">Лидті CRM-ге қосу</button>
+  </div>
+  <div class="panel">
+    <h3>Айдананың тапсырмасы</h3>
+    <p>🎯 Тойға қатысты ашық жарияланымдар мен серіктестікке дайын бизнес парақшаларын зерттеу.</p>
+    <p>🛡️ Платформалардың ережелерін сақтау. Жеке деректерді заңсыз жинамау.</p>
+    <p>📋 Хабарласу үшін адамның мақұлдауын күту.</p>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="page" id="agents">
+  <h2 class="section-title">🤖 AI қызметкерлер басқармасы</h2>
+  <div class="agents">
+    <div class="agent" onclick="agentInfo('Айдана')"><div class="avatar">👩🏻‍💼</div><h3>Айдана</h3><span class="status">● Лид іздеу</span><p>Клиенттерді табу және тізімдеу</p></div>
+    <div class="agent" onclick="agentInfo('Данияр')"><div class="avatar">👨🏻‍💼</div><h3>Данияр</h3><span class="status">● Сату</span><p>Жеке ұсыныс және жауап әзірлеу</p></div>
+    <div class="agent" onclick="agentInfo('Меруерт')"><div class="avatar">👩🏻‍💻</div><h3>Меруерт</h3><span class="status">● CRM</span><p>Есеп және жұмыс үйлестіру</p></div>
+  </div>
+  <div class="panel" style="margin-top:20px">
+    <h3>💬 Данияр — ұсыныс дайындау</h3>
+    <label>Клиентті таңда</label>
+    <select id="offerClient"></select>
+    <label>Жеке ұсыныс</label>
+    <textarea id="offerText" placeholder="Клиентке арналған ұсыныс мәтіні..."></textarea>
+    <button class="btn" onclick="prepareOffer()">Ұсыныс дайындау</button>
+    <div id="approvalBox"></div>
+  </div>
+</section>
+
+<!-- SALES -->
+<section class="page" id="sales">
+  <h2 class="section-title">💰 Сатылымдар</h2>
+  <div class="panel">
+    <h3>Сатып алуды тіркеу</h3>
+    <label>Клиент</label>
+    <select id="saleClient"></select>
+    <label>Төленген тариф</label>
+    <select id="saleTariff"><option value="3000">ҚОЛА — 3000 ₸</option><option value="5000">КҮМІС — 5000 ₸</option><option value="10000">АЛТЫН — 10000 ₸</option></select>
+    <button class="btn goldbtn" onclick="addSale()">Сатылымды тіркеу</button>
+  </div>
+  <div class="panel">
+    <h3>Соңғы сатылымдар</h3>
+    <div id="salesList"></div>
+  </div>
+</section>
+
+<!-- REPORTS -->
+<section class="page" id="reports">
+  <h2 class="section-title">📊 Меруерт — Есеп орталығы</h2>
+  <div class="stats">
+    <div class="card"><div class="stat-label">Клиенттер</div><div class="stat-number" id="rLeads">0</div></div>
+    <div class="card"><div class="stat-label">Сатылым</div><div class="stat-number" id="rSales">0</div></div>
+    <div class="card"><div class="stat-label">Түсім</div><div class="stat-number" id="rRevenue">0 ₸</div></div>
+    <div class="card"><div class="stat-label">Конверсия</div><div class="stat-number" id="rConversion">0%</div></div>
+  </div>
+  <div class="panel">
+    <h3>Меруерттің қорытындысы</h3>
+    <p id="reportText">Әзірге есеп жасауға дерек жеткіліксіз.</p>
+    <button class="btn" onclick="makeReport()">Есепті жаңарту</button>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page" id="settings">
+  <h2 class="section-title">⚙️ Баптаулар</h2>
+  <div class="panel">
+    <h3>Жоба параметрлері</h3>
+    <label>Жоба атауы</label>
+    <input value="Тойға Ерекше Шақырту" disabled>
+    <label>Firebase Project ID</label>
+    <input value="qosshy-joly" disabled>
+    <p style="color:var(--muted);font-size:12px">Firebase интеграциясы әлі қосылмаған. Деректер осы браузердегі localStorage ішінде сақталады.</p>
+  </div>
+  <div class="panel">
+    <h3>Қауіпсіздік</h3>
+    <p>🛡️ Клиентке хабарлама автоматты жіберілмейді.</p>
+    <p>🛡️ Ұсыныс алдымен мақұлдануы керек.</p>
+    <p>🛡️ API құпия кілттерін браузер кодында сақтама.</p>
+  </div>
+  <div class="panel">
+    <h3>Демо деректер</h3>
+    <button class="btn danger" onclick="resetData()">Барлық демо деректерді тазалау</button>
+  </div>
+</section>
+
 </main>
-
-<aside>
-<div class="card"><h2>📊 Dashboard</h2><div class="grid2"><div class="stat"><b data-c="leads">0</b><span>Жаңа лид</span></div><div class="stat"><b data-c="props">0</b><span>Ұсыныс</span></div><div class="stat"><b data-c="sales">0</b><span>Сатылды</span></div><div class="stat"><b><span data-c="revenue">0</span> ₸</b><span>Табыс</span></div></div><p style="margin-top:10px">Дерек жоқ кезде 0. Жалған сан жоқ.</p></div>
-<div class="card" style="margin-top:12px"><h2>💎 Тарифтер</h2><div class="tariff"><span>🥉 ҚОЛА</span><b>3 000 ₸</b></div><div class="tariff gold"><span>🥈 КҮМІС ⭐ НЕГІЗГІ</span><b>5 000 ₸</b></div><div class="tariff"><span>🥇 АЛТЫН</span><b>10 000 ₸</b></div><button class="btn" style="width:100%" onclick="document.getElementById('page-home').scrollIntoView({behavior:'smooth'})">Таңдау →</button></div>
-<div class="card" style="margin-top:12px"><h2>🌃 Кеңсе</h2><p>Панорамалық терезе • Түнгі қала • Неон • Алтын акцент<br><br>3 қызметкерді бас — әрқайсысының панелі ашылады.</p></div>
-</aside>
 </div>
-
-<div class="modal" id="modal"><div class="mbox"><div style="display:flex;justify-content:space-between"><h2 id="mT">Агент</h2><button onclick="closeM()" style="background:#334155;color:#fff;padding:6px 10px;border-radius:8px">✕</button></div><div id="mB" style="margin-top:10px"></div></div></div>
+<div id="toast"></div>
 
 <script>
-let db=JSON.parse(localStorage.getItem('aiOffice_v2')||'{"leads":[],"tasks":[],"sales":[],"props":[],"drafts":[]}');
-function save(){localStorage.setItem('aiOffice_v2',JSON.stringify(db));render()}
-function render(){
- document.querySelectorAll('[data-c="leads"]').forEach(e=>e.textContent=db.leads.length);
- document.querySelectorAll('[data-c="props"]').forEach(e=>e.textContent=db.props.length);
- document.querySelectorAll('[data-c="sales"]').forEach(e=>e.textContent=db.sales.length);
- let rev=db.sales.reduce((s,x)=>s+Number(x.a||0),0);
- document.querySelectorAll('[data-c="revenue"]').forEach(e=>e.textContent=rev.toLocaleString('kk-KZ'));
- document.getElementById('leads').innerHTML=db.leads.map((l,i)=>`<div class="list"><span><b>${l.n}</b> • ${l.p} • ${l.t}</span><button onclick="db.leads.splice(${i},1);save()" style="background:#ef4444;color:#fff;padding:6px 10px;border-radius:8px">✕</button></div>`).join('')||'<p style="margin-top:8px">Клиент жоқ — 0</p>';
- document.getElementById('tasks').innerHTML=db.tasks.map((t,i)=>`<div class="list"><span>${t.d?'✅ ':''}${t.t}</span><button onclick="db.tasks[${i}].d=!db.tasks[${i}].d;save()" style="background:#22c55e;color:#fff;padding:6px 10px;border-radius:8px">Орындалды</button></div>`).join('')||'<p style="margin-top:8px">Тапсырма жоқ</p>';
- document.getElementById('sales').innerHTML=db.sales.map(s=>`<div class="list"><span>${s.l} — ${Number(s.a).toLocaleString('kk-KZ')} ₸</span><span>${s.date}</span></div>`).join('')||'<p style="margin-top:8px">Сатылым жоқ</p>';
- document.getElementById('drafts').innerHTML=db.drafts.map(d=>`<div class="list"><span>${d}</span></div>`).join('')||'';
- document.getElementById('rep').innerHTML=`<div class="grid2"><div class="stat"><b>${db.leads.length}</b><span>Лид</span></div><div class="stat"><b>${db.sales.length}</b><span>Сатылым</span></div><div class="stat"><b>${rev.toLocaleString('kk-KZ')} ₸</b><span>Табыс</span></div><div class="stat"><b>${db.tasks.filter(x=>!x.d).length}</b><span>Орындалмаған</span></div></div>`;
+const $ = id => document.getElementById(id);
+const read = (key, fallback=[]) => {
+  try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+  catch { return fallback; }
+};
+let clients = read("toy_clients");
+let leads = read("toy_leads");
+let sales = read("toy_sales");
+let offers = read("toy_offers");
+
+function save(){
+  localStorage.setItem("toy_clients",JSON.stringify(clients));
+  localStorage.setItem("toy_leads",JSON.stringify(leads));
+  localStorage.setItem("toy_sales",JSON.stringify(sales));
+  localStorage.setItem("toy_offers",JSON.stringify(offers));
+  refresh();
 }
-function addLead(){let n=document.getElementById('lName').value.trim();if(!n)return alert('Атын жаз');db.leads.push({n,p:document.getElementById('lPhone').value||'-',t:document.getElementById('lType').value});save();alert('Қосылды ✅')}
-function addTask(){let v=document.getElementById('tText').value.trim();if(!v)return;db.tasks.push({t:v,d:false});save();document.getElementById('tText').value=''}
-function addSale(){let a=document.getElementById('sTariff').value;db.sales.push({l:a==3000?'ҚОЛА':a==5000?'КҮМІС':'АЛТЫН',a:Number(a),date:new Date().toLocaleDateString('kk-KZ')});save()}
-function make(){let n=document.getElementById('cName').value.trim()||'Құрметті клиент';let t=document.getElementById('cTariff').value;let txt=`Сәлеметсіз бе, ${n}! 💍 Тойға Ерекше Шақырту дайындадық. Тариф: ${t}. Мақұлдасаңыз, бүгін жасаймыз!`;document.getElementById('out').innerHTML=`<div class="list">${txt}</div>`;db.props.push(txt);save();document.getElementById('okMsg').style.display='none'}
-function approve(){document.getElementById('okMsg').style.display='block'}
-function saveDraft(){let v=document.getElementById('draft').value.trim();if(!v)return;db.drafts.push(v);save();document.getElementById('draft').value='';alert('Жоба сақталды. Жіберу үшін рұқсатың керек.')}
-function search(){let q=document.getElementById('q').value||'Алматы';document.getElementById('searchOut').innerHTML=`<div class="list"><span>🔍 Айдана: <b>${q}</b> бойынша 3 ықтимал клиент (демо). Нақтысын өзің тексеріп CRM-ге қос.</span></div>`}
-function openAgent(w){let d={aidana:{t:'АЙДАНА — Leads Hunter',b:'<p>Клиент іздейді, той түрін анықтайды, CRM-ге ұсынады.</p><p style="margin-top:8px">Лид: <b>'+db.leads.length+'</b></p><button class="btn" onclick="go(\'leads\')">Лид іздеуге өту</button>'},daniyar:{t:'ДАНИЯР — Sales AI',b:'<p>Жеке ұсыныс жасайды. ҚОЛА / КҮМІС / АЛТЫН.</p><p style="margin-top:8px">Ұсыныс: <b>'+db.props.length+'</b></p><button class="btn" onclick="go(\'home\')">Ұсыныс жасау</button>'},meruert:{t:'МӘУЕРТ — CRM Manager',b:'<p>CRM, сатылым, есеп, тапсырма.</p><p style="margin-top:8px">Сатылым: <b>'+db.sales.length+'</b></p><button class="btn" onclick="go(\'sales\')">Сатылымға өту</button>'}};document.getElementById('mT').textContent=d[w].t;document.getElementById('mB').innerHTML=d[w].b;document.getElementById('modal').classList.add('open')}
-function closeM(){document.getElementById('modal').classList.remove('open')}
-function go(p){closeM();document.querySelector(`[data-page="${p}"]`).click();window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('#menu button[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('#menu button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('main section').forEach(s=>s.style.display='none');document.getElementById('page-'+b.dataset.page).style.display='block';window.scrollTo({top:0,behavior:'smooth'})});
-render();
+function toast(msg){
+  $("toast").textContent=msg;
+  $("toast").style.display="block";
+  setTimeout(()=>$("toast").style.display="none",2600);
+}
+function toggleMenu(){ $("sidebar").classList.toggle("open"); }
+function showPage(page){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  $(page).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+  const titles={home:"AI басқару орталығы",crm:"Клиенттер CRM",leads:"Айдана — Лид іздеу",agents:"AI қызметкерлер",sales:"Сатылымдар",reports:"Есептер",settings:"Баптаулар"};
+  $("pageTitle").textContent=titles[page];
+  $("sidebar").classList.remove("open");
+  refresh();
+}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+
+function agentInfo(name){
+ const info={
+ Айдана:"Мен Айданамын. Менің міндетім — әлеуетті клиенттер мен серіктестерді анықтап, CRM-ге тіркеу.",
+ Данияр:"Мен Даниярмын. Мен клиенттің қажеттілігін түсініп, оған жеке ұсыныс әзірлеймін.",
+ Меруерт:"Мен Меруертпін. Мен CRM, сатылым статистикасы мен есептерді басқарамын."
+ };
+ alert(info[name]+"\n\nБұл — әзірге демо режимі. Нақты AI API әлі қосылған жоқ.");
+}
+function addClient(){
+ const name=$("clientName").value.trim();
+ if(!name){toast("Клиент атын енгіз!");return;}
+ clients.push({
+  id:Date.now(),name,
+  phone:$("clientPhone").value.trim(),
+  event:$("eventType").value,
+  price:Number($("clientTariff").value),
+  status:"Жаңа клиент",
+  approved:false
+ });
+ $("clientName").value="";
+ $("clientPhone").value="";
+ save();toast("Клиент CRM-ге қосылды!");
+}
+function addLead(){
+ const name=$("leadName").value.trim();
+ if(!name){toast("Лид атауын енгіз!");return;}
+ leads.push({
+  id:Date.now(),name,source:$("leadSource").value,
+  contact:$("leadContact").value.trim(),
+  status:"Жаңа лид"
+ });
+ $("leadName").value="";
+ $("leadContact").value="";
+ save();toast("Лид сақталды!");
+}
+function renderClients(){
+ const q=($("search")?.value||"").toLowerCase();
+ const rows=clients.filter(c=>(c.name+" "+c.event).toLowerCase().includes(q));
+ $("clientTable").innerHTML=rows.length?rows.map(c=>`
+ <tr>
+ <td><b>${escapeHTML(c.name)}</b><br><small>${escapeHTML(c.phone||"Телефон жоқ")}</small></td>
+ <td>${escapeHTML(c.event)}</td>
+ <td>${Number(c.price).toLocaleString("kk-KZ")} ₸</td>
+ <td><span class="pill">${escapeHTML(c.status)}</span></td>
+ <td><div class="actions">
+ <button class="btn secondary" onclick="makeClientOffer(${c.id})">Ұсыныс</button>
+ <button class="btn danger" onclick="deleteClient(${c.id})">Өшіру</button>
+ </div></td></tr>`).join(""):`<tr><td colspan="5" class="empty">Клиенттер әзірге жоқ</td></tr>`;
+}
+function escapeHTML(v){
+ return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function deleteClient(id){
+ if(confirm("Клиентті өшіресің бе?")){
+  clients=clients.filter(c=>c.id!==id);save();toast("Клиент өшірілді");
+ }
+}
+function makeClientOffer(id){
+ showPage("agents");
+ $("offerClient").value=id;
+ $("offerText").value="Сәлеметсіз бе! Сізге "+(clients.find(c=>c.id===id)?.event||"тойыңызға")+" арналған ерекше электронды шақырту сайтын ұсынамыз. Негізгі КҮМІС тарифі — 5000 ₸. Қызықтырса, толық ақпарат беруге дайынбыз.";
+}
+function prepareOffer(){
+ const id=Number($("offerClient").value);
+ const client=clients.find(c=>c.id===id);
+ const text=$("offerText").value.trim();
+ if(!client||!text){toast("Клиент пен ұсыныс мәтінін таңда!");return;}
+ const offer={id:Date.now(),clientId:id,text,status:"Мақұлдауды күтуде"};
+ offers.push(offer);save();
+ $("approvalBox").innerHTML=`
+ <div class="approval">
+ <b>🛡️ Адамның мақұлдауын күтіп тұр</b>
+ <p>${escapeHTML(text)}</p>
+ <p>Клиент: ${escapeHTML(client.name)}</p>
+ <div class="actions">
+ <button class="btn goldbtn" onclick="approveOffer(${offer.id})">✓ Мақұлдау</button>
+ <button class="btn secondary" onclick="rejectOffer(${offer.id})">Бас тарту</button>
+ <button class="btn secondary" onclick="copyOffer(${offer.id})">Көшіру</button>
+ </div>
+ <small>Мақұлдау тек мәтінді жіберуге дайындайды. Автоматты хабарлама жіберілмейді.</small>
+ </div>`;
+ toast("Ұсыныс дайындалды!");
+}
+function approveOffer(id){
+ const o=offers.find(x=>x.id===id);
+ if(!o)return;
+ o.status="Мақұлданды — қолмен жіберу керек";
+ save();toast("Мақұлданды. Мәтінді көшіріп, өзің жібер.");
+ $("approvalBox").innerHTML="<div class='approval'>✓ Мақұлданды. Хабарламаны өзің қолмен жібер.</div>";
+}
+function rejectOffer(id){
+ offers=offers.filter(o=>o.id!==id);save();
+ $("approvalBox").innerHTML="";toast("Ұсыныс қабылданбады");
+}
+function copyOffer(id){
+ const o=offers.find(x=>x.id===id);
+ if(!o)return;
+ if(navigator.clipboard?.writeText){
+  navigator.clipboard.writeText(o.text).then(()=>toast("Мәтін көшірілді")).catch(()=>toast("Көшіру мүмкін болмады"));
+ }else toast("Бұл браузерде көшіру қолжетімсіз");
+}
+function addSale(){
+ const id=Number($("saleClient").value);
+ const c=clients.find(x=>x.id===id);
+ if(!c){toast("Алдымен CRM-ге клиент қос!");return;}
+ const price=Number($("saleTariff").value);
+ sales.push({id:Date.now(),client:c.name,price,date:new Date().toLocaleDateString("kk-KZ")});
+ c.status="Сатып алды";
+ save();toast("Сатылым тіркелді!");
+}
+function makeReport(){
+ const revenue=sales.reduce((s,x)=>s+x.price,0);
+ const rate=clients.length?Math.round(sales.length/clients.length*100):0;
+ $("reportText").textContent=`Меруерттің есебі: CRM-де ${clients.length} клиент бар. ${sales.length} тапсырыс тіркелген. Жалпы түсім ${revenue.toLocaleString("kk-KZ")} ₸. Сатылым конверсиясы ${rate}%.`;
+}
+function resetData(){
+ if(confirm("Барлық жергілікті демо деректерді өшіресің бе?")){
+  clients=[];leads=[];sales=[];offers=[];save();toast("Деректер тазаланды");
+ }
+}
+function refresh(){
+ $("statLeads").textContent=clients.length+leads.length;
+ $("statOffers").textContent=offers.length;
+ $("statSales").textContent=sales.length;
+ const revenue=sales.reduce((s,x)=>s+x.price,0);
+ $("statRevenue").textContent=revenue.toLocaleString("kk-KZ")+" ₸";
+ $("rLeads").textContent=clients.length+leads.length;
+ $("rSales").textContent=sales.length;
+ $("rRevenue").textContent=revenue.toLocaleString("kk-KZ")+" ₸";
+ $("rConversion").textContent=(clients.length?Math.round(sales.length/clients.length*100):0)+"%";
+ renderClients();
+ $("offerClient").innerHTML=clients.map(c=>`<option value="${c.id}">${escapeHTML(c.name)}</option>`).join("")||"<option value=''>Клиент жоқ</option>";
+ $("saleClient").innerHTML=clients.map(c=>`<option value="${c.id}">${escapeHTML(c.name)}</option>`).join("")||"<option value=''>Клиент жоқ</option>";
+ $("salesList").innerHTML=sales.length?sales.slice().reverse().map(s=>`<p>💰 ${escapeHTML(s.client)} — <b>${s.price.toLocaleString("kk-KZ")} ₸</b> <small>${escapeHTML(s.date)}</small></p>`).join(""):"<div class='empty'>Сатылым әзірге жоқ</div>";
+}
+refresh();
 </script>
 </body>
 </html>
