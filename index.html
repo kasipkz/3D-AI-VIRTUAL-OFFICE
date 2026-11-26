@@ -2,294 +2,239 @@
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#FF6B35">
-<title>Туыс-Туған — отбасылық желі</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Туыстар - Жабық Желі</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--o:#FF6B35;--o2:#ff9a5c;--gold:#e3a63b;--ink:#3b2417;--mut:#8a6f5e;--card:#fff;--line:#f0dcc9;--soft:#ffe8d9}
-html,body{margin:0;background:#efdfce;color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}
-#app{position:relative;max-width:480px;min-height:100vh;margin:0 auto;background:linear-gradient(#fff6ec,#ffe9d6);padding-bottom:88px;box-shadow:0 0 40px rgba(120,70,30,.18)}
-.pg{display:none;padding:0 14px}.pg.on{display:block}
-.top{position:sticky;top:0;z-index:15;display:flex;align-items:center;gap:10px;margin:0 -14px 10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:rgba(255,246,236,.92);backdrop-filter:blur(8px)}
-.top h1{margin:0;font-size:24px;flex:1}.top .ib{width:40px;height:40px;border-radius:50%;border:0;background:var(--soft);font-size:19px}
-.logo{width:34px;height:34px;flex:0 0 34px}
-input,textarea,select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;outline:none}
-input:focus,textarea:focus,select:focus{border-color:var(--o)}
-.btn{width:100%;padding:14px;border:0;border-radius:14px;background:var(--o);color:#fff;font-weight:800;font-size:16px;box-shadow:0 6px 16px rgba(255,107,53,.28)}
-.btn.sec{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}.btn.soft{background:var(--soft);color:var(--o);box-shadow:none}.btn.sm{width:auto;padding:9px 16px;font-size:14px}
-/* кіру беті */
-#pg-login{padding-top:calc(24px + env(safe-area-inset-top));text-align:center;position:relative;overflow:hidden}
-#pg-login:before,#pg-login:after{content:"";position:absolute;top:0;bottom:0;width:34px;opacity:.16;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='60' viewBox='0 0 48 24' fill='none' stroke='%23e3a63b' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M24 3L31 12 24 21 17 12Z'/%3E%3Cpath d='M16 12C8 12 6 4 12 3 16 2.6 17 7 14 7.6'/%3E%3Cpath d='M32 12C40 12 42 4 36 3 32 2.6 31 7 34 7.6'/%3E%3C/svg%3E") repeat-y center/34px}
-#pg-login:before{left:0}#pg-login:after{right:0}
-.brand{display:flex;align-items:center;justify-content:center;gap:10px;font-size:34px;font-weight:900;color:#a8561c}
-.hero{position:relative;margin:14px auto 6px;width:300px;height:210px}
-.hero .yurt{position:absolute;right:6px;top:4px}.hero .fam{position:absolute;left:0;right:0;bottom:30px;font-size:46px;letter-spacing:-6px}.hero .tbl{position:absolute;left:0;right:0;bottom:0;font-size:34px}
-.login h2{margin:8px 0 4px;font-size:30px}.login p{margin:0 22px 16px;color:var(--mut)}
-.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;color:var(--ink);box-shadow:0 6px 18px rgba(120,70,30,.15)}
-.g{font-weight:900;font-size:22px;background:conic-gradient(#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;background-clip:text;color:transparent}
-.or{display:flex;align-items:center;gap:12px;color:var(--mut);margin:14px 18px}.or:before,.or:after{content:"";flex:1;height:1px;background:#e5cdb8}
-.fine{font-size:12.5px;color:var(--mut);margin:16px 10px 4px}.fine a,.reg a{color:var(--o);font-weight:800;text-decoration:underline}.reg{margin:10px 0 24px}
-/* лента */
-.card{position:relative;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(120,70,30,.1);margin-bottom:16px}
-.media{position:relative;aspect-ratio:4/5;background:#f4e3d2;overflow:hidden}.media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
-.media .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:54px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.5);pointer-events:none}
-.ov2{position:absolute;left:0;right:0;bottom:0;padding:44px 14px 12px;color:#fff;background:linear-gradient(transparent,rgba(30,12,0,.72));font-size:14.5px}
-.ov2 b{font-size:16px;display:block}.ov2 small{opacity:.85}.ht{color:#ffd9a8;font-weight:700;cursor:pointer}.card-body .ht{color:var(--o)}
-.acts{display:flex;align-items:center;gap:6px;padding:8px 10px}.acts button{border:0;background:none;font-size:17px;padding:6px 9px;border-radius:12px}.acts button.on{background:var(--soft)}.acts .sp{flex:1}
-.cm{padding:0 14px 12px;font-size:14px;color:var(--mut)}.cm b{color:var(--ink)}.cm a{color:var(--o);font-weight:700;cursor:pointer}
-.empty{text-align:center;color:var(--mut);padding:30px 10px}
-/* іздеу */
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;padding:9px 14px;border-radius:14px;background:#fbe3d0;border:0;font-weight:700;color:var(--ink)}.chip.on{background:var(--o);color:#fff}
-.h3{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 8px}.h3 h3{margin:0;font-size:20px}.h3 span{color:var(--o);font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tile{position:relative;aspect-ratio:3/4.2;border-radius:16px;overflow:hidden;background:#f4e3d2;cursor:pointer;color:#fff}
-.tile img{width:100%;height:100%;object-fit:cover;display:block}.tile .meta{position:absolute;left:0;right:0;bottom:0;padding:18px 7px 6px;font-size:11.5px;font-weight:700;background:linear-gradient(transparent,rgba(30,12,0,.75))}
-.tile .dur{position:absolute;right:7px;top:7px;font-size:11px;background:rgba(0,0,0,.45);padding:2px 6px;border-radius:8px}
-/* жүктеу */
-.pv{position:relative;aspect-ratio:16/10;border-radius:20px;background:#f4e3d2;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--mut);text-align:center}
-.pv img,.pv video{width:100%;height:100%;object-fit:cover}.pv .bd{position:absolute;right:10px;top:10px;background:rgba(0,0,0,.5);color:#fff;border-radius:10px;padding:4px 9px;font-size:12px;font-weight:800}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}.two label{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:14px;border:1.5px dashed #e2b98f;background:#fff;font-weight:800;cursor:pointer}
-.sw{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin:8px 0}.sw input[type=text]{border:0;padding:4px;flex:1;background:none}
-.tg{position:relative;width:46px;height:26px;flex:0 0 46px;border-radius:20px;background:#e5d3c3;border:0}.tg:after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}.tg.on{background:var(--o)}.tg.on:after{left:23px}
-h4.s{margin:16px 0 4px;text-align:center;font-size:17px}
-/* чат */
-.row{display:flex;gap:12px;align-items:center;padding:12px;border-bottom:1px solid #f3e3d3;cursor:pointer}.row:last-child{border:0}
-.av{position:relative;flex:0 0 52px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:800}
-.av.on:after{content:"";position:absolute;right:1px;bottom:1px;width:13px;height:13px;border-radius:50%;background:#22c55e;border:2px solid #fff}
-.row .nm{display:flex;justify-content:space-between;font-weight:800}.row .nm small{font-weight:600;color:var(--mut)}.row p{margin:2px 0 0;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:8px}.row p span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bdg{background:var(--o);color:#fff;border-radius:10px;padding:1px 8px;font-size:12px;font-weight:800;flex:0 0 auto}
-.list{background:rgba(255,255,255,.7);border-radius:20px;overflow:hidden}
-.room{display:flex;flex-direction:column;height:calc(100vh - 100px)}.msgs{flex:1;overflow:auto;padding:10px;background:#fff3ea;border-radius:16px;display:flex;flex-direction:column;gap:6px}
-.m{max-width:80%;padding:9px 13px;border-radius:16px;background:#fff;align-self:flex-start;word-wrap:break-word}.m.me{background:var(--o);color:#fff;align-self:flex-end}.m small{display:block;font-size:10.5px;opacity:.7;margin-top:2px}
-.sendr{display:flex;gap:8px;margin-top:10px}.sendr button{flex:0 0 auto;width:52px;padding:0}
-/* профиль */
-.pf{text-align:center}.pf .big{width:92px;height:92px;margin:6px auto;font-size:40px;border-radius:50%;background:linear-gradient(135deg,var(--o2),var(--gold));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;border:3px solid #fff;box-shadow:0 6px 18px rgba(120,70,30,.2)}
-.stats{display:flex;justify-content:space-around;margin:14px 0}.stats b{display:block;font-size:24px}.stats span{color:var(--mut);font-size:13px}
-.tabs{display:flex;gap:8px;margin:14px 0 10px}.tabs button{flex:1;padding:11px 4px;border:0;border-radius:14px;background:rgba(255,255,255,.7);font-weight:800;font-size:13.5px}.tabs button.on{background:#fbd7bd;color:#a8561c}
-/* төменгі меню */
-#nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;display:flex;justify-content:space-around;align-items:center;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#fffaf4;border-radius:22px 22px 0 0;box-shadow:0 -6px 24px rgba(120,70,30,.14);z-index:30}
-#nav button{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:62px;padding:6px 8px;border:0;border-radius:16px;background:none;font-size:11.5px;font-weight:700;color:var(--mut)}
-#nav button.on{background:#fbd7bd;color:#a8561c}#nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-#nav .up{background:var(--o);color:#fff;border-radius:18px;padding:8px 14px;flex-direction:row;gap:6px}#nav .up.on{background:var(--o)}
-#nav .nb{position:absolute;top:0;right:8px;background:#e11d48;color:#fff;border-radius:10px;font-size:10.5px;padding:0 6px;font-weight:800}
-.ov{position:fixed;inset:0;z-index:60;background:rgba(40,20,5,.5);display:none;align-items:flex-end;justify-content:center}.ov.on{display:flex}
-.sheet{width:100%;max-width:480px;max-height:88vh;overflow:auto;background:#fffaf4;border-radius:24px 24px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));animation:up .25s ease-out}
-@keyframes up{from{transform:translateY(40px);opacity:0}}
-.sheet h3{margin:0 0 10px}.sheet .cl{float:right;border:0;background:var(--soft);width:34px;height:34px;border-radius:50%;font-size:16px}.sheet label{display:block;margin:10px 0 2px;font-weight:700;color:var(--mut);font-size:13px}
-#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#3b2417;color:#fff;padding:10px 16px;border-radius:100px;font-weight:700;z-index:90;display:none;max-width:90vw;text-align:center}
+  body{font-family: -apple-system, sans-serif; background:#F8F7F4;}
+  .tab-active{color:black !important; border-top:2px solid black;}
+  video,img{max-width:100%}
+  .hide{display:none}
 </style>
 </head>
 <body>
-<div id="app">
 
-<!-- 1. КІРУ БЕТІ -->
-<section id="pg-login" class="pg on login">
-  <div class="brand"><svg class="logo" style="width:44px;height:44px;flex:0 0 44px" viewBox="0 0 64 64" id="lg1"></svg>Туыс-Туған</div>
-  <div class="hero"><svg class="yurt" width="170" height="130" viewBox="0 0 170 130"><path d="M10 112 L10 70 Q10 20 85 12 Q160 20 160 70 L160 112Z" fill="#f6dcc0" stroke="#e3a63b" stroke-width="3"/><path d="M85 12 L85 112" stroke="#e3a63b" stroke-width="2"/><path d="M60 112 L60 72 Q85 58 110 72 L110 112Z" fill="#ff8a4c" opacity=".85"/><circle cx="85" cy="10" r="5" fill="#e3a63b"/></svg><div class="fam">👵🏻👨🏻‍🦳👩🏻‍🦰👧🏻</div><div class="tbl">🫖🥟🍵</div></div>
-  <h2>Қош келдіңіз!</h2><p>Отбасыңның жанында бол. Естеліктерді бөліс, дастарханның дәмін бірге сезін.</p>
-  <input id="lgName" placeholder="Аты-жөніңіз" maxlength="40" style="margin-bottom:8px">
-  <input id="lgMail" type="email" placeholder="Gmail поштаңыз: aaa@gmail.com" maxlength="80" style="margin-bottom:12px">
-  <button class="btn gbtn" id="lgGo"><span class="g">G</span> Gmail арқылы кіру</button>
-  <div class="or">немесе</div>
-  <button class="btn sec" id="lgPhone">Телефон нөмірі арқылы кіру</button>
-  <div class="fine">Жалғастыру арқылы сіз <a>Қызмет көрсету шарттары</a> мен <a>Құпиялылық саясатымен</a> келісесіз. Деректер тек осы құрылғыда сақталады.</div>
-  <div class="reg">Әлі тіркелмедіңіз бе? <a id="lgReg">Тіркелу</a></div>
-</section>
+<!-- ============ LOGIN ============ -->
+<div id="loginPage" class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white rounded-[24px] p-6 w-full max-w-sm shadow-xl">
+    <div class="text-6xl text-center mb-2">👨‍👩‍👧‍👦</div>
+    <h1 class="text-2xl font-black text-center">ТУЫСТАР</h1>
+    <p class="text-center text-gray-500 text-sm mb-5">Тек шақырумен кіруге болады</p>
+    <input id="loginName" placeholder="Аты-жөнің (мысалы: Аружан)" class="w-full border p-3 rounded-xl mb-3">
+    <input id="inviteCode" placeholder="Шақыру коды" class="w-full border p-3 rounded-xl mb-3 bg-yellow-50" value="TUGAN-2026">
+    <p class="text-xs text-gray-400 mb-3">Демо кодтар: <b>TUGAN-2026</b> , <b>OTBAS-123</b></p>
+    <button onclick="login()" class="w-full bg-black text-white p-3 rounded-xl font-bold">Кіру →</button>
+    <p class="text-center text-xs text-gray-400 mt-4">Бұл жабық отбасылық желі. Бөтен адам кіре алмайды.</p>
+  </div>
+</div>
 
-<!-- 2. БАСТЫ ЛЕНТА -->
-<section id="pg-home" class="pg"><div class="top"><svg class="logo" viewBox="0 0 64 64" id="lg2"></svg><h1>Туыс-Туған</h1><button class="ib" id="hSearch" aria-label="Іздеу">🔍</button></div><div id="feed"></div></section>
+<!-- ============ APP ============ -->
+<div id="appPage" class="hide max-w-md mx-auto min-h-screen pb-24 bg-[#F8F7F4]">
+  <!-- Header -->
+  <div class="sticky top-0 bg-white/90 backdrop-blur z-10 p-4 flex justify-between items-center shadow-sm">
+    <b class="text-lg">Туыстар 👨‍👩‍👧‍👦</b>
+    <div class="flex gap-2 items-center">
+      <span id="myNameLabel" class="text-sm font-bold"></span>
+      <button onclick="logout()" class="text-xs bg-gray-100 px-2 py-1 rounded-full">Шығу</button>
+    </div>
+  </div>
 
-<!-- 3. ІЗДЕУ -->
-<section id="pg-search" class="pg"><div class="top"><h1>Іздеу</h1></div>
-  <input id="q" placeholder="🔍 Отбасы, дәстүр, рецепт деп іздеңіз..." autocomplete="off">
-  <div class="chips" id="chips"></div><div id="sres"></div></section>
+  <!-- FEED -->
+  <div id="page-feed" class="p-3">
+    <!-- Жүктеу боксы -->
+    <div class="bg-white rounded-2xl p-3 mb-3 shadow-sm">
+      <div class="flex gap-2">
+        <img id="myAvatarFeed" class="w-10 h-10 rounded-full object-cover bg-gray-200">
+        <input id="captionInput" placeholder="Бүгін не жаңалық, туыс?" class="flex-1 bg-gray-100 rounded-full px-4 text-sm outline-none">
+      </div>
+      <div class="flex gap-2 mt-3">
+        <label class="flex-1 text-center bg-black text-white py-2 rounded-xl text-sm cursor-pointer">📷 Сурет / 🎬 Видео
+          <input type="file" id="fileInput" accept="image/*,video/*" class="hidden" onchange="previewFile(event)">
+        </label>
+        <button onclick="createPost()" class="flex-1 bg-yellow-400 font-bold py-2 rounded-xl text-sm">Жариялау</button>
+      </div>
+      <div id="previewBox" class="mt-2 hide"></div>
+    </div>
+    <div id="feedList"></div>
+  </div>
 
-<!-- 4. ЖҮКТЕУ -->
-<section id="pg-upload" class="pg"><div class="top"><h1>Жариялау</h1><button class="ib" id="upCancel" aria-label="Бас тарту" style="width:auto;padding:0 14px;font-size:14px;font-weight:800;color:var(--o)">Бас тарту</button></div>
-  <div class="pv" id="pv"><div>📷 Фото немесе 🎬 видео таңдаңыз</div></div>
-  <textarea id="upText" rows="3" maxlength="300" placeholder="Сипаттама жазыңыз... #отбасы" style="margin-top:10px"></textarea>
-  <h4 class="s">Медиа қосу</h4>
-  <div class="two"><label>🖼️ Фото +<input type="file" id="upPhoto" accept="image/*" hidden></label><label>▶️ Видео<input type="file" id="upVideo" accept="video/*" hidden></label></div>
-  <h4 class="s">Көрінетін топ</h4>
-  <select id="upVis"><option value="private">🔒 Жеке — тек отбасы</option><option value="rel">👨‍👩‍👧 Барлық туыстар</option><option value="open">🌍 Ашық</option></select>
-  <div class="sw"><span>Орналасқан жер</span><input type="text" id="upLoc" placeholder="Алматы, Қазақстан"><button class="tg" id="upLocT" aria-label="Орынды қосу"></button></div>
-  <button class="btn" id="upGo" style="margin-top:10px">Жариялау</button><p id="upMsg" class="empty" style="padding:8px"></p></section>
+  <!-- CHAT LIST -->
+  <div id="page-chat" class="p-3 hide">
+    <h2 class="font-bold text-lg mb-3">Хаттар 💬</h2>
+    <div id="chatList"></div>
+  </div>
 
-<!-- 5. ХАБАРЛАМА -->
-<section id="pg-chat" class="pg">
-  <div id="chatList"><div class="top"><h1>Хабарламалар</h1><button class="ib" id="chNew" aria-label="Жаңа чат">✏️</button></div>
-    <input id="chQ" placeholder="🔍 Чаттан іздеу..."><div class="tabs" id="chTabs"></div><div class="list" id="chRows"></div></div>
-  <div id="chatRoom" hidden><div class="top"><button class="ib" id="rmBack" aria-label="Артқа">←</button><div class="av" id="rmAv" style="width:40px;height:40px;flex-basis:40px;font-size:19px"></div><div style="flex:1"><b id="rmName"></b><br><small id="rmSt" style="color:#16a34a"></small></div></div>
-    <div class="room"><div class="msgs" id="msgs"></div><div class="sendr"><input id="msgIn" placeholder="Хабарлама жазыңыз..." maxlength="500"><button class="btn" id="msgGo" aria-label="Жіберу">➤</button></div></div></div>
-</section>
+  <!-- CHAT ROOM -->
+  <div id="page-chatroom" class="p-3 hide">
+    <button onclick="showPage('chat')" class="text-sm mb-3">← Артқа</button>
+    <h2 id="chatWithName" class="font-bold mb-3"></h2>
+    <div id="chatMessages" class="space-y-2 min-h-[50vh]"></div>
+    <div class="flex gap-2 mt-3 sticky bottom-20 bg-[#F8F7F4] py-2">
+      <input id="msgInput" placeholder="Хат жаз..." class="flex-1 border p-3 rounded-xl bg-white">
+      <button onclick="sendMsg()" class="bg-black text-white px-4 rounded-xl">➤</button>
+    </div>
+  </div>
 
-<!-- 6. ПРОФИЛЬ -->
-<section id="pg-profile" class="pg"><div class="top"><h1>Профиль</h1><button class="ib" id="pfSet" aria-label="Баптаулар">⚙️</button></div>
-  <div class="pf"><div class="big" id="pfAv"></div><h2 id="pfName" style="margin:6px 0 0"></h2><div id="pfMail" style="color:var(--mut)"></div><p id="pfBio" style="margin:6px 20px;color:var(--mut)"></p>
-    <div class="stats"><div><b id="stP">0</b><span>Жазбалар</span></div><div><b id="stR">0</b><span>Туыстар</span></div><div><b id="stL">0</b><span>❤️ Лайк</span></div></div>
-    <div style="display:flex;gap:10px"><button class="btn" id="pfEdit">Профиль өңдеу ✏️</button><button class="btn sec" id="pfShare">Бөлісу</button></div></div>
-  <div class="tabs" id="pfTabs"></div><div class="grid" id="myGrid"></div></section>
+  <!-- PROFILE -->
+  <div id="page-profile" class="p-4 hide text-center">
+    <img id="profileAvatar" class="w-24 h-24 rounded-full mx-auto object-cover bg-gray-200">
+    <h2 id="profileName" class="text-xl font-bold mt-2"></h2>
+    <p class="text-gray-500 text-sm">Туыс • Жабық желі мүшесі</p>
+    <div class="flex gap-2 justify-center mt-4">
+      <button onclick="changeAvatar()" class="bg-white border px-4 py-2 rounded-full text-sm">📷 Аватар ауыстыру</button>
+      <input type="file" id="avatarInput" accept="image/*" class="hidden" onchange="saveAvatar(event)">
+    </div>
+    <h3 class="font-bold text-left mt-6 mb-2">Менің посттарым</h3>
+    <div id="myPosts" class="grid grid-cols-3 gap-2"></div>
+    <div class="bg-white rounded-2xl p-4 mt-6 text-left">
+      <b>🔑 Шақыру кодың:</b>
+      <div class="flex gap-2 mt-2">
+        <input id="myInviteCode" value="TUGAN-2026" readonly class="flex-1 border p-2 rounded-lg bg-yellow-50 font-bold text-center">
+        <button onclick="copyInvite()" class="bg-black text-white px-3 rounded-lg text-sm">Көшіру</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">Осы кодты туысыңа жібер. Тек осы кодпен кіре алады.</p>
+    </div>
+  </div>
 
-<nav id="nav" hidden></nav>
-<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
-<div id="toast"></div>
+  <!-- Bottom Nav -->
+  <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t flex justify-around py-3 text-gray-400 text-[11px] font-bold z-20">
+    <button onclick="showPage('feed')" id="tab-feed" class="tab-active flex flex-col items-center">🏠<span>Лента</span></button>
+    <button onclick="showPage('chat')" id="tab-chat" class="flex flex-col items-center">💬<span>Хаттар</span></button>
+    <button onclick="showPage('profile')" id="tab-profile" class="flex flex-col items-center">👤<span>Профиль</span></button>
+  </div>
 </div>
 
 <script>
-/* ================= Туыс-Туған — Бір файл, backend жоқ: localStorage + IndexedDB ================= */
-(function(){
-'use strict';
-var $=function(i){return document.getElementById(i)};
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
-function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){toast('⚠️ Жад толды. Бірнеше жазбаны жойыңыз.')}}
-var tt;function toast(m){var t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(tt);tt=setTimeout(function(){t.style.display='none'},2600)}
-function ago(ts){var d=new Date(ts),n=new Date(),p=function(x){return(x<10?'0':'')+x};if(d.toDateString()===n.toDateString())return p(d.getHours())+':'+p(d.getMinutes());var y=new Date(n-864e5);if(d.toDateString()===y.toDateString())return'Кеше';return p(d.getDate())+'.'+p(d.getMonth()+1)}
-function fmtN(n){return n>=1000?(n/1000).toFixed(1).replace('.',',')+' мың':String(n)}
-function fdur(s){s=Math.round(s||0);return'00:'+(s<10?'0':'')+s}
+// ===== ДЕРЕКТЕР =====
+let DB = JSON.parse(localStorage.getItem('tuys_db') || 'null');
+if(!DB){
+  DB = {
+    users: [
+      {name:'Апа', avatar:'https://i.pravatar.cc/100?img=47'},
+      {name:'Аға', avatar:'https://i.pravatar.cc/100?img=12'},
+      {name:'Әпке', avatar:'https://i.pravatar.cc/100?img=32'},
+    ],
+    posts: [
+      {id:1, author:'Апа', avatar:'https://i.pravatar.cc/100?img=47', caption:'Бүгін бауырсақ пісірдім, келіңдер 😋', type:'image', media:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600', likes:5, comments:[{author:'Аға', text:'Керемет!'}], time:'2 сағ бұрын'},
+      {id:2, author:'Аға', avatar:'https://i.pravatar.cc/100?img=12', caption:'Ауылда қар жауып жатыр ❄️', type:'image', media:'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=600', likes:3, comments:[], time:'5 сағ бұрын'},
+    ],
+    messages: {},
+    me: null
+  };
+  save();
+}
+function save(){ localStorage.setItem('tuys_db', JSON.stringify(DB)); }
 
-/* ---------- Логотип (SVG) ---------- */
-var LOGO='<circle cx="32" cy="32" r="29" fill="#fff" stroke="#e3a63b" stroke-width="3" stroke-dasharray="3 2.2"/><path d="M12 30 Q32 6 52 30" fill="none" stroke="#ff8a1f" stroke-width="2.4"/><path d="M32 12 V30 M22 17 L26 30 M42 17 L38 30" stroke="#ffb02e" stroke-width="1.6"/><g fill="none" stroke="#e3a63b" stroke-width="2.2" stroke-linecap="round"><circle cx="21" cy="36" r="3"/><circle cx="43" cy="36" r="3"/><circle cx="28" cy="40" r="2.2"/><circle cx="36" cy="40" r="2.2"/><path d="M21 40 L17 52 H25 Z M43 40 L39 52 H47 Z M28 43 V52 M36 43 V52"/></g>';
-$('lg1').innerHTML=LOGO;$('lg2').innerHTML=LOGO;
+let pendingMedia = null, pendingType = null;
+let currentChat = null;
 
-/* ---------- IndexedDB: фото/видео файлдарын сақтау (бет жаңартылса да қалады) ---------- */
-var IDB={db:null,mem:{},open:function(){return new Promise(function(r){try{var q=indexedDB.open('tt_media',1);q.onupgradeneeded=function(){q.result.createObjectStore('m')};q.onsuccess=function(){IDB.db=q.result;r()};q.onerror=function(){r()}}catch(e){r()}})},
- put:function(id,b){IDB.mem[id]=b;return new Promise(function(r){if(!IDB.db)return r(false);try{var t=IDB.db.transaction('m','readwrite');t.objectStore('m').put(b,id);t.oncomplete=function(){r(true)};t.onerror=function(){r(false)}}catch(e){r(false)}})},
- get:function(id){if(IDB.mem[id])return Promise.resolve(IDB.mem[id]);return new Promise(function(r){if(!IDB.db)return r(null);try{var q=IDB.db.transaction('m').objectStore('m').get(id);q.onsuccess=function(){r(q.result||null)};q.onerror=function(){r(null)}}catch(e){r(null)}})}};
-var URLS={};function mediaURL(id){if(URLS[id])return Promise.resolve(URLS[id]);return IDB.get(id).then(function(b){if(!b)return'';return URLS[id]=URL.createObjectURL(b)})}
+// ===== КІРУ =====
+function login(){
+  const name = document.getElementById('loginName').value.trim();
+  const code = document.getElementById('inviteCode').value.trim().toUpperCase();
+  if(!name) return alert('Атыңды жазшы!');
+  if(code !== 'TUGAN-2026' && code !== 'OTBAS-123') return alert('❌ Шақыру коды қате! Тек туыстар кіре алады.');
+  DB.me = {name, avatar:'https://i.pravatar.cc/100?img=5'};
+  // Егер бұрын жоқ болса, тізімге қос
+  if(!DB.users.find(u=>u.name===name)) DB.users.push(DB.me);
+  save(); initApp();
+}
+function logout(){ DB.me=null; save(); location.reload(); }
+function initApp(){
+  if(!DB.me){ return; }
+  document.getElementById('loginPage').classList.add('hide');
+  document.getElementById('appPage').classList.remove('hide');
+  document.getElementById('myNameLabel').innerText = DB.me.name;
+  document.getElementById('myAvatarFeed').src = DB.me.avatar;
+  document.getElementById('profileAvatar').src = DB.me.avatar;
+  document.getElementById('profileName').innerText = DB.me.name;
+  renderFeed(); renderChatList(); renderMyPosts();
+}
+if(DB.me) initApp();
 
-/* ---------- Демо суреттер (SVG, сыртқы сілтемесіз) ---------- */
-function art(emoji,c1,c2){var s='<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient></defs><rect width="800" height="1000" fill="url(#g)"/><circle cx="650" cy="150" r="120" fill="#fff" opacity=".18"/><circle cx="120" cy="820" r="170" fill="#fff" opacity=".14"/><text x="400" y="560" font-size="300" text-anchor="middle">'+emoji+'</text></svg>';return'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s)}
+// ===== ЛЕНТА =====
+function previewFile(e){
+  const f = e.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    pendingMedia = ev.target.result;
+    pendingType = f.type.startsWith('video') ? 'video' : 'image';
+    document.getElementById('previewBox').classList.remove('hide');
+    document.getElementById('previewBox').innerHTML = pendingType==='video' ? `<video src="${pendingMedia}" controls class="w-full rounded-xl"></video>` : `<img src="${pendingMedia}" class="w-full rounded-xl">`;
+  };
+  reader.readAsDataURL(f);
+}
+function createPost(){
+  const cap = document.getElementById('captionInput').value.trim();
+  if(!pendingMedia && !cap) return alert('Сурет немесе мәтін жаз!');
+  DB.posts.unshift({id: Date.now(), author: DB.me.name, avatar: DB.me.avatar, caption: cap || 'Жаңа пост ❤️', type: pendingType || 'image', media: pendingMedia || 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600', likes:0, comments:[], time:'Қазір', liked:false});
+  pendingMedia=null; document.getElementById('captionInput').value=''; document.getElementById('previewBox').classList.add('hide'); document.getElementById('previewBox').innerHTML='';
+  save(); renderFeed(); renderMyPosts(); alert('✅ Жарияланды!');
+}
+function renderFeed(){
+  const el = document.getElementById('feedList');
+  el.innerHTML = DB.posts.map((p, idx)=>`
+    <div class="bg-white rounded-2xl p-3 mb-3 shadow-sm">
+      <div class="flex items-center gap-2 mb-2">
+        <img src="${p.avatar}" class="w-9 h-9 rounded-full object-cover">
+        <div><div class="font-bold text-sm">${p.author}</div><div class="text-[11px] text-gray-400">${p.time}</div></div>
+      </div>
+      <p class="text-sm mb-2">${p.caption}</p>
+      ${p.media ? (p.type==='video' ? `<video src="${p.media}" controls class="w-full rounded-xl"></video>` : `<img src="${p.media}" class="w-full rounded-xl">`) : ''}
+      <div class="flex gap-4 mt-3 text-sm">
+        <button onclick="likePost(${idx})" class="font-bold ${p.liked?'text-red-500':''}">❤️ ${p.likes}</button>
+        <button onclick="document.getElementById('cmt-${idx}').focus()" class="text-gray-500">💬 ${p.comments.length} Пікір</button>
+      </div>
+      <div class="mt-2 space-y-1">${p.comments.map(c=>`<div class="text-sm bg-gray-50 p-2 rounded-lg"><b>${c.author}:</b> ${c.text}</div>`).join('')}</div>
+      <div class="flex gap-2 mt-2"><input id="cmt-${idx}" placeholder="Пікір жаз..." class="flex-1 bg-gray-100 rounded-full px-3 py-2 text-sm"><button onclick="addComment(${idx})" class="bg-black text-white px-3 rounded-full text-sm">Жібер</button></div>
+    </div>`).join('');
+}
+function likePost(i){ DB.posts[i].liked = !DB.posts[i].liked; DB.posts[i].likes += DB.posts[i].liked?1:-1; save(); renderFeed(); }
+function addComment(i){
+  const inp = document.getElementById('cmt-'+i); if(!inp.value.trim()) return;
+  DB.posts[i].comments.push({author: DB.me.name, text: inp.value}); save(); renderFeed();
+}
 
-/* ---------- Күй ---------- */
-var me=load('tt_user',null),posts=load('tt_posts',null),chats=load('tt_chats',null),cur=null,tab='all',pfTab='posts',pending=null;
-function seed(){var H=36e5;
- posts=[{id:'p1',user:'Анашым ❤️',mine:0,text:'Бүгін бауырсақ пісірдім #отбасы #бауырсақ',art:art('🥟','#ffb88a','#e3742f'),type:'art',likes:24,liked:0,saved:0,views:12100,comments:[{u:'Ағажан',t:'Иісі осында келіп тұр 😋'}],ts:Date.now()-3*H},
- {id:'p2',user:'Ағажан',mine:0,text:'Ата-әжемізбен кездесу #ата-әже #отбасы',art:art('👵🏻👴🏻','#f4c58a','#b8742b'),type:'art',likes:18,liked:0,saved:0,views:8400,comments:[],ts:Date.now()-26*H},
- {id:'p3',user:'Сіңілім',mine:0,text:'Дастархан дайын! #отбасы #дәстүр',art:art('🫖','#ffcf9e','#d4812f'),type:'art',likes:32,liked:0,saved:0,views:5700,comments:[],ts:Date.now()-50*H},
- {id:'p4',user:'Әжем',mine:0,text:'Қонақжайлылық — біздің дәстүр #қонақжайлық #дәстүр',art:art('🏕️','#f7d3a1','#c8873a'),type:'art',likes:41,liked:0,saved:0,views:9300,comments:[],ts:Date.now()-70*H}];save('tt_posts',posts)}
-function seedChats(){var H=36e5;chats=[
- {id:'c1',name:'Анашым ❤️',g:0,col:'#e3742f',on:1,unread:2,msgs:[{f:'t',t:'Балам, қашан келесің?',ts:Date.now()-5*H},{f:'t',t:'Бауырсақ дайын 😋',ts:Date.now()-4*H}]},
- {id:'c2',name:'Әке',g:0,col:'#8a5a2b',on:1,unread:0,msgs:[{f:'t',t:'Ертең ауылға барамыз. Сағат 9-да жолға шығамыз 🚗',ts:Date.now()-6*H}]},
- {id:'c3',name:'Қарлығаш (сіңілім)',g:0,col:'#d4577f',on:0,unread:0,msgs:[{f:'t',t:'Фотоны көрдің бе? Дастархан өте керемет шықты 😍',ts:Date.now()-26*H}]},
- {id:'c4',name:'Ағажан',g:0,col:'#4b7bb5',on:0,unread:0,msgs:[{f:'t',t:'Ертең келем',ts:Date.now()-27*H}]},
- {id:'c5',name:'Отбасы тобы 👨‍👩‍👧‍👦',g:1,col:'#6b8e4e',on:0,unread:5,msgs:[{f:'t',t:'Жексенбі жиналамыз ба?',ts:Date.now()-30*H}]},
- {id:'c6',name:'Әже',g:0,col:'#b8742b',on:0,unread:0,msgs:[{f:'t',t:'Құтты болсын! Қайырлы түн, балаларым 🥰',ts:Date.now()-50*H}]}];save('tt_chats',chats)}
-if(!posts)seed();if(!chats)seedChats();
-function sP(){save('tt_posts',posts)}function sC(){save('tt_chats',chats)}function sU(){save('tt_user',me)}
+// ===== ЧАТ =====
+function renderChatList(){
+  document.getElementById('chatList').innerHTML = DB.users.filter(u=>u.name!==DB.me.name).map(u=>`
+    <div onclick="openChat('${u.name}')" class="flex items-center gap-3 bg-white p-3 rounded-2xl mb-2 cursor-pointer">
+      <img src="${u.avatar}" class="w-11 h-11 rounded-full object-cover"><div><div class="font-bold">${u.name}</div><div class="text-xs text-gray-400">Туыс • онлайн</div></div><span class="ml-auto">›</span>
+    </div>`).join('') || '<p class="text-gray-500 text-center">Әлі туыс жоқ</p>';
+}
+function openChat(name){
+  currentChat = name; document.getElementById('chatWithName').innerText = name; showPage('chatroom'); renderMessages();
+}
+function renderMessages(){
+  const msgs = DB.messages[currentChat] || [];
+  document.getElementById('chatMessages').innerHTML = msgs.map(m=>`<div class="bg-white p-3 rounded-2xl max-w-[80%] ${m.from==='me'?'ml-auto bg-black text-white':''}">${m.text}</div>`).join('') || '<p class="text-gray-400 text-center text-sm">Әлі хат жоқ. Сәлем деп жаз!</p>';
+}
+function sendMsg(){
+  const inp = document.getElementById('msgInput'); if(!inp.value.trim()) return;
+  if(!DB.messages[currentChat]) DB.messages[currentChat]=[];
+  DB.messages[currentChat].push({from:'me', text: inp.value});
+  // Демо жауап
+  setTimeout(()=>{ DB.messages[currentChat].push({from:'other', text:'Жақсы, жаным! 😊'}); save(); renderMessages(); }, 1000);
+  inp.value=''; save(); renderMessages();
+}
 
-/* ---------- Беттер мен меню ---------- */
-var ICON={home:'<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',plus:'<path d="M12 5v14M5 12h14"/>',chat:'<path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6A8 8 0 1 1 21 12z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>'};
-function buildNav(){var n=$('nav'),it=[['home','Басты'],['search','Іздеу'],['upload','Жүктеу'],['chat','Хабарлама'],['profile','Профиль']];n.innerHTML=it.map(function(x){return'<button data-p="'+x[0]+'" id="n-'+x[0]+'" class="'+(x[0]==='upload'?'up':'')+'"><svg viewBox="0 0 24 24">'+ICON[x[0]==='upload'?'plus':x[0]]+'</svg><span>'+x[1]+'</span></button>'}).join('');
- n.onclick=function(e){var b=e.target.closest('button');if(b)go(b.dataset.p)}}
-function badge(){var u=chats.reduce(function(a,c){return a+c.unread},0),b=$('n-chat');if(!b)return;var o=b.querySelector('.nb');if(o)o.remove();if(u){var s=document.createElement('i');s.className='nb';s.textContent=u;b.appendChild(s)}}
-function go(p){document.querySelectorAll('.pg').forEach(function(e){e.classList.remove('on')});$('pg-'+p).classList.add('on');document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.p===p)});window.scrollTo(0,0);
- if(p==='home')renderFeed();if(p==='search')renderSearch();if(p==='chat'){closeRoom();renderChats()}if(p==='profile')renderProfile();if(p==='upload')resetUp();badge()}
+// ===== ПРОФИЛЬ =====
+function renderMyPosts(){
+  document.getElementById('myPosts').innerHTML = DB.posts.filter(p=>p.author===DB.me.name).map(p=> p.type==='video' ? `<video src="${p.media}" class="w-full aspect-square object-cover rounded-xl"></video>` : `<img src="${p.media}" class="w-full aspect-square object-cover rounded-xl">`).join('') || '<p class="col-span-3 text-gray-400 text-sm">Әлі пост жоқ</p>';
+}
+function changeAvatar(){ document.getElementById('avatarInput').click(); }
+function saveAvatar(e){
+  const r = new FileReader(); r.onload = ev=>{ DB.me.avatar = ev.target.result; save(); initApp(); }; r.readAsDataURL(e.target.files[0]);
+}
+function copyInvite(){ navigator.clipboard.writeText(document.getElementById('myInviteCode').value); alert('Көшірілді! Туысыңа жібер.'); }
 
-/* ---------- 1. Кіру ---------- */
-var phoneMode=false;
-$('lgPhone').onclick=function(){phoneMode=!phoneMode;$('lgMail').type=phoneMode?'tel':'email';$('lgMail').placeholder=phoneMode?'Телефон: +7 7XX XXX XX XX':'Gmail поштаңыз: aaa@gmail.com';this.textContent=phoneMode?'Gmail арқылы кіру үшін қайту':'Телефон нөмірі арқылы кіру';$('lgMail').focus()};
-$('lgReg').onclick=function(){$('lgName').focus();toast('Аты-жөніңіз бен Gmail енгізсеңіз жеткілікті — тіркелу автоматты 🎉')};
-$('lgGo').onclick=function(){var n=$('lgName').value.trim(),m=$('lgMail').value.trim();if(n.length<2){toast('Аты-жөніңізді жазыңыз');$('lgName').focus();return}
- if(phoneMode){if(m.replace(/\D/g,'').length<10){toast('Телефон нөмірін дұрыс жазыңыз');return}}else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){toast('Gmail поштаңызды дұрыс жазыңыз (aaa@gmail.com)');return}
- me={name:n,mail:m,bio:'Отбасы ❤️ Дәстүр мен жылулық'};sU();enter();toast('Қош келдіңіз, '+n+'! 🎉')};
-function enter(){$('nav').hidden=false;buildNav();go('home')}
-
-/* ---------- 2. Лента ---------- */
-function tags(t){return esc(t).replace(/#([\p{L}\d_-]+)/gu,'<span class="ht" data-q="#$1">#$1</span>')}
-function thumb(p){return p.art||p.poster||''}
-function cardHTML(p){var med=p.type==='video'?'<video data-mid="'+p.mediaId+'" poster="'+esc(p.poster||'')+'" muted loop playsinline preload="metadata"></video><div class="play">▶</div>':p.mediaId?'<img data-mid="'+p.mediaId+'" alt="">':'<img src="'+p.art+'" alt="">';
- var cm=p.comments.length?'<div class="cm">'+p.comments.slice(-2).map(function(c){return'<div><b>'+esc(c.u)+':</b> '+esc(c.t)+'</div>'}).join('')+(p.comments.length>2?'<a data-a="cms" data-i="'+p.id+'">Барлық '+p.comments.length+' пікірді көру</a>':'')+'</div>':'';
- return'<div class="card" data-id="'+p.id+'"><div class="media" data-a="tap">'+med+'<div class="ov2"><b>'+esc(p.user)+'</b>'+tags(p.text)+'<br><small>'+ago(p.ts)+(p.loc?' · 📍 '+esc(p.loc):'')+(p.vis==='private'?' · 🔒':'')+'</small></div></div>'+actsHTML(p)+'<div class="cmw">'+cm+'</div></div>'}
-function actsHTML(p){return'<div class="acts"><button data-a="like" class="'+(p.liked?'on':'')+'">'+(p.liked?'❤️':'🤍')+' '+p.likes+'</button><button data-a="cm">💬 '+p.comments.length+'</button><button data-a="sh">↗️ Бөлісу</button><span class="sp"></span>'+(p.mine?'<button data-a="del" aria-label="Жою">🗑</button>':'')+'<button data-a="sv" class="'+(p.saved?'on':'')+'">'+(p.saved?'🔖':'🏷️')+'</button></div>'}
-function hydrate(root){[].forEach.call((root||document).querySelectorAll('[data-mid]'),function(el){if(el.dataset.done)return;el.dataset.done=1;mediaURL(el.dataset.mid).then(function(u){if(u)el.src=u;else if(el.tagName==='VIDEO')el.parentNode.insertAdjacentHTML('beforeend','<div class="empty">Видео табылмады</div>')})})}
-var io=null;
-function watch(){if(io)io.disconnect();if(!('IntersectionObserver' in window))return;io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target.querySelector('video'),card=e.target.closest('.card'),p=card&&byId(card.dataset.id);if(e.isIntersecting){if(v&&v.src)v.play().catch(function(){});if(p&&!p.seen){p.seen=1;p.views=(p.views||0)+1;sP()}}else if(v)v.pause()})},{threshold:.6});[].forEach.call(document.querySelectorAll('#feed .media'),function(m){io.observe(m)})}
-function byId(id){return posts.filter(function(p){return p.id===id})[0]}
-function renderFeed(){var f=$('feed');f.innerHTML=posts.length?posts.map(cardHTML).join(''):'<div class="empty">Әзірге жазба жоқ. Төмендегі «Жүктеу» басып, алғашқы жазбаңызды жариялаңыз!</div>';hydrate(f);watch()}
-function rerenderCard(id){var p=byId(id);[].forEach.call(document.querySelectorAll('.card[data-id="'+id+'"]'),function(c){var a=c.querySelector('.acts');if(a)a.outerHTML=actsHTML(p);var w=c.querySelector('.cmw');if(w)w.innerHTML=(cardHTML(p).match(/<div class="cmw">([\s\S]*)<\/div><\/div>$/)||[0,''])[1]})}
-function act(e){var b=e.target.closest('[data-a]');if(!b)return;var c=b.closest('.card'),id=c?c.dataset.id:b.dataset.i,p=byId(id),a=b.dataset.a;if(!p)return;
- if(a==='like'){p.liked=!p.liked;p.likes+=p.liked?1:-1;sP();rerenderCard(id)}
- else if(a==='cm'){var t=prompt('Пікір жазыңыз:');if(t&&t.trim()){p.comments.push({u:me.name,t:t.trim().slice(0,200)});sP();rerenderCard(id);toast('Пікіріңіз жарияланды ✅')}}
- else if(a==='cms'){openSheet('<button class="cl" data-close>✕</button><h3>Пікірлер ('+p.comments.length+')</h3>'+p.comments.map(function(x){return'<p><b>'+esc(x.u)+':</b> '+esc(x.t)+'</p>'}).join(''))}
- else if(a==='sh'){var url=location.href.split('#')[0]+'#post-'+p.id,txt=p.user+': '+p.text;if(navigator.share)navigator.share({title:'Туыс-Туған',text:txt,url:url}).catch(function(){});else copy(txt+' '+url)}
- else if(a==='sv'){p.saved=!p.saved;sP();rerenderCard(id);toast(p.saved?'Сақталды 🔖':'Сақтаудан алынды')}
- else if(a==='del'){if(confirm('Жазбаны жою керек пе?')){posts=posts.filter(function(x){return x.id!==id});sP();renderFeed();if($('pg-profile').classList.contains('on'))renderProfile();toast('Жазба жойылды')}}
- else if(a==='tap'){var v=b.querySelector('video');if(v){if(v.paused)v.play().catch(function(){});else v.pause()}}}
-function copy(t){if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(function(){toast('Сілтеме көшірілді! Туыстарыңа жібер ✅')},function(){toast('Көшіру мүмкін болмады')});else{var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Сілтеме көшірілді! Туыстарыңа жібер ✅')}catch(e){toast('Көшіру мүмкін болмады')}a.remove()}}
-$('feed').addEventListener('click',act);$('hSearch').onclick=function(){go('search')};
-document.addEventListener('click',function(e){var h=e.target.closest('.ht');if(h){setQ(h.dataset.q);closeSheet()}if(e.target.closest('[data-close]'))closeSheet()});
-
-/* ---------- Баспа парақ (sheet) ---------- */
-function openSheet(h){$('sheet').innerHTML=h;$('ov').classList.add('on');hydrate($('sheet'))}
-function closeSheet(){$('ov').classList.remove('on')}
-$('ov').onclick=function(e){if(e.target===this)closeSheet()};document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
-function viewPost(id){var p=byId(id);if(!p)return;openSheet('<button class="cl" data-close>✕</button><h3>'+esc(p.user)+'</h3><div id="vw">'+cardHTML(p)+'</div>');$('vw').addEventListener('click',act);var v=$('vw').querySelector('video');if(v)v.addEventListener('loadeddata',function(){v.play().catch(function(){})})}
-
-/* ---------- 3. Іздеу ---------- */
-var TAGS=['#отбасы','#дәстүр','#бауырсақ','#ата-әже','#қонақжайлық'];
-function setQ(q){$('q').value=q;go('search');$('q').value=q;renderSearch()}
-function tileHTML(p){return'<div class="tile" data-v="'+p.id+'">'+(thumb(p)?'<img src="'+esc(thumb(p))+'" alt="">':'<img data-mid="'+p.mediaId+'" alt="">')+(p.type==='video'?'<span class="dur">'+fdur(p.dur)+'</span>':'')+'<div class="meta">'+(p.views>=1000?'🔥 '+fmtN(p.views)+' қаралым':'❤️ '+p.likes+' · 👁 '+(p.views||0))+'</div></div>'}
-function renderSearch(){var q=$('q').value.trim().toLowerCase();$('chips').innerHTML=TAGS.map(function(t){return'<button class="chip'+(q===t?' on':'')+'" data-q="'+t+'">'+t+'</button>'}).join('');var r=$('sres');
- if(q){var res=posts.filter(function(p){return(p.text+' '+p.user).toLowerCase().indexOf(q)>-1});r.innerHTML='<div class="h3"><h3>Нәтиже</h3><span>'+res.length+'</span></div>'+(res.length?'<div class="grid">'+res.map(tileHTML).join('')+'</div>':'<div class="empty">Табылмады. Басқа сөз жазып көріңіз 🔍</div>')}
- else{var s=posts.slice().sort(function(a,b){return(b.views||0)+b.likes*50-(a.views||0)-a.likes*50}),top=s.slice(0,6),rest=s.slice(6);r.innerHTML='<div class="h3"><h3>Қазір трендте</h3></div><div class="grid">'+top.map(tileHTML).join('')+'</div>'+(rest.length?'<div class="h3"><h3>Сізді қызықтыруы мүмкін</h3></div><div class="grid">'+rest.map(tileHTML).join('')+'</div>':'')}
- hydrate(r)}
-$('q').oninput=renderSearch;$('chips').onclick=function(e){var b=e.target.closest('.chip');if(b){$('q').value=$('q').value.toLowerCase()===b.dataset.q?'':b.dataset.q;renderSearch()}};
-$('sres').onclick=function(e){var t=e.target.closest('.tile');if(t)viewPost(t.dataset.v)};
-
-/* ---------- 4. Жүктеу ---------- */
-function resetUp(){pending=null;$('pv').innerHTML='<div>📷 Фото немесе 🎬 видео таңдаңыз</div>';$('upText').value='';$('upPhoto').value='';$('upVideo').value='';$('upMsg').textContent='';$('upLoc').value='';$('upLocT').classList.remove('on')}
-$('upCancel').onclick=function(){resetUp();go('home')};
-$('upLocT').onclick=function(){this.classList.toggle('on');if(this.classList.contains('on')&&!$('upLoc').value)$('upLoc').value='Алматы, Қазақстан'};
-function compress(file){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){var m=1080,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(function(b){URL.revokeObjectURL(u);b?res({blob:b,poster:c.toDataURL('image/jpeg',.5)}):rej()},'image/jpeg',.82)};im.onerror=function(){rej()};im.src=u})}
-function videoInfo(file){return new Promise(function(res){var u=URL.createObjectURL(file),v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';var done=false,fin=function(po,du){if(done)return;done=true;URL.revokeObjectURL(u);res({poster:po,dur:du})};v.onloadeddata=function(){try{v.currentTime=Math.min(.3,(v.duration||1)/2)}catch(e){fin('',v.duration)}};v.onseeked=function(){try{var c=document.createElement('canvas'),s=Math.min(1,480/Math.max(v.videoWidth,v.videoHeight));c.width=Math.round(v.videoWidth*s);c.height=Math.round(v.videoHeight*s);c.getContext('2d').drawImage(v,0,0,c.width,c.height);fin(c.toDataURL('image/jpeg',.6),v.duration)}catch(e){fin('',v.duration)}};v.onerror=function(){fin('',0)};setTimeout(function(){fin('',v.duration||0)},6000);v.src=u})}
-$('upPhoto').onchange=function(){var f=this.files[0];if(!f)return;$('upVideo').value='';$('upMsg').textContent='Фото өңделуде...';compress(f).then(function(r){pending={type:'photo',blob:r.blob,poster:r.poster};$('pv').innerHTML='<img src="'+URL.createObjectURL(r.blob)+'" alt=""><span class="bd">ФОТО</span>';$('upMsg').textContent=''},function(){$('upMsg').textContent='⚠️ Бұл суретті ашу мүмкін болмады';toast('Фото ашылмады')})};
-$('upVideo').onchange=function(){var f=this.files[0];if(!f)return;$('upPhoto').value='';if(f.size>150*1048576){toast('Видео тым үлкен (150 МБ-тан кіші болсын)');return}$('upMsg').textContent='Видео өңделуде...';videoInfo(f).then(function(i){pending={type:'video',blob:f,poster:i.poster,dur:i.dur};$('pv').innerHTML='<video src="'+URL.createObjectURL(f)+'" controls playsinline muted></video><span class="bd">БЕЙНЕ '+fdur(i.dur)+'</span>';$('upMsg').textContent=''})};
-$('upGo').onclick=function(){var t=$('upText').value.trim();if(!pending&&!t){toast('Фото, видео немесе сипаттама қосыңыз');return}var btn=this;btn.disabled=true;
- var p={id:'u'+Date.now(),user:me.name,mine:1,text:t||'Жаңа жазба',likes:0,liked:0,saved:0,views:0,comments:[],ts:Date.now(),vis:$('upVis').value,loc:$('upLocT').classList.contains('on')?$('upLoc').value.trim():''};
- function fin(){posts.unshift(p);sP();btn.disabled=false;toast('Жарияланды! 🎉');resetUp();go('home')}
- if(!pending){p.type='art';p.art=art('💬','#ffd2a8','#e8913a');fin();return}
- p.type=pending.type;p.poster=pending.poster;p.dur=pending.dur;p.mediaId='m'+Date.now();IDB.put(p.mediaId,pending.blob).then(function(ok){if(!ok)toast('⚠️ Файл тек осы сессияда сақталады');fin()})};
-
-/* ---------- 5. Хабарлама ---------- */
-var CT=[['all','Барлығы'],['fam','Отбасы'],['unr','Оқылмаған']];
-function chatList(){var q=$('chQ').value.trim().toLowerCase();return chats.filter(function(c){return(tab==='all'||(tab==='fam'&&true)||(tab==='unr'&&c.unread>0))&&(!q||c.name.toLowerCase().indexOf(q)>-1||c.msgs.some(function(m){return m.t.toLowerCase().indexOf(q)>-1}))}).sort(function(a,b){return last(b).ts-last(a).ts})}
-function last(c){return c.msgs[c.msgs.length-1]||{t:'',ts:0}}
-function avHTML(c,s){return'<div class="av'+(c.on?' on':'')+'" style="background:'+c.col+'">'+(c.g?'👥':esc(c.name[0]))+'</div>'}
-function renderChats(){$('chTabs').innerHTML=CT.map(function(t){return'<button data-t="'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+'</button>'}).join('');var l=chatList();
- $('chRows').innerHTML=l.length?l.map(function(c){var m=last(c);return'<div class="row" data-c="'+c.id+'">'+avHTML(c)+'<div style="flex:1;min-width:0"><div class="nm"><span>'+esc(c.name)+'</span><small>'+ago(m.ts)+'</small></div><p><span>'+(m.f==='me'?'Сіз: ':'')+esc(m.t)+'</span>'+(c.unread?'<span class="bdg">'+c.unread+'</span>':'')+'</p></div></div>'}).join(''):'<div class="empty">Чат табылмады</div>';badge()}
-$('chTabs').onclick=function(e){var b=e.target.closest('button');if(b){tab=b.dataset.t;renderChats()}};$('chQ').oninput=renderChats;
-$('chRows').onclick=function(e){var r=e.target.closest('.row');if(r)openRoom(r.dataset.c)};
-$('chNew').onclick=function(){var n=prompt('Туысыңыздың аты:');if(n&&n.trim()){var cols=['#e3742f','#4b7bb5','#d4577f','#6b8e4e','#8a5a2b'];chats.unshift({id:'c'+Date.now(),name:n.trim().slice(0,30),g:0,col:cols[chats.length%5],on:1,unread:0,msgs:[]});sC();renderChats();openRoom(chats[0].id)}};
-function openRoom(id){cur=chats.filter(function(c){return c.id===id})[0];if(!cur)return;cur.unread=0;sC();$('chatList').hidden=true;$('chatRoom').hidden=false;$('rmName').textContent=cur.name;$('rmSt').textContent=cur.on?'желіде':'';$('rmAv').outerHTML='<div class="av'+(cur.on?' on':'')+'" id="rmAv" style="width:40px;height:40px;flex-basis:40px;font-size:19px;background:'+cur.col+'">'+(cur.g?'👥':esc(cur.name[0]))+'</div>';showMsgs();badge()}
-function closeRoom(){cur=null;$('chatList').hidden=false;$('chatRoom').hidden=true}
-$('rmBack').onclick=function(){closeRoom();renderChats()};
-function showMsgs(){var m=$('msgs');m.innerHTML=cur.msgs.length?cur.msgs.map(function(x){return'<div class="m'+(x.f==='me'?' me':'')+'">'+esc(x.t)+'<small>'+ago(x.ts)+'</small></div>'}).join(''):'<div class="empty">Әңгімені бастаңыз 👋</div>';m.scrollTop=m.scrollHeight}
-var REP={p:['Жарайды, түсіндім 😊','Рахмет, балам! ❤️','Ал, жақсы, күтемін!','Келіп кет, дастархан дайын 🫖','Аман бол, жаным!'],g:['Жақсы 👍','Мен де келемін!','Керемет! 🎉','Жарайды, жиналамыз 😊']};
-function send(){var v=$('msgIn').value.trim();if(!v||!cur)return;var c=cur;c.msgs.push({f:'me',t:v,ts:Date.now()});$('msgIn').value='';sC();showMsgs();$('rmSt').textContent='жазып жатыр...';
- setTimeout(function(){var pool=c.g?REP.g:REP.p,t=(c.g?'Әжем: ':'')+pool[Math.floor(Math.random()*pool.length)];c.msgs.push({f:'t',t:t,ts:Date.now()});if(cur&&cur.id===c.id){showMsgs();$('rmSt').textContent=c.on?'желіде':''}else c.unread++;sC();badge()},1000)}
-$('msgGo').onclick=send;$('msgIn').onkeydown=function(e){if(e.key==='Enter')send()};
-
-/* ---------- 6. Профиль ---------- */
-var PT=[['posts','Жазбалар'],['vid','Бейнелер'],['saved','Сақталған']];
-function renderProfile(){var mine=posts.filter(function(p){return p.mine});$('pfAv').textContent=me.name[0].toUpperCase();$('pfName').textContent=me.name;$('pfMail').textContent=me.mail;$('pfBio').textContent=me.bio||'';
- $('stP').textContent=mine.length;$('stR').textContent=chats.filter(function(c){return!c.g}).length;$('stL').textContent=mine.reduce(function(a,p){return a+p.likes},0);
- $('pfTabs').innerHTML=PT.map(function(t){return'<button data-t="'+t[0]+'" class="'+(pfTab===t[0]?'on':'')+'">'+t[1]+'</button>'}).join('');
- var l=pfTab==='saved'?posts.filter(function(p){return p.saved}):pfTab==='vid'?mine.filter(function(p){return p.type==='video'}):mine;
- $('myGrid').innerHTML=l.length?l.map(tileHTML).join(''):'<div class="empty" style="grid-column:1/-1">'+(pfTab==='saved'?'Сақталған жазба жоқ. Лентада 🏷️ басыңыз.':'Әлі жазба жоқ. «Жүктеу» басып, жариялаңыз!')+'</div>';hydrate($('myGrid'))}
-$('pfTabs').onclick=function(e){var b=e.target.closest('button');if(b){pfTab=b.dataset.t;renderProfile()}};$('myGrid').onclick=function(e){var t=e.target.closest('.tile');if(t)viewPost(t.dataset.v)};
-$('pfEdit').onclick=function(){openSheet('<button class="cl" data-close>✕</button><h3>Профиль өңдеу</h3><label>Аты-жөні</label><input id="edN" maxlength="40" value="'+esc(me.name)+'"><label>Өзің туралы</label><input id="edB" maxlength="80" value="'+esc(me.bio||'')+'"><button class="btn" id="edS" style="margin-top:14px">Сақтау ✅</button>');$('edS').onclick=function(){var n=$('edN').value.trim();if(n.length<2){toast('Аты-жөніңізді жазыңыз');return}me.name=n;me.bio=$('edB').value.trim();sU();posts.forEach(function(p){if(p.mine)p.user=n});sP();closeSheet();renderProfile();toast('Профиль өзгертілді ✅')}};
-$('pfShare').onclick=function(){var u=location.href.split('#')[0],t='Мен Туыс-Туған желісінде: '+me.name;if(navigator.share)navigator.share({title:'Туыс-Туған',text:t,url:u}).catch(function(){});else copy(t+' '+u)};
-$('pfSet').onclick=function(){openSheet('<button class="cl" data-close>✕</button><h3>Баптаулар</h3><p style="color:var(--mut)">Барлық деректер тек осы құрылғыда (браузерде) сақталады.</p><button class="btn sec" id="stOut" style="margin-bottom:10px">🚪 Шығу</button><button class="btn soft" id="stClr">🗑 Барлық деректерді тазалау</button>');
- $('stOut').onclick=function(){me=null;try{localStorage.removeItem('tt_user')}catch(e){}closeSheet();$('nav').hidden=true;document.querySelectorAll('.pg').forEach(function(e){e.classList.remove('on')});$('pg-login').classList.add('on')};
- $('stClr').onclick=function(){if(!confirm('Барлық жазбалар мен чаттар өшеді. Жалғастыру керек пе?'))return;['tt_user','tt_posts','tt_chats'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});try{indexedDB.deleteDatabase('tt_media')}catch(e){}location.reload()}};
-
-/* ---------- Іске қосу ---------- */
-IDB.open().then(function(){if(me&&me.name)enter()});
-})();
+// ===== НАВИГАЦИЯ =====
+function showPage(p){
+  ['feed','chat','chatroom','profile'].forEach(x=> document.getElementById('page-'+x).classList.add('hide'));
+  document.getElementById('page-'+p).classList.remove('hide');
+  ['feed','chat','profile'].forEach(t=> document.getElementById('tab-'+t)?.classList.remove('tab-active'));
+  if(document.getElementById('tab-'+p)) document.getElementById('tab-'+p).classList.add('tab-active');
+}
 </script>
 </body>
 </html>
