@@ -1,57 +1,272 @@
-Сен "Туыс-Туған" атты веб-беттің толық кодын жаздырғың келеді екен. Бірақ сенің жіберген фрагментің тек бастапқы бөлігі ғана, толық кодты қайта қалпына келтіре алмаймын.
-
-Оның орнына, осы дизайн негізінде **кіру бетінің толық жұмыс істейтін нұсқасын** қазақша тілде жазып берейін:
-
-```html
-
-    
-    
-    Туыс-Туған
-    
-
-    
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Туыс-Туған</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         
-            Туыс-Туған
-            Сүйікті адамдармен байланыста бол
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
         
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
         
+        .logo-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
         
-            Кіру
-            
-            
-            
-                
-                    +7
-                    
-                
-                
-                Кіру
-            
-            
-            
-            
-                
-                
-                Кіру
-            
-            
-            
-                немесе
-            
-            
-            
-                Google
-                Apple
-            
-            
-            
-                Пароль арқылы кіру
-                 | 
-                Тіркелу
-            
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFEFD0;
+            margin-bottom: 10px;
+        }
         
-    
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .login-card {
+            background: #FFEFD0;
+            color: #000;
+            border-radius: 20px;
+            padding: 30px 25px;
+        }
+        
+        .login-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #000;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus {
+            border-color: #000;
+        }
+        
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .country-code {
+            width: 80px;
+            padding: 13px 10px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #000;
+            background: #fff;
+            text-align: center;
+        }
+        
+        .phone-input-wrapper input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-primary {
+            background: #000;
+            color: #fff;
+            margin-top: 10px;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .divider span {
+            background: #FFEFD0;
+            padding: 0 15px;
+            color: #666;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #fff;
+            font-size: 14px;
+            color: #000;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .social-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .links {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .links a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+        }
+        
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo">Туыс-Туған</div>
+            <div class="subtitle">Сүйікті адамдармен байланыста бол</div>
+        </div>
+        
+        <div class="login-card">
+            <div class="login-title">Кіру</div>
+            
+            <!-- Телефон нөмірі арқылы кіру -->
+            <div id="phone-login">
+                <div class="phone-input-wrapper">
+                    <div class="country-code">+7</div>
+                    <input type="tel" placeholder="Телефон нөмірі" id="phone">
+                </div>
+                <input type="text" placeholder="Код" id="code">
+                <button class="btn btn-primary" onclick="loginWithPhone()">Кіру</button>
+            </div>
+            
+            <!-- Пароль арқылы кіру (жасырылған) -->
+            <div id="password-login" class="hide">
+                <input type="text" placeholder="Логин немесе телефон" id="username">
+                <input type="password" placeholder="Пароль" id="password">
+                <button class="btn btn-primary" onclick="loginWithPassword()">Кіру</button>
+            </div>
+            
+            <div class="divider">
+                <span>немесе</span>
+            </div>
+            
+            <div class="social-buttons">
+                <button class="social-btn" onclick="loginWithGoogle()">Google</button>
+                <button class="social-btn" onclick="loginWithApple()">Apple</button>
+            </div>
+            
+            <div class="links">
+                <a href="#" onclick="toggleLoginMode()">Пароль арқылы кіру</a>
+                <span> | </span>
+                <a href="#">Тіркелу</a>
+            </div>
+        </div>
+    </div>
 
-    
-
-
+    <script>
+        let isPhoneMode = true;
+        
+        function toggleLoginMode() {
+            isPhoneMode = !isPhoneMode;
+            document.getElementById('phone-login').classList.toggle('hide', !isPhoneMode);
+            document.getElementById('password-login').classList.toggle('hide', isPhoneMode);
+        }
+        
+        function loginWithPhone() {
+            const phone = document.getElementById('phone').value;
+            const code = document.getElementById('code').value;
+            if (!phone || !code) {
+                alert('Телефон нөмірі мен кодты енгізіңіз');
+                return;
+            }
+            // API шақыру коды осында
+            console.log('Телефон арқылы кіру:', phone, code);
+        }
+        
+        function loginWithPassword() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username || !password) {
+                alert('Логин мен парольді енгізіңіз');
+                return;
+            }
+            // API шақыру коды осында
+            console.log('Пароль арқылы кіру:', username);
+        }
+        
+        function loginWithGoogle() {
+            console.log('Google арқылы кіру');
+        }
+        
+        function loginWithApple() {
+            console.log('Apple арқылы кіру');
+        }
+    </script>
+</body>
+</html>
