@@ -11,147 +11,87 @@ input{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin-bo
 button{width:100%;padding:12px;background:#000;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold}
 .hide{display:none}
 .post{background:#fff;max-width:380px;margin:10px auto;padding:12px;border-radius:16px}
-.post img{width:100%;border-radius:12px}
+.post img,.post video{width:100%;border-radius:12px}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:380px;background:#fff;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #eee}
 .nav button{background:none;color:#000;font-size:14px;width:auto}
 </style>
 </head>
 <body>
 
-<!-- КІРУ БЕТІ -->
 <div id="loginPage">
   <div class="box" style="margin-top:60px;text-align:center">
     <div style="font-size:50px">👨‍👩‍👧‍👦</div>
     <h2>ТУЫСТАР</h2>
-    <p style="color:gray;font-size:14px">Тек шақырумен кіруге болады</p>
-    <input id="myName" placeholder="Атыңды жаз: Аружан">
-    <input id="myCode" placeholder="Шақыру коды" value="TUGAN-2026">
+    <input id="myName" placeholder="Атыңды жаз">
+    <input id="myCode" value="TUGAN-2026">
     <button onclick="kiru()">КІРУ →</button>
-    <p id="errorMsg" style="color:red;font-size:14px"></p>
-    <p style="font-size:12px;color:gray">Код: TUGAN-2026<br>Аты бос болмасын!</p>
+    <p id="errorMsg" style="color:red"></p>
   </div>
 </div>
 
-<!-- НЕГІЗГІ БЕТ -->
 <div id="appPage" class="hide">
-  <div style="background:#fff;padding:15px;text-align:center;font-weight:bold;position:sticky;top:0">Туыстар 👨‍👩‍👧‍👦 | <span id="showName"></span></div>
-
-  <div id="page1">
-    <div class="box">
-      <input id="postText" placeholder="Не жаңалық?">
-      <input type="file" id="postFile" accept="image/*,video/*">
-      <div id="preview"></div>
-      <button onclick="postJasau()" style="margin-top:10px">Жариялау</button>
-    </div>
-    <div id="feed"></div>
+  <div style="background:#fff;padding:15px;text-align:center;font-weight:bold">Туыстар 👨‍👩‍👧‍👦 | <span id="showName"></span></div>
+  <div class="box">
+    <input id="postText" placeholder="Не жаңалық?">
+    <!-- МІНЕ ОСЫ ЖЕР - СУРЕТ + ВИДЕО -->
+    <input type="file" id="postFile" accept="image/*,video/*">
+    <p style="font-size:12px;color:gray">Сурет немесе 15-60 сек видео таңда</p>
+    <div id="preview"></div>
+    <button onclick="postJasau()" style="margin-top:10px">Жариялау</button>
   </div>
-
-  <div id="page2" class="hide">
-    <div class="box"><b>Хаттар 💬</b><br><br>
-      <div onclick="chatAsh('Апа')" style="padding:10px;border-bottom:1px solid #eee">👤 Апа ›</div>
-      <div onclick="chatAsh('Аға')" style="padding:10px;border-bottom:1px solid #eee">👤 Аға ›</div>
-      <div onclick="chatAsh('Әпке')" style="padding:10px">👤 Әпке ›</div>
-    </div>
-    <div id="chatBox" class="box hide">
-      <b id="chatName"></b>
-      <div id="chatMsgs" style="min-height:100px;margin:10px 0"></div>
-      <input id="chatInput" placeholder="Хат жаз...">
-      <button onclick="hatJiberu()">Жіберу</button>
-    </div>
-  </div>
-
-  <div id="page3" class="hide">
-    <div class="box" style="text-align:center">
-      <div style="font-size:60px">👤</div>
-      <h3 id="profName"></h3>
-      <p>Туыс • Жабық желі мүшесі</p>
-      <p style="background:#fff8c5;padding:10px;border-radius:10px"><b>Шақыру кодың: TUGAN-2026</b></p>
-      <button onclick="shigu()" style="background:#ffe0e0;color:red;margin-top:10px">Шығу</button>
-    </div>
-  </div>
-
+  <div id="feed"></div>
   <div style="height:70px"></div>
   <div class="nav">
-    <button onclick="bet(1)">🏠 Лента</button>
-    <button onclick="bet(2)">💬 Хаттар</button>
-    <button onclick="bet(3)">👤 Профиль</button>
+    <button onclick="location.reload()">🏠 Лента</button>
+    <button onclick="shigu()">👤 Шығу</button>
   </div>
 </div>
 
 <script>
 var posts = [
-  {author:'Апа', text:'Бүгін бауырсақ пісірдім 😋', img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600'},
-  {author:'Аға', text:'Ауылда қар жауып жатыр ❄️', img:'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=600'}
+  {author:'Апа', text:'Бүгін бауырсақ пісірдім 😋', media:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600', type:'image'},
+  {author:'Аға', text:'Мына видеоны көріңдер 🎬', media:'https://www.w3schools.com/html/mov_bbb.mp4', type:'video'}
 ];
-var myName = '';
-var tmpImg = '';
-var curChat = '';
+var myName=''; var tmpMedia=''; var tmpType='image';
 
 function kiru(){
-  var name = document.getElementById('myName').value;
-  var code = document.getElementById('myCode').value;
-  // Бос орындарды алып тастаймыз
-  name = name.trim();
-  code = code.trim().toUpperCase();
-
-  if(name === ''){
-    document.getElementById('errorMsg').innerText = 'Атыңды жазшы!';
-    return;
-  }
-  if(code !== 'TUGAN-2026'){
-    document.getElementById('errorMsg').innerText = 'Код қате! TUGAN-2026 деп жаз';
-    return;
-  }
-  myName = name;
+  var name=document.getElementById('myName').value.trim();
+  var code=document.getElementById('myCode').value.trim().toUpperCase();
+  if(!name){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;}
+  if(code!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате!';return;}
+  myName=name;
   document.getElementById('loginPage').classList.add('hide');
   document.getElementById('appPage').classList.remove('hide');
-  document.getElementById('showName').innerText = myName;
-  document.getElementById('profName').innerText = myName;
+  document.getElementById('showName').innerText=myName;
   render();
 }
-
 function render(){
-  var h = '';
+  var h='';
   for(var i=0;i<posts.length;i++){
-    h += '<div class="post"><b>'+posts[i].author+'</b><p>'+posts[i].text+'</p><img src="'+posts[i].img+'"></div>';
+    var m = posts[i].type==='video' ? '<video src="'+posts[i].media+'" controls></video>' : '<img src="'+posts[i].media+'">';
+    h += '<div class="post"><b>'+posts[i].author+'</b><p>'+posts[i].text+'</p>'+m+'</div>';
   }
-  document.getElementById('feed').innerHTML = h;
+  document.getElementById('feed').innerHTML=h;
 }
-
 document.getElementById('postFile').addEventListener('change', function(e){
-  var f = e.target.files[0];
-  var r = new FileReader();
-  r.onload = function(ev){ tmpImg = ev.target.result; document.getElementById('preview').innerHTML = '<img src="'+tmpImg+'" style="width:100%;border-radius:12px;margin-top:10px">'; };
+  var f=e.target.files[0]; if(!f) return;
+  if(f.size > 15*1024*1024){ alert('Видео үлкен екен, 15МБ-тан кіші болсын'); return; }
+  var r=new FileReader();
+  r.onload=function(ev){
+    tmpMedia=ev.target.result;
+    tmpType = f.type.indexOf('video')===0 ? 'video' : 'image';
+    document.getElementById('preview').innerHTML = tmpType==='video' ? '<video src="'+tmpMedia+'" controls style="width:100%;border-radius:12px"></video>' : '<img src="'+tmpMedia+'" style="width:100%;border-radius:12px">';
+  };
   r.readAsDataURL(f);
 });
-
 function postJasau(){
-  var t = document.getElementById('postText').value;
-  if(!t && !tmpImg){ alert('Мәтін немесе сурет керек!'); return; }
-  posts.unshift({author:myName, text:t||'Жаңа пост ❤️', img: tmpImg || 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600'});
-  tmpImg=''; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML='';
+  var t=document.getElementById('postText').value;
+  if(!t && !tmpMedia){alert('Мәтін немесе файл керек!');return;}
+  posts.unshift({author:myName, text:t||'Жаңа видео ❤️', media:tmpMedia||'', type:tmpType});
+  tmpMedia=''; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML='';
   render(); alert('Жарияланды ✅');
 }
-
-function bet(n){
-  document.getElementById('page1').classList.add('hide');
-  document.getElementById('page2').classList.add('hide');
-  document.getElementById('page3').classList.add('hide');
-  document.getElementById('page'+n).classList.remove('hide');
-}
-function chatAsh(name){
-  curChat = name;
-  document.getElementById('chatBox').classList.remove('hide');
-  document.getElementById('chatName').innerText = name;
-  document.getElementById('chatMsgs').innerHTML = '<div>Сәлем! 👋</div>';
-}
-function hatJiberu(){
-  var v = document.getElementById('chatInput').value;
-  if(!v) return;
-  document.getElementById('chatMsgs').innerHTML += '<div style="background:#000;color:#fff;padding:8px;border-radius:10px;margin:5px 0">'+v+'</div>';
-  document.getElementById('chatInput').value='';
-}
-function shigu(){ location.reload(); }
+function shigu(){location.reload();}
 </script>
 </body>
 </html>
