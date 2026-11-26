@@ -34,23 +34,35 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
 .prof-avatar-wrap{position:relative;flex-shrink:0}
 .prof-avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid #fff;background:#333}
 .prof-add{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;cursor:pointer}
-/* СТАТИСТИКА - ЕНДІ БАСЫЛАТЫН БАТЫРМА */
 .profile-stats{display:flex;gap:8px;background:#fff;color:#000;border-radius:14px;padding:12px;margin-top:14px;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 .stat{text-align:center;cursor:pointer;padding:4px 6px;border-radius:10px;flex:1}
 .stat:active{background:#f0f0f0;transform:scale(.95)}
-.stat b{font-size:19px;display:block}
-.stat span{font-size:12px;color:#666}
+.stat b{font-size:19px;display:block}.stat span{font-size:12px;color:#666}
 .edit-btn{background:#f2f2f2;border:none;padding:8px 12px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer}
-.tabs{display:flex;gap:20px;padding:12px 16px 0 16px;border-bottom:1px solid #eee;font-size:16px;color:#999;overflow-x:auto;white-space:nowrap}
-.tabs::-webkit-scrollbar{display:none}
+.tabs{display:flex;gap:24px;padding:14px 16px 0 16px;border-bottom:1px solid #eee;font-size:16px;color:#999}
 .tab{padding-bottom:9px;cursor:pointer;flex-shrink:0;color:#999}
 .tab.active{color:#000!important;font-weight:800;border-bottom:3px solid #000}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
 .grid3 img,.grid3 video{width:100%;aspect-ratio:3/4;object-fit:cover;background:#000;cursor:pointer}
 .grid-item{position:relative}.grid-item .views{position:absolute;bottom:6px;left:6px;color:#fff;font-size:12px;text-shadow:0 1px 4px #000}
+/* ХАТТАР - ЖАҢА */
 .chat-page{background:#fff;color:#000;min-height:calc(100vh - 60px);padding:14px}
 .chat-item{padding:14px 0;border-bottom:1px solid #eee;display:flex;gap:10px;align-items:center;cursor:pointer}
-.chat-item img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.chat-item:active{background:#f9f9f9}
+.chat-item img{width:50px;height:50px;border-radius:50%;object-fit:cover}
+.chat-unread{background:#fe2c55;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 6px;margin-left:auto;font-weight:700}
+.chat-view{position:fixed;inset:0;background:#fff;color:#000;z-index:500;display:flex;flex-direction:column;max-width:430px;margin:0 auto}
+.chat-header{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid #eee;background:#fff}
+.chat-header img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:#f9f9f9}
+.msg{max-width:75%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:1.4;word-break:break-word}
+.msg.mine{align-self:flex-end;background:#000;color:#fff;border-bottom-right-radius:4px}
+.msg.theirs{align-self:flex-start;background:#fff;color:#000;border:1px solid #eee;border-bottom-left-radius:4px}
+.msg-time{font-size:10px;opacity:.6;margin-top:4px;text-align:right}
+.msg-typing{align-self:flex-start;background:#fff;border:1px solid #eee;padding:10px 14px;border-radius:18px;font-size:14px;color:#888}
+.chat-input-bar{display:flex;gap:8px;padding:10px;padding-bottom:16px;background:#fff;border-top:1px solid #eee;align-items:center}
+.chat-input-bar input{margin:0;background:#f0f0f0;border:none}
+.send-btn{width:46px;height:46px;min-width:46px;background:#fe2c55;color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
 .modal video,.modal img{max-width:100%;max-height:60vh;border-radius:12px}
 .dots{position:absolute;top:12px;right:14px;font-size:26px;cursor:pointer;color:#fff;z-index:10;padding:4px 8px}
@@ -61,7 +73,6 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
 .comment-list{flex:1;overflow-y:auto}
 .comment-row{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #f0f0f0}
 .comment-row img{width:32px;height:32px;border-radius:50%;object-fit:cover}
-/* ДОС / ОҚЫРМАН ТІЗІМІ */
 .people-sheet{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:60vh;background:#fff;color:#000;border-radius:20px 20px 0 0;z-index:1000;display:flex;flex-direction:column;padding:14px}
 .people-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0}
 .people-row img{width:44px;height:44px;border-radius:50%;object-fit:cover}
@@ -86,14 +97,16 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
 
 <div id="appPage" class="hide">
   <div id="p1"><div class="feed" id="feed"></div></div>
+
+  <!-- ХАТТАР ТІЗІМІ -->
   <div id="p2" class="hide">
-    <div class="chat-page"><h2>Хаттар 💬</h2>
-      <div class="chat-item" onclick="chatAsh('Апа')"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div><b>Апа</b><p style="color:#888;font-size:13px">Сәлем! 👋</p></div></div>
-      <div class="chat-item" onclick="chatAsh('Аға')"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div><b>Аға</b><p style="color:#888;font-size:13px">Видео көрдің бе?</p></div></div>
-      <div class="chat-item" onclick="chatAsh('Әпке')"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div><b>Әпке</b><p style="color:#888;font-size:13px">Ертең келеміз</p></div></div>
-      <div id="chatBox" class="hide" style="margin-top:14px;border:1px solid #eee;border-radius:14px;padding:12px"><b id="chatName"></b><div id="chatMsgs" style="min-height:60px;margin:10px 0"></div><input id="chatInput" placeholder="Хат жаз..."><button onclick="hatJiberu()" style="width:100%;padding:12px;background:#000;color:#fff;border:none;border-radius:12px">Жіберу</button></div>
+    <div class="chat-page">
+      <h2 style="margin-bottom:6px">Хаттар 💬</h2>
+      <p style="color:#999;font-size:13px;margin-bottom:10px">Адамды басып, хат жаз</p>
+      <div id="chatList"></div>
     </div>
   </div>
+
   <div id="pUpload" class="hide">
     <div style="background:#fff;color:#000;min-height:calc(100vh - 60px);padding:20px;text-align:center">
       <h2>➕ Жаңа видео</h2>
@@ -104,6 +117,7 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
       <p id="postMsg" style="color:green;font-size:13px"></p>
     </div>
   </div>
+
   <div id="p3" class="hide">
     <div class="profile">
       <div class="profile-top">
@@ -113,7 +127,6 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
           <div class="prof-avatar-wrap" onclick="document.getElementById('avatarInput').click()"><img id="myAvatar" src="" class="prof-avatar"><div class="prof-add">📷<span>Аватар қосу</span></div></div>
           <div><h2 id="profName" style="font-size:28px">Ержан</h2><p style="opacity:.8;font-size:14px">ID: tuys_<span id="myId">2026</span></p><input type="file" id="avatarInput" accept="image/*" style="display:none"></div>
         </div>
-        <!-- СТАТИСТИКА - ЕНДІ БАСЫЛАДЫ -->
         <div class="profile-stats">
           <div class="stat" onclick="openPeople('likes')"><b id="cntLikes">2092</b><span>Лайк</span></div>
           <div class="stat" onclick="openPeople('friends')"><b id="cntFriends">168</b><span>Дос</span></div>
@@ -124,10 +137,8 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
         <p style="color:#333;padding:12px 4px;font-size:14px" id="bioText">Өзім туралы жазу үшін басыңыз... ✏️</p>
       </div>
       <div class="tabs">
-        <span class="tab active" onclick="setTab('works',this)">Жұмыстар ▾</span>
-        <span class="tab" onclick="setTab('all',this)">Барлығы</span>
+        <span class="tab active" onclick="setTab('all',this)">Барлығы</span>
         <span class="tab" onclick="setTab('saved',this)">⭐ Сақталған</span>
-        <span class="tab" onclick="setTab('diary',this)">Күнделік</span>
         <span class="tab" onclick="setTab('liked',this)">❤️ Ұнаған</span>
       </div>
       <div id="tabInfo" style="padding:8px 16px;font-size:12px;color:#999"></div>
@@ -136,7 +147,24 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
       <p style="text-align:center;color:#ddd;font-size:11px;margin-top:20px" onclick="secretTap()">Туыстар • v1.0</p>
     </div>
   </div>
-  <div class="nav"><button id="n1" class="on" onclick="bet(1)">Басты</button><button id="n2" onclick="bet(2)">Достар</button><button class="nav-plus" onclick="bet(0)">+</button><button onclick="bet(2)">Хаттар <span style="background:#fe2c55;color:#fff;font-size:10px;padding:2px 5px;border-radius:10px">4</span></button><button id="n3" onclick="bet(3)">Мен</button></div>
+  <div class="nav"><button id="n1" class="on" onclick="bet(1)">Басты</button><button id="n2" onclick="bet(2)">Достар</button><button class="nav-plus" onclick="bet(0)">+</button><button onclick="bet(2)">Хаттар <span id="chatBadge" style="background:#fe2c55;color:#fff;font-size:10px;padding:2px 5px;border-radius:10px">4</span></button><button id="n3" onclick="bet(3)">Мен</button></div>
+</div>
+
+<!-- ЖЕКЕ ЧАТ - ТОЛЫҚ БЕТ -->
+<div id="chatView" class="chat-view hide">
+  <div class="chat-header">
+    <span onclick="closeChat()" style="font-size:24px;cursor:pointer;padding:0 6px">←</span>
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <div style="flex:1"><b id="chatViewName">Апа</b><p style="font-size:12px;color:#22c55e">● желіде</p></div>
+    <span style="font-size:22px">📞</span>
+    <span style="font-size:22px">📹</span>
+  </div>
+  <div id="chatMsgs" class="chat-msgs"></div>
+  <div class="chat-input-bar">
+    <button onclick="addEmoji()" style="background:none;border:none;font-size:24px;cursor:pointer">😊</button>
+    <input id="chatInput" placeholder="Хат жаз..." onkeydown="if(event.key==='Enter') sendChat()">
+    <button class="send-btn" onclick="sendChat()">➤</button>
+  </div>
 </div>
 
 <div id="modal" class="modal hide" onclick="closeModal()"><div style="position:absolute;top:15px;right:18px;font-size:32px">✕</div><div id="modalContent" onclick="event.stopPropagation()"></div><div id="modalText" style="color:#fff;margin-top:10px"></div></div>
@@ -145,8 +173,6 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
   <div id="commentList" class="comment-list" style="margin-top:10px"></div>
   <div style="display:flex;gap:8px;margin-top:10px"><input id="commentInput" placeholder="Комментарий жаз..." style="margin:0"><button onclick="addComment()" style="width:80px;background:#fe2c55;color:#fff;border:none;border-radius:12px;font-weight:bold">Жіберу</button></div>
 </div>
-
-<!-- ДОС / ЛАЙК / ОҚЫРМАН ТІЗІМІ -->
 <div id="peopleSheet" class="people-sheet hide">
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="peopleTitle">Достар</b><span onclick="closePeople()" style="font-size:24px;cursor:pointer">✕</span></div>
   <input id="peopleSearch" placeholder="🔍 Іздеу..." style="margin:12px 0" oninput="renderPeople()">
@@ -159,9 +185,8 @@ var myName=localStorage.getItem('tuys_name')||'';
 var myAvatar=localStorage.getItem('tuys_avatar')||'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
 var myBio=localStorage.getItem('tuys_bio')||'Өзім туралы жазу үшін басыңыз... ✏️';
 var tmpFile=null; var tmpType='image'; var tmpPreview='';
-var currentCommentId=null; var currentTab='works'; var currentPeopleType='friends';
+var currentCommentId=null; var currentTab='all'; var currentPeopleType='friends';
 var db=null;
-// Достар тізімі - сақталады
 var people=[
   {name:'Апа',desc:'Туыс • Алматы',following:true},
   {name:'Аға',desc:'Туыс • Астана',following:true},
@@ -172,8 +197,91 @@ var people=[
   {name:'Нағашы',desc:'Туыс • Тараз',following:false},
   {name:'Жиен',desc:'Туыс • Ақтөбе',following:false}
 ];
-try{ var savedPeople=JSON.parse(localStorage.getItem('tuys_people')||'null'); if(savedPeople) people=savedPeople; }catch(e){}
+try{ var sp=JSON.parse(localStorage.getItem('tuys_people')||'null'); if(sp) people=sp; }catch(e){}
 function savePeople(){ localStorage.setItem('tuys_people',JSON.stringify(people)); updateCounts(); }
+
+// ===== ХАТТАР - ШЫНАЙЫ, САҚТАЛАДЫ =====
+var chats={};
+try{ chats=JSON.parse(localStorage.getItem('tuys_chats')||'{}'); }catch(e){ chats={}; }
+if(!chats['Апа']) chats['Апа']=[{from:'Апа',text:'Сәлем! 👋 Қалайсың?',time:'10:00'}];
+if(!chats['Аға']) chats['Аға']=[{from:'Аға',text:'Видео көрдің бе?',time:'09:30'}];
+if(!chats['Әпке']) chats['Әпке']=[{from:'Әпке',text:'Ертең келеміз 😊',time:'08:15'}];
+var currentChat=null;
+function saveChats(){ localStorage.setItem('tuys_chats',JSON.stringify(chats)); }
+function nowTime(){ var d=new Date(); return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes(); }
+var replies={
+  'Апа':['Жарайсың 😊','Ой, солай ма?','Ауылға қашан келесің?','Тамақ іштің бе? ❤️','Жақсы болды ғой!','Апаң сағынды 🥰'],
+  'Аға':['Хаха 😂','Керемет! 🔥','Видео көрдің бе?','Ертең барамыз ба?','Жарайды, келістік 👍'],
+  'Әпке':['Иә, солай 😊','Ертең келеміз!','Дайындал 😄','Қайда жүрсің?','Жақсы, күтемін ❤️'],
+  'default':['Иә 😊','Жарайды!','Қызық екен 😄','Айтпа!','Келістік 👍']
+};
+function renderChatList(){
+  var html='';
+  var names=Object.keys(chats);
+  // people-ден жоқ адамдарды да қосу
+  people.forEach(function(p){ if(names.indexOf(p.name)===-1) names.push(p.name); });
+  names.forEach(function(name){
+    var msgs=chats[name]||[];
+    var last=msgs.length?msgs[msgs.length-1].text:'Хат жаз...';
+    var unread = msgs.filter(function(m){ return m.from===name && !m.read; }).length;
+    html+='<div class="chat-item" onclick="openChat(\''+name+'\')"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div style="flex:1;min-width:0"><b>'+name+'</b><p style="color:#888;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+last+'</p></div>'+(unread?'<div class="chat-unread">'+unread+'</div>':'<span style="color:#aaa;font-size:11px">'+(msgs.length?msgs[msgs.length-1].time:'')+'</span>')+'</div>';
+  });
+  document.getElementById('chatList').innerHTML=html;
+  var total=0; names.forEach(function(n){ (chats[n]||[]).forEach(function(m){ if(m.from===n && !m.read) total++; }); });
+  document.getElementById('chatBadge').innerText=total>0?total:'';
+  document.getElementById('chatBadge').style.display=total>0?'inline':'none';
+}
+function openChat(name){
+  currentChat=name;
+  if(!chats[name]) chats[name]=[];
+  // Оқылды деп белгілеу
+  chats[name].forEach(function(m){ m.read=true; });
+  saveChats(); renderChatList();
+  document.getElementById('chatViewName').innerText=name;
+  document.getElementById('chatView').classList.remove('hide');
+  renderChatMsgs();
+  setTimeout(function(){ var inp=document.getElementById('chatInput'); if(inp) inp.focus(); },300);
+}
+function renderChatMsgs(){
+  var msgs=chats[currentChat]||[];
+  var html='';
+  if(msgs.length===0) html='<p style="text-align:center;color:#999;font-size:13px;margin-top:20px">Әлі хат жоқ. Бірінші болып жаз! 👋</p>';
+  msgs.forEach(function(m){
+    var isMine=m.from!==currentChat;
+    html+='<div class="msg '+(isMine?'mine':'theirs')+'">'+m.text+'<div class="msg-time">'+(m.time||'')+(isMine?' ✓✓':'')+'</div></div>';
+  });
+  document.getElementById('chatMsgs').innerHTML=html;
+  var box=document.getElementById('chatMsgs'); box.scrollTop=box.scrollHeight;
+}
+function sendChat(){
+  var inp=document.getElementById('chatInput'); var v=inp.value.trim(); if(!v||!currentChat) return;
+  if(!chats[currentChat]) chats[currentChat]=[];
+  chats[currentChat].push({from:myName||'Мен',text:v,time:nowTime(),read:true});
+  inp.value=''; saveChats(); renderChatMsgs(); renderChatList();
+  // Қарсы адам жауап береді - "жазып жатыр..."
+  setTimeout(function(){
+    var box=document.getElementById('chatMsgs'); if(!box) return;
+    box.innerHTML+='<div class="msg-typing" id="typing">✍️ '+currentChat+' жазып жатыр...</div>';
+    box.scrollTop=box.scrollHeight;
+  },800);
+  setTimeout(function(){
+    var t=document.getElementById('typing'); if(t) t.remove();
+    var arr=replies[currentChat]||replies['default'];
+    var reply=arr[Math.floor(Math.random()*arr.length)];
+    // Егер сен видео туралы жазсаң, видео туралы жауап береді
+    if(v.toLowerCase().indexOf('видео')>-1) reply='Видео керемет шығыпты! 🔥';
+    if(v.toLowerCase().indexOf('салем')>-1||v.toLowerCase().indexOf('сәлем')>-1) reply='Сәлем! 👋 Қалайсың?';
+    chats[currentChat].push({from:currentChat,text:reply,time:nowTime(),read:true});
+    saveChats(); renderChatMsgs(); renderChatList();
+  },2200);
+}
+function addEmoji(){
+  var inp=document.getElementById('chatInput');
+  var emojis=['😊','❤️','😂','🔥','👍','🙏','🥰','😍'];
+  inp.value+=emojis[Math.floor(Math.random()*emojis.length)];
+  inp.focus();
+}
+function closeChat(){ document.getElementById('chatView').classList.add('hide'); currentChat=null; renderChatList(); }
 
 function openDB(cb){ var req=indexedDB.open('TuysDB',1); req.onupgradeneeded=function(e){ var d=e.target.result; if(!d.objectStoreNames.contains('posts')) d.createObjectStore('posts',{keyPath:'id'}); }; req.onsuccess=function(e){ db=e.target.result; cb(); }; req.onerror=function(){ cb(); }; }
 function savePostToDB(p){ if(!db) return; try{ var tx=db.transaction('posts','readwrite'); tx.objectStore('posts').put({id:p.id,author:p.author,text:p.text,type:p.type,likes:p.likes,liked:p.liked,saved:p.saved,comments:p.comments,file:p.file}); }catch(e){} }
@@ -199,7 +307,7 @@ function loadPostsFromDB(cb){
 }
 function saveStates(){ var o={}; posts.forEach(function(p){ o[p.id]={liked:p.liked,saved:p.saved,comments:p.comments}; }); localStorage.setItem('tuys_states',JSON.stringify(o)); }
 openDB(function(){ loadPostsFromDB(function(){ if(myName) showApp(); }); });
-function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2026'; document.getElementById('bioText').innerText=myBio; render(); updateCounts(); }
+function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2026'; document.getElementById('bioText').innerText=myBio; render(); updateCounts(); renderChatList(); }
 function kiru(){ var n=document.getElementById('myName').value.trim(); var c=document.getElementById('myCode').value.trim().toUpperCase(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} if(c!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате!';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
 function updateCounts(){
   var likes=2092; posts.forEach(function(p){ if(p.author===myName) likes+=p.likes; });
@@ -209,48 +317,20 @@ function updateCounts(){
   document.getElementById('cntFriends').innerText=160+following;
   document.getElementById('cntFollowers').innerText=350+people.length;
 }
-
-// === ДОС / ЛАЙК / ЖАЗЫЛЫМ / ОҚЫРМАН - ЕНДІ ЖҰМЫС ІСТЕЙДІ ===
-function openPeople(type){
-  currentPeopleType=type;
-  var titles={likes:'❤️ Лайк басқандар',friends:'👥 Достар',following:'➡️ Жазылымдар',followers:'👀 Оқырмандар'};
-  document.getElementById('peopleTitle').innerText=titles[type];
-  document.getElementById('peopleSearch').value='';
-  renderPeople();
-  document.getElementById('peopleSheet').classList.remove('hide');
-}
+function openPeople(type){ currentPeopleType=type; var titles={likes:'❤️ Лайк басқандар',friends:'👥 Достар',following:'➡️ Жазылымдар',followers:'👀 Оқырмандар'}; document.getElementById('peopleTitle').innerText=titles[type]; document.getElementById('peopleSearch').value=''; renderPeople(); document.getElementById('peopleSheet').classList.remove('hide'); }
 function renderPeople(){
   var q=(document.getElementById('peopleSearch').value||'').toLowerCase();
   var list=people.filter(function(p){ return p.name.toLowerCase().indexOf(q)>-1; });
   if(currentPeopleType==='likes') list=list.slice(0,3);
   if(currentPeopleType==='following') list=list.filter(function(p){ return p.following; });
-  if(currentPeopleType==='followers') list=list; // бәрі оқырман
-  var html='';
-  if(list.length===0) html='<p style="text-align:center;color:#999;padding:20px">Ешкім табылмады</p>';
-  list.forEach(function(p){
-    var idx=people.indexOf(p);
-    var btn = currentPeopleType==='likes' ? '<button class="follow-btn" style="background:#f0f0f0;color:#000">❤️ Лайк</button>' : '<button class="follow-btn '+(p.following?'following':'follow')+'" onclick="toggleFollow('+idx+',this)">'+(p.following?'✓ Жазылған':'➕ Жазылу')+'</button>';
-    html+='<div class="people-row"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div><b>'+p.name+'</b><p style="font-size:13px;color:#888">'+p.desc+'</p></div>'+btn+'</div>';
-  });
+  var html=''; if(list.length===0) html='<p style="text-align:center;color:#999;padding:20px">Ешкім табылмады</p>';
+  list.forEach(function(p){ var idx=people.indexOf(p); var btn=currentPeopleType==='likes'?'<button class="follow-btn" style="background:#f0f0f0;color:#000">❤️ Лайк</button>':'<button class="follow-btn '+(p.following?'following':'follow')+'" onclick="toggleFollow('+idx+',this)">'+(p.following?'✓ Жазылған':'➕ Жазылу')+'</button>'; html+='<div class="people-row"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"><div><b>'+p.name+'</b><p style="font-size:13px;color:#888">'+p.desc+'</p></div>'+btn+'</div>'; });
   document.getElementById('peopleList').innerHTML=html;
 }
-function toggleFollow(idx,el){
-  people[idx].following=!people[idx].following;
-  el.innerText=people[idx].following?'✓ Жазылған':'➕ Жазылу';
-  el.className='follow-btn '+(people[idx].following?'following':'follow');
-  savePeople(); renderPeople();
-}
+function toggleFollow(idx,el){ people[idx].following=!people[idx].following; el.innerText=people[idx].following?'✓ Жазылған':'➕ Жазылу'; el.className='follow-btn '+(people[idx].following?'following':'follow'); savePeople(); renderPeople(); }
 function closePeople(){ document.getElementById('peopleSheet').classList.add('hide'); }
-
 function setTab(tab,el){ currentTab=tab; document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); }); el.classList.add('active'); render(); }
-function getFilteredPosts(){
-  if(currentTab==='works') return posts.filter(function(p){ return p.author===myName; });
-  if(currentTab==='all') return posts;
-  if(currentTab==='saved') return posts.filter(function(p){ return p.saved; });
-  if(currentTab==='diary') return posts.filter(function(p){ return p.author===myName && p.type==='image'; });
-  if(currentTab==='liked') return posts.filter(function(p){ return p.liked; });
-  return posts;
-}
+function getFilteredPosts(){ if(currentTab==='all') return posts; if(currentTab==='saved') return posts.filter(function(p){ return p.saved; }); if(currentTab==='liked') return posts.filter(function(p){ return p.liked; }); return posts; }
 function render(){
   var h='';
   for(var i=0;i<posts.length;i++){
@@ -264,10 +344,10 @@ function render(){
   var filtered=getFilteredPosts(); var my='';
   filtered.forEach(function(pj){ my+='<div class="grid-item" onclick="openModal(\''+pj.id+'\')">'+(pj.type==='video'?'<video src="'+pj.media+'"></video>':'<img src="'+pj.media+'">')+'<div class="views">▶ '+pj.likes+(pj.saved?' ⭐':'')+'</div></div>'; });
   document.getElementById('myPosts').innerHTML=my;
-  var info={works:'Менің видеоларым',all:'Барлық видеолар',saved:'Сақтаған видеоларың ⭐',diary:'Күнделік - суреттер 📷',liked:'Лайк басқан видеоларың ❤️'};
+  var info={all:'Барлық видеолар',saved:'Сақтаған видеоларың ⭐',liked:'Лайк басқан видеоларың ❤️'};
   document.getElementById('tabInfo').innerText=info[currentTab]+' • '+filtered.length+' видео';
   document.getElementById('noPost').style.display=filtered.length?'none':'block';
-  if(filtered.length===0) document.getElementById('noPost').innerText='Әлі жоқ. + басып сал!';
+  if(filtered.length===0) document.getElementById('noPost').innerText=currentTab==='saved'?'Әлі сақталған жоқ. ⭐ бас!':currentTab==='liked'?'Әлі лайк жоқ. ❤️ бас!':'Әлі пост жоқ, + басып сал!';
   updateCounts(); setupAutoPlay();
 }
 function toggleLike(i,el){ var p=posts[i]; if(p.liked){ p.liked=false; p.likes--; el.innerText='🤍'; el.classList.remove('liked'); } else { p.liked=true; p.likes++; el.innerText='❤️'; el.classList.add('liked'); } var cntEl=el.nextElementSibling; if(cntEl) cntEl.innerText=p.likes; saveStates(); if(p.file) savePostToDB(p); updateCounts(); if(currentTab==='liked') render(); }
@@ -291,10 +371,8 @@ function secretTap(){ secretCount++; if(secretCount>=5){ secretCount=0; if(confi
 document.getElementById('postFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; tmpFile=f; tmpType=f.type.indexOf('video')===0?'video':'image'; tmpPreview=URL.createObjectURL(f); document.getElementById('fileInfo').innerText='Таңдалды: '+f.name+' ✅'; document.getElementById('preview').innerHTML=tmpType==='video'?'<video src="'+tmpPreview+'" controls playsinline style="width:100%;max-height:300px;border-radius:12px"></video>':'<img src="'+tmpPreview+'" style="width:100%;border-radius:12px">'; });
 function postJasau(){ var t=document.getElementById('postText').value; if(!tmpFile){alert('Алдымен видео / сурет таңда!');return;} document.getElementById('postMsg').innerText='Сақталып жатыр...'; var newPost={id:'p'+Date.now(),author:myName,text:t||'Жаңа видео ❤️',type:tmpType,likes:0,liked:false,saved:false,comments:[],media:tmpPreview,file:tmpFile}; posts.unshift(newPost); savePostToDB(newPost); saveStates(); tmpFile=null; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML=''; document.getElementById('fileInfo').innerText=''; document.getElementById('postFile').value=''; document.getElementById('postMsg').innerText='Сақталды ✅'; render(); setTimeout(function(){ bet(1); },500); }
 document.getElementById('avatarInput').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(ev){ myAvatar=ev.target.result; document.getElementById('myAvatar').src=myAvatar; localStorage.setItem('tuys_avatar',myAvatar); render(); alert('Аватар қойылды ✅'); }; r.readAsDataURL(f); });
-function bet(n){ document.getElementById('p1').classList.add('hide'); document.getElementById('p2').classList.add('hide'); document.getElementById('pUpload').classList.add('hide'); document.getElementById('p3').classList.add('hide'); if(n===0) document.getElementById('pUpload').classList.remove('hide'); if(n===1) document.getElementById('p1').classList.remove('hide'); if(n===2) document.getElementById('p2').classList.remove('hide'); if(n===3) document.getElementById('p3').classList.remove('hide'); document.getElementById('n1').classList.remove('on'); document.getElementById('n2').classList.remove('on'); document.getElementById('n3').classList.remove('on'); if(n===1) document.getElementById('n1').classList.add('on'); if(n===2) document.getElementById('n2').classList.add('on'); if(n===3) document.getElementById('n3').classList.add('on'); if(n===1) setTimeout(setupAutoPlay,100); }
-function chatAsh(name){ document.getElementById('chatBox').classList.remove('hide'); document.getElementById('chatName').innerText=name; document.getElementById('chatMsgs').innerHTML='<div>Сәлем! 👋</div>'; }
-function hatJiberu(){ var v=document.getElementById('chatInput').value; if(!v) return; document.getElementById('chatMsgs').innerHTML+='<div style="background:#000;color:#fff;padding:8px;border-radius:10px;margin:5px 0">'+v+'</div>'; document.getElementById('chatInput').value=''; }
-function shigu(){ if(confirm('Шынымен шығасың ба? Видеоларың сақталып тұрады.')){ localStorage.removeItem('tuys_name'); location.reload(); } }
+function bet(n){ document.getElementById('p1').classList.add('hide'); document.getElementById('p2').classList.add('hide'); document.getElementById('pUpload').classList.add('hide'); document.getElementById('p3').classList.add('hide'); if(n===0) document.getElementById('pUpload').classList.remove('hide'); if(n===1) document.getElementById('p1').classList.remove('hide'); if(n===2) document.getElementById('p2').classList.remove('hide'); if(n===3) document.getElementById('p3').classList.remove('hide'); document.getElementById('n1').classList.remove('on'); document.getElementById('n2').classList.remove('on'); document.getElementById('n3').classList.remove('on'); if(n===1) document.getElementById('n1').classList.add('on'); if(n===2) document.getElementById('n2').classList.add('on'); if(n===3) document.getElementById('n3').classList.add('on'); if(n===1) setTimeout(setupAutoPlay,100); if(n===2) renderChatList(); }
+function shigu(){ if(confirm('Шынымен шығасың ба? Видеоларың мен хаттарың сақталып тұрады.')){ localStorage.removeItem('tuys_name'); location.reload(); } }
 </script>
 </body>
 </html>
