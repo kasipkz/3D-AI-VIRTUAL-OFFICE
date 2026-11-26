@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="kk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Туыс-Туған</title>
 <style>
-*{box-sizing:border-box;font-family:sans-serif}body{margin:0;background:#FFF8F0;color:#222;max-width:480px;margin:auto;min-height:100vh;padding-bottom:70px}
+*{box-sizing:border-box;font-family:sans-serif}
+body{margin:0;background:#FFF8F0;color:#222;max-width:480px;margin:auto;min-height:100vh;padding-bottom:70px}
 header{background:#FF6B35;color:#fff;padding:14px;text-align:center;font-weight:900;font-size:22px;position:sticky;top:0;z-index:10}
 .page{display:none;padding:12px}.page.active{display:block}
 .card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px #0001;margin-bottom:14px}
-.card img,.card video{width:100%;display:block;max-height:380px;object-fit:cover}
+.card img{width:100%;display:block;max-height:380px;object-fit:cover}
 .card-body{padding:10px}.actions{display:flex;gap:16px;font-size:22px}.actions span{cursor:pointer}
 input,textarea,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:12px;font-size:15px}
 button{width:100%;padding:13px;border:0;border-radius:12px;background:#FF6B35;color:#fff;font-weight:800;font-size:16px;cursor:pointer}
@@ -18,30 +22,27 @@ nav span{font-size:24px;cursor:pointer;text-align:center}nav span.active{transfo
 .badge{background:red;color:#fff;border-radius:50%;padding:2px 7px;font-size:12px;margin-left:auto}
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}.grid img{width:100%;height:110px;object-fit:cover;border-radius:8px}
 .tag{display:inline-block;background:#FFE8DD;padding:6px 10px;border-radius:20px;margin:3px;cursor:pointer}
-</style></head><body>
+</style>
+</head>
+<body>
 <header>🏠 Туыс-Туған</header>
 
-<!-- КІРУ -->
 <div id="p-login" class="page active">
 <h2>Қош келдіңіз! 👋</h2><p>Отбасыңның жанында бол</p>
 <input id="gmail" placeholder="Gmail поштаңды жаз: aaa@gmail.com">
 <input id="nameInput" placeholder="Аты-жөнің">
 <button onclick="login()">📧 Gmail арқылы кіру</button><br><br>
 <button class="secondary" onclick="login()">📱 Телефон арқылы кіру</button>
-<p style="font-size:13px;color:#888">Кіргісі келген адам тіркеліп кіре береді</p>
 </div>
 
-<!-- ЛЕНТА -->
 <div id="p-home" class="page"><div id="feed"></div></div>
 
-<!-- ІЗДЕУ -->
 <div id="p-search" class="page">
 <input id="searchInput" placeholder="🔍 Іздеу: отбасы, дәстүр..." oninput="doSearch()">
 <div><span class="tag" onclick="setSearch('отбасы')">#отбасы</span><span class="tag" onclick="setSearch('бауырсақ')">#бауырсақ</span><span class="tag" onclick="setSearch('ата-әже')">#ата-әже</span></div>
 <div id="searchResult"></div>
 </div>
 
-<!-- ЖҮКТЕУ -->
 <div id="p-upload" class="page">
 <h3>Жаңа жазба 📸</h3>
 <select id="upType"><option>Видео 🎬</option><option>Фото 📷</option></select>
@@ -50,17 +51,16 @@ nav span{font-size:24px;cursor:pointer;text-align:center}nav span.active{transfo
 <button onclick="publish()">Жариялау ✅</button><p id="upMsg"></p>
 </div>
 
-<!-- ХАБАР -->
 <div id="p-chat" class="page">
-<h3>Хабарлама 💬</h3><div id="chatList"></div><div id="chatBox" style="display:none">
+<h3>Хабарлама 💬</h3><div id="chatList"></div>
+<div id="chatBox" style="display:none">
 <h4 id="chatName"></h4><div id="msgs" style="min-height:120px;background:#FFF3EC;padding:10px;border-radius:12px"></div>
 <input id="msgInput" placeholder="Хабарлама жаз..."><button onclick="sendMsg()">Жіберу ➤</button><br><br><button class="secondary" onclick="backChats()">← Артқа</button></div>
 </div>
 
-<!-- ПРОФИЛЬ -->
 <div id="p-profile" class="page">
 <div style="text-align:center"><div class="avatar" style="width:80px;height:80px;margin:auto;font-size:36px" id="myAvatar">👤</div>
-<h3 id="myName">Қонақ</h3><p id="myGmail"></p><p>👥 Туыстар: <b id="followCount">24</b> | ❤️ <b id="likeTotal">128</b></p>
+<h3 id="myName">Қонақ</h3><p id="myGmail"></p><p>👥 Туыстар: <b>24</b> | ❤️ <b>128</b></p>
 <button class="secondary" onclick="editProfile()">Профиль өңдеу ✏️</button></div>
 <h4>Менің жазбаларым</h4><div class="grid" id="myGrid"></div>
 </div>
@@ -108,4 +108,6 @@ function sendMsg(){let v=document.getElementById('msgInput').value;if(!v)return;
 function backChats(){document.getElementById('chatList').style.display='block';document.getElementById('chatBox').style.display='none';render();}
 function editProfile(){let n=prompt("Жаңа атың:",myName);if(n){myName=n;document.getElementById('myName').innerText=n;document.getElementById('myAvatar').innerText=n[0];alert("Профиль өзгертілді ✅");}}
 render();
-</script></body></html>
+</script>
+</body>
+</html>
