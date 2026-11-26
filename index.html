@@ -13,19 +13,18 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
 .feed{height:calc(100vh - 60px);overflow-y:scroll;scroll-snap-type:y mandatory;background:#000}
 .feed::-webkit-scrollbar{display:none}
 .video-card{height:calc(100vh - 60px);width:100%;max-width:430px;margin:0 auto;position:relative;scroll-snap-align:start;background:#000;overflow:hidden}
-.video-card video,.video-card img{width:100%;height:100%;object-fit:cover}
-/* МӘТІН ТӨМЕНДЕ, БЕТКЕ ТИМЕЙДІ */
-.video-overlay{position:absolute;bottom:0;left:0;right:0;padding:0 78px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.75));pointer-events:none}
+/* ТҮЗЕТУ: тек тікелей баласына ғана 100% - аватарға тиіспейді */
+.video-card > video,.video-card > img{width:100%;height:100%;object-fit:cover;display:block}
+.video-overlay{position:absolute;bottom:0;left:0;right:0;padding:0 78px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.75));pointer-events:none;z-index:3}
 .video-overlay b{font-size:17px}
 .video-overlay p{font-size:14px;margin-top:5px;line-height:1.4}
-/* КНОПКАЛАР - ЕНДІ ТӨМЕНДЕ, БЕТТІҢ ОРТАСЫНДА ЕМЕС */
 .side{position:absolute;right:10px;bottom:118px;display:flex;flex-direction:column;gap:12px;align-items:center;z-index:5}
-.side-btn{width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;backdrop-filter:blur(3px)}
+/* ТҮЗЕТУ: аватар енді кішкентай, 100% емес */
+.side-avatar{width:48px!important;height:48px!important;min-width:48px;min-height:48px;border-radius:50%!important;border:2px solid #fff;object-fit:cover;display:block;flex-shrink:0}
+.side-btn{width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer}
 .side-btn.liked{background:#fe2c55;border:none}
-.side-avatar{width:48px;height:48px;border-radius:50%;border:2px solid #fff;object-fit:cover}
 .side-plus{width:20px;height:20px;background:#fe2c55;border-radius:50%;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:-16px;border:2px solid #fff;cursor:pointer}
 .side-count{font-size:11px;margin-top:-8px;font-weight:bold;text-shadow:0 1px 4px #000}
-/* ОЙНАТУ БЕЛГІСІ ОРТАДА */
 .play-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:70px;opacity:.9;pointer-events:none;text-shadow:0 0 20px #000;z-index:4}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:60px;background:#000;display:flex;justify-content:space-around;align-items:center;z-index:100;border-top:1px solid #222}
 .nav button{background:none;border:none;color:#aaa;font-size:16px;font-weight:600;cursor:pointer}
@@ -73,7 +72,6 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
 
 <div id="appPage" class="hide">
   <div id="p1"><div class="feed" id="feed"></div></div>
-
   <div id="p2" class="hide">
     <div class="chat-page">
       <h2>Хаттар 💬</h2>
@@ -83,7 +81,6 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
       <div id="chatBox" class="hide" style="margin-top:14px;border:1px solid #eee;border-radius:14px;padding:12px"><b id="chatName"></b><div id="chatMsgs" style="min-height:60px;margin:10px 0"></div><input id="chatInput" placeholder="Хат жаз..."><button onclick="hatJiberu()" style="width:100%;padding:12px;background:#000;color:#fff;border:none;border-radius:12px">Жіберу</button></div>
     </div>
   </div>
-
   <div id="pUpload" class="hide">
     <div style="background:#fff;color:#000;min-height:calc(100vh - 60px);padding:20px;text-align:center">
       <h2>➕ Жаңа видео</h2>
@@ -92,37 +89,18 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
       <p id="fileInfo" style="font-size:13px;color:gray"></p>
       <div id="preview"></div>
       <button onclick="postJasau()" style="width:200px;padding:15px;background:#fe2c55;color:#fff;border:none;border-radius:30px;font-size:18px;font-weight:bold;margin:12px auto;display:block">✦ Жариялау</button>
-      <p id="postMsg" style="color:green"></p>
     </div>
   </div>
-
   <div id="p3" class="hide">
     <div class="profile">
       <div class="profile-top">
         <div class="dots" onclick="toggleMenu(event)">⋮</div>
-        <div id="hiddenMenu" class="hidden-menu hide">
-          <div onclick="alert('Нұсқа: 1.0')">ℹ️ Нұсқа туралы</div>
-          <div onclick="alert('Шақыру коды: TUGAN-2026')">🔑 Шақыру коды</div>
-          <div onclick="shigu()">🚪 Шығу</div>
-        </div>
+        <div id="hiddenMenu" class="hidden-menu hide"><div onclick="alert('Нұсқа: 1.0')">ℹ️ Нұсқа туралы</div><div onclick="alert('Шақыру коды: TUGAN-2026')">🔑 Шақыру коды</div><div onclick="shigu()">🚪 Шығу</div></div>
         <div class="profile-top-row">
-          <div class="prof-avatar-wrap" onclick="document.getElementById('avatarInput').click()">
-            <img id="myAvatar" src="" class="prof-avatar">
-            <div class="prof-add">📷<span>Аватар қосу</span></div>
-          </div>
-          <div>
-            <h2 id="profName" style="font-size:28px">Ержан</h2>
-            <p style="opacity:.8;font-size:14px">ID: tuys_<span id="myId">2026</span></p>
-            <input type="file" id="avatarInput" accept="image/*" style="display:none">
-          </div>
+          <div class="prof-avatar-wrap" onclick="document.getElementById('avatarInput').click()"><img id="myAvatar" src="" class="prof-avatar"><div class="prof-add">📷<span>Аватар қосу</span></div></div>
+          <div><h2 id="profName" style="font-size:28px">Ержан</h2><p style="opacity:.8;font-size:14px">ID: tuys_<span id="myId">2026</span></p><input type="file" id="avatarInput" accept="image/*" style="display:none"></div>
         </div>
-        <div class="profile-stats">
-          <div class="stat"><b id="cntLikes">2092</b><span>Лайк</span></div>
-          <div class="stat"><b>168</b><span>Дос</span></div>
-          <div class="stat"><b>304</b><span>Жазылым</span></div>
-          <div class="stat"><b>354</b><span>Оқырман</span></div>
-          <button class="edit-btn" onclick="editProfile()">Өңдеу</button>
-        </div>
+        <div class="profile-stats"><div class="stat"><b id="cntLikes">2092</b><span>Лайк</span></div><div class="stat"><b>168</b><span>Дос</span></div><div class="stat"><b>304</b><span>Жазылым</span></div><div class="stat"><b>354</b><span>Оқырман</span></div><button class="edit-btn" onclick="editProfile()">Өңдеу</button></div>
         <p style="color:#333;padding:12px 4px;font-size:14px" id="bioText">Өзім туралы жазу үшін басыңыз... ✏️</p>
       </div>
       <div class="tabs"><b>Жұмыстар ▾</b><span>Күнделік</span><span>Жеке</span><span>Ұсыныс</span><span>Сақталған</span></div>
@@ -131,18 +109,9 @@ input{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;margin-bo
       <p style="text-align:center;color:#ddd;font-size:11px;margin-top:20px" onclick="secretTap()">Туыстар • v1.0</p>
     </div>
   </div>
-
-  <div class="nav">
-    <button id="n1" class="on" onclick="bet(1)">Басты</button>
-    <button id="n2" onclick="bet(2)">Достар</button>
-    <button class="nav-plus" onclick="bet(0)">+</button>
-    <button onclick="bet(2)">Хаттар <span style="background:#fe2c55;color:#fff;font-size:10px;padding:2px 5px;border-radius:10px">4</span></button>
-    <button id="n3" onclick="bet(3)">Мен</button>
-  </div>
+  <div class="nav"><button id="n1" class="on" onclick="bet(1)">Басты</button><button id="n2" onclick="bet(2)">Достар</button><button class="nav-plus" onclick="bet(0)">+</button><button onclick="bet(2)">Хаттар <span style="background:#fe2c55;color:#fff;font-size:10px;padding:2px 5px;border-radius:10px">4</span></button><button id="n3" onclick="bet(3)">Мен</button></div>
 </div>
-
 <div id="modal" class="modal hide" onclick="closeModal()"><div style="position:absolute;top:15px;right:18px;font-size:32px">✕</div><div id="modalContent" onclick="event.stopPropagation()"></div><div id="modalText" style="color:#fff;margin-top:10px"></div></div>
-
 <script>
 var posts=[
   {author:'Апа',text:'Бүгін бауырсақ пісірдім 😋 #туыстар',media:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800',type:'image',likes:383,comments:79},
@@ -154,71 +123,26 @@ var myAvatar=localStorage.getItem('tuys_avatar')||'https://cdn-icons-png.flatico
 var myBio=localStorage.getItem('tuys_bio')||'Өзім туралы жазу үшін басыңыз... ✏️';
 var tmpMedia=''; var tmpType='image'; var secretCount=0;
 if(myName) showApp();
-function showApp(){
-  document.getElementById('loginPage').classList.add('hide');
-  document.getElementById('appPage').classList.remove('hide');
-  document.getElementById('profName').innerText=myName;
-  document.getElementById('myAvatar').src=myAvatar;
-  document.getElementById('myId').innerText=myName.length+'2026';
-  document.getElementById('bioText').innerText=myBio;
-  render();
-}
-function kiru(){
-  var n=document.getElementById('myName').value.trim();
-  var c=document.getElementById('myCode').value.trim().toUpperCase();
-  if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;}
-  if(c!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате!';return;}
-  myName=n; localStorage.setItem('tuys_name',myName); showApp();
-}
+function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2026'; document.getElementById('bioText').innerText=myBio; render(); }
+function kiru(){ var n=document.getElementById('myName').value.trim(); var c=document.getElementById('myCode').value.trim().toUpperCase(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} if(c!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате!';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
 function render(){
   var h='';
   for(var i=0;i<posts.length;i++){
-    var p=posts[i];
-    var av = p.author===myName ? myAvatar : 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
-    var media = p.type==='video' ? '<video src="'+p.media+'" loop muted playsinline preload="auto" onclick="toggleVideo(this)"></video><div class="play-center" id="playIcon'+i+'">▶</div>' : '<img src="'+p.media+'">';
-    h+='<div class="video-card" data-index="'+i+'">'+media+
-      '<div class="side"><img src="'+av+'" class="side-avatar"><div class="side-plus" onclick="follow(this)">+</div>'+
-      '<div class="side-btn" onclick="likePost('+i+',this)">🤍</div><div class="side-count">'+p.likes+'</div>'+
-      '<div class="side-btn" onclick="openModal('+i+')">💬</div><div class="side-count">'+p.comments+'</div>'+
-      '<div class="side-btn">⭐</div><div class="side-count">25</div>'+
-      '<div class="side-btn">➤</div><div class="side-count">4</div></div>'+
-      '<div class="video-overlay"><b>@'+p.author+'</b><p>'+p.text+'</p></div></div>';
+    var p=posts[i]; var av=p.author===myName?myAvatar:'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
+    var media=p.type==='video'?'<video src="'+p.media+'" loop muted playsinline preload="auto" onclick="toggleVideo(this)"></video><div class="play-center" id="playIcon'+i+'">▶</div>':'<img src="'+p.media+'">';
+    h+='<div class="video-card" data-index="'+i+'">'+media+'<div class="side"><img src="'+av+'" class="side-avatar"><div class="side-plus" onclick="follow(this)">+</div><div class="side-btn" onclick="likePost('+i+',this)">🤍</div><div class="side-count">'+p.likes+'</div><div class="side-btn" onclick="openModal('+i+')">💬</div><div class="side-count">'+p.comments+'</div><div class="side-btn">⭐</div><div class="side-count">25</div><div class="side-btn">➤</div><div class="side-count">4</div></div><div class="video-overlay"><b>@'+p.author+'</b><p>'+p.text+'</p></div></div>';
   }
   document.getElementById('feed').innerHTML=h;
   var my=''; var cnt=0; var likes=0;
   for(var j=0;j<posts.length;j++){ if(posts[j].author===myName){ cnt++; likes+=posts[j].likes; var pj=posts[j]; my+='<div class="grid-item" onclick="openModal('+j+')">'+(pj.type==='video'?'<video src="'+pj.media+'"></video>':'<img src="'+pj.media+'">')+'<div class="views">▶ '+pj.likes+'</div></div>'; } }
-  document.getElementById('myPosts').innerHTML=my;
-  document.getElementById('cntLikes').innerText=2092+likes;
-  document.getElementById('noPost').style.display=cnt?'none':'block';
-  setupAutoPlay();
+  document.getElementById('myPosts').innerHTML=my; document.getElementById('cntLikes').innerText=2092+likes; document.getElementById('noPost').style.display=cnt?'none':'block'; setupAutoPlay();
 }
-// ВИДЕО АВТОМАТТЫ ОЙНАУ - ЕҢ МАҢЫЗДЫ
 function setupAutoPlay(){
-  var videos=document.querySelectorAll('.video-card video');
-  var observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      var v=e.target.querySelector('video'); if(!v) return;
-      var idx=e.target.getAttribute('data-index');
-      var icon=document.getElementById('playIcon'+idx);
-      if(e.isIntersecting){
-        v.play().catch(function(){});
-        if(icon) icon.style.display='none';
-      } else {
-        v.pause();
-        if(icon) icon.style.display='block';
-      }
-    });
-  },{threshold:0.6});
+  var observer=new IntersectionObserver(function(entries){ entries.forEach(function(e){ var v=e.target.querySelector('video'); if(!v) return; var idx=e.target.getAttribute('data-index'); var icon=document.getElementById('playIcon'+idx); if(e.isIntersecting){ v.play().catch(function(){}); if(icon) icon.style.display='none'; } else { v.pause(); if(icon) icon.style.display='block'; } }); },{threshold:0.6});
   document.querySelectorAll('.video-card').forEach(function(c){ observer.observe(c); });
-  // Бірінші видеоны бірден қосу
-  if(videos[0]){ videos[0].play().catch(function(){}); var ic=document.getElementById('playIcon0'); if(ic) ic.style.display='none'; }
+  var v0=document.querySelector('.video-card video'); if(v0){ v0.play().catch(function(){}); var ic=document.getElementById('playIcon0'); if(ic) ic.style.display='none'; }
 }
-function toggleVideo(v){
-  if(v.paused){ v.play(); v.parentNode.querySelector('.play-center').style.display='none'; }
-  else { v.pause(); v.parentNode.querySelector('.play-center').style.display='block'; }
-  // Дыбысты қосу үшін бір рет бассаң дыбыс шығады
-  v.muted=false;
-}
+function toggleVideo(v){ if(v.paused){ v.play(); v.parentNode.querySelector('.play-center').style.display='none'; } else { v.pause(); v.parentNode.querySelector('.play-center').style.display='block'; } v.muted=false; }
 function likePost(i,el){ posts[i].likes++; el.innerText='❤️'; el.classList.add('liked'); render(); var feed=document.getElementById('feed'); feed.scrollTop=i*(window.innerHeight-60); }
 function follow(el){ el.innerText='✓'; el.style.background='#fff'; el.style.color='#000'; }
 function openModal(idx){ var p=posts[idx]; var html=p.type==='video'?'<video src="'+p.media+'" controls autoplay playsinline></video>':'<img src="'+p.media+'">'; document.getElementById('modalContent').innerHTML=html; document.getElementById('modalText').innerText='@'+p.author+' : '+p.text; document.getElementById('modal').classList.remove('hide'); }
@@ -228,36 +152,10 @@ document.getElementById('bioText').addEventListener('click',editProfile);
 function toggleMenu(e){ e.stopPropagation(); document.getElementById('hiddenMenu').classList.toggle('hide'); }
 document.addEventListener('click',function(){ var m=document.getElementById('hiddenMenu'); if(m) m.classList.add('hide'); });
 function secretTap(){ secretCount++; if(secretCount>=5){ secretCount=0; if(confirm('Шығу керек пе?')) shigu(); } }
-document.getElementById('postFile').addEventListener('change',function(e){
-  var f=e.target.files[0]; if(!f) return;
-  tmpType=f.type.indexOf('video')===0?'video':'image';
-  tmpMedia=URL.createObjectURL(f);
-  document.getElementById('fileInfo').innerText='Таңдалды: '+f.name+' ✅';
-  document.getElementById('preview').innerHTML=tmpType==='video'?'<video src="'+tmpMedia+'" controls playsinline style="width:100%;max-height:300px;border-radius:12px"></video>':'<img src="'+tmpMedia+'" style="width:100%;border-radius:12px">';
-});
-function postJasau(){
-  var t=document.getElementById('postText').value;
-  if(!tmpMedia){alert('Алдымен видео / сурет таңда!');return;}
-  posts.unshift({author:myName,text:t||'Жаңа видео ❤️',media:tmpMedia,type:tmpType,likes:0,comments:0});
-  tmpMedia=''; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML=''; document.getElementById('fileInfo').innerText=''; document.getElementById('postFile').value='';
-  render(); alert('Жарияланды ✅'); bet(1);
-}
-document.getElementById('avatarInput').addEventListener('change',function(e){
-  var f=e.target.files[0]; if(!f) return;
-  var r=new FileReader(); r.onload=function(ev){ myAvatar=ev.target.result; document.getElementById('myAvatar').src=myAvatar; localStorage.setItem('tuys_avatar',myAvatar); render(); alert('Аватар қойылды ✅'); }; r.readAsDataURL(f);
-});
-function bet(n){
-  document.getElementById('p1').classList.add('hide'); document.getElementById('p2').classList.add('hide'); document.getElementById('pUpload').classList.add('hide'); document.getElementById('p3').classList.add('hide');
-  if(n===0) document.getElementById('pUpload').classList.remove('hide');
-  if(n===1) document.getElementById('p1').classList.remove('hide');
-  if(n===2) document.getElementById('p2').classList.remove('hide');
-  if(n===3) document.getElementById('p3').classList.remove('hide');
-  document.getElementById('n1').classList.remove('on'); document.getElementById('n2').classList.remove('on'); document.getElementById('n3').classList.remove('on');
-  if(n===1) document.getElementById('n1').classList.add('on');
-  if(n===2) document.getElementById('n2').classList.add('on');
-  if(n===3) document.getElementById('n3').classList.add('on');
-  if(n===1) setTimeout(setupAutoPlay,100);
-}
+document.getElementById('postFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; tmpType=f.type.indexOf('video')===0?'video':'image'; tmpMedia=URL.createObjectURL(f); document.getElementById('fileInfo').innerText='Таңдалды: '+f.name+' ✅'; document.getElementById('preview').innerHTML=tmpType==='video'?'<video src="'+tmpMedia+'" controls playsinline style="width:100%;max-height:300px;border-radius:12px"></video>':'<img src="'+tmpMedia+'" style="width:100%;border-radius:12px">'; });
+function postJasau(){ var t=document.getElementById('postText').value; if(!tmpMedia){alert('Алдымен видео / сурет таңда!');return;} posts.unshift({author:myName,text:t||'Жаңа видео ❤️',media:tmpMedia,type:tmpType,likes:0,comments:0}); tmpMedia=''; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML=''; document.getElementById('fileInfo').innerText=''; document.getElementById('postFile').value=''; render(); alert('Жарияланды ✅'); bet(1); }
+document.getElementById('avatarInput').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(ev){ myAvatar=ev.target.result; document.getElementById('myAvatar').src=myAvatar; localStorage.setItem('tuys_avatar',myAvatar); render(); alert('Аватар қойылды ✅'); }; r.readAsDataURL(f); });
+function bet(n){ document.getElementById('p1').classList.add('hide'); document.getElementById('p2').classList.add('hide'); document.getElementById('pUpload').classList.add('hide'); document.getElementById('p3').classList.add('hide'); if(n===0) document.getElementById('pUpload').classList.remove('hide'); if(n===1) document.getElementById('p1').classList.remove('hide'); if(n===2) document.getElementById('p2').classList.remove('hide'); if(n===3) document.getElementById('p3').classList.remove('hide'); document.getElementById('n1').classList.remove('on'); document.getElementById('n2').classList.remove('on'); document.getElementById('n3').classList.remove('on'); if(n===1) document.getElementById('n1').classList.add('on'); if(n===2) document.getElementById('n2').classList.add('on'); if(n===3) document.getElementById('n3').classList.add('on'); if(n===1) setTimeout(setupAutoPlay,100); }
 function chatAsh(name){ document.getElementById('chatBox').classList.remove('hide'); document.getElementById('chatName').innerText=name; document.getElementById('chatMsgs').innerHTML='<div>Сәлем! 👋</div>'; }
 function hatJiberu(){ var v=document.getElementById('chatInput').value; if(!v) return; document.getElementById('chatMsgs').innerHTML+='<div style="background:#000;color:#fff;padding:8px;border-radius:10px;margin:5px 0">'+v+'</div>'; document.getElementById('chatInput').value=''; }
 function shigu(){ if(confirm('Шынымен шығасың ба?')){ localStorage.clear(); location.reload(); } }
