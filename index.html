@@ -95,22 +95,23 @@ input:focus{border-color:#000}
 </head>
 <body>
 
-<!-- ===== КІРУ - СУРЕТТЕР КОДТЫҢ ІШІНДЕ ===== -->
+<!-- ===== КІРУ - КОДПЕН ===== -->
 <div id="loginPage" class="login-page">
   <div class="login-container">
     <div class="logo-section">
-      <img class="logo-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><rect width='300' height='300' fill='%23FFEFD0'/><circle cx='150' cy='150' r='135' fill='%23FFF8E7' stroke='%23C9A227' stroke-width='6'/><circle cx='150' cy='108' r='42' fill='%23FFD9A0'/><circle cx='150' cy='108' r='42' fill='none' stroke='%238B5A00' stroke-width='3'/><circle cx='135' cy='100' r='5' fill='%23333'/><circle cx='165' cy='100' r='5' fill='%23333'/><path d='M130 125 Q150 140 170 125' stroke='%23333' stroke-width='4' fill='none' stroke-linecap='round'/><circle cx='78' cy='150' r='30' fill='%23FFD9A0' stroke='%238B5A00' stroke-width='3'/><circle cx='222' cy='150' r='30' fill='%23FFD9A0' stroke='%238B5A00' stroke-width='3'/><circle cx='70' cy='145' r='4' fill='%23333'/><circle cx='86' cy='145' r='4' fill='%23333'/><circle cx='214' cy='145' r='4' fill='%23333'/><circle cx='230' cy='145' r='4' fill='%23333'/><path d='M65 158 Q78 168 91 158' stroke='%23333' stroke-width='3' fill='none'/><path d='M209 158 Q222 168 235 158' stroke='%23333' stroke-width='3' fill='none'/><rect x='95' y='185' width='110' height='48' rx='20' fill='%23E63946'/><text x='150' y='216' font-size='22' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>Туыс</text></svg>" alt="Туыс-Туған">
+      <img class="logo-img" src="data:image/svg+xml;utf8,[STRIPPED]" alt="Туыс-Туған">
       <div class="logo">Туыс-Туған</div>
       <div class="subtitle">Сүйікті адамдармен байланыста бол</div>
     </div>
     <div class="login-card">
       <div class="login-title">Қош келдіңіз!</div>
       <p class="login-desc">Отбасыңызбен бірге естеліктерді бөлісіңіз,<br>жылы дастарханның дәмін бірге сезініңіз.</p>
-      <img class="welcome-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360'><rect width='600' height='360' fill='%23FFEFD0'/><rect x='0' y='0' width='600' height='160' fill='%23FFF3D6'/><circle cx='520' cy='50' r='28' fill='%23FFD93D'/><rect x='40' y='190' width='520' height='18' rx='9' fill='%238B5A00'/><rect x='70' y='208' width='460' height='110' fill='%23A67C2E'/><circle cx='150' cy='150' r='38' fill='%23FFD9A0'/><circle cx='300' cy='130' r='42' fill='%23FFD9A0'/><circle cx='450' cy='150' r='38' fill='%23FFD9A0'/><rect x='120' y='185' width='60' height='70' fill='%234A90E2'/><rect x='270' y='170' width='60' height='85' fill='%23E63946'/><rect x='420' y='185' width='60' height='70' fill='%2322C55E'/><circle cx='150' cy='150' r='5' fill='%23333'/><circle cx='300' cy='130' r='5' fill='%23333'/><circle cx='450' cy='150' r='5' fill='%23333'/><rect x='180' y='185' width='70' height='22' rx='11' fill='white'/><rect x='330' y='185' width='70' height='22' rx='11' fill='white'/><text x='300' y='330' font-size='20' text-anchor='middle' fill='%238B5A00' font-family='Arial' font-weight='bold'>❤️ Отбасы • Дастархан • Естелік ❤️</text></svg>" alt="Отбасы">
+      <img class="welcome-img" src="data:image/svg+xml;utf8,[STRIPPED]" alt="Отбасы">
       <input id="myName" placeholder="Атыңды жаз (мысалы: Ержан)">
+      <input id="myCode" placeholder="Құпия кодты жаз" autocomplete="off">
       <button class="btn btn-primary" onclick="kiru()">КІРУ →</button>
       <p id="errorMsg" style="color:red;margin-top:8px;text-align:center;font-size:13px"></p>
-      <p style="font-size:12px;color:#8a6a3a;margin-top:8px;text-align:center">Код керек емес, тек атыңды жаз!</p>
+      <p style="font-size:12px;color:#8a6a3a;margin-top:8px;text-align:center">Тек туыстар кіре алады 🔒</p>
     </div>
   </div>
 </div>
@@ -312,7 +313,7 @@ function loadPostsFromDB(cb){
 function saveStates(){ var o={}; posts.forEach(function(p){ o[p.id]={liked:p.liked,saved:p.saved,comments:p.comments}; }); localStorage.setItem('tuys_states',JSON.stringify(o)); }
 openDB(function(){ loadPostsFromDB(function(){ if(myName) showApp(); }); });
 function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2026'; document.getElementById('bioText').innerText=myBio; render(); updateCounts(); renderChatList(); }
-function kiru(){ var n=document.getElementById('myName').value.trim(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
+function kiru(){ var n=document.getElementById('myName').value.trim(); var c=document.getElementById('myCode').value.trim().toUpperCase(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} if(c!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате! Дұрыс кодты жаз.';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
 function updateCounts(){
   var likes=0; posts.forEach(function(p){ if(p.author===myName) likes+=p.likes; });
   document.getElementById('cntLikes').innerText=likes;
@@ -393,4 +394,4 @@ function bet(n){ document.getElementById('p1').classList.add('hide'); document.g
 function shigu(){ if(confirm('Шынымен шығасың ба? Видеоларың мен хаттарың сақталып тұрады.')){ localStorage.removeItem('tuys_name'); location.reload(); } }
 </script>
 </body>
-</html>
+  </html>
