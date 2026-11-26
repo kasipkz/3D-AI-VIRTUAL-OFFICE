@@ -13,10 +13,14 @@ input:focus{border-color:#000}
 .login-page{background:#000;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 .login-container{width:100%;max-width:400px}
 .logo-section{text-align:center;margin-bottom:24px}
-.logo-img{width:130px;height:130px;object-fit:cover;border-radius:50%;background:#fff;display:block;margin:0 auto 10px;border:4px solid #FFEFD0}
+.logo-circle{width:130px;height:130px;border-radius:50%;background:#FFEFD0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;border:4px solid #fff;font-size:48px;line-height:1}
+.logo-circle span{font-size:13px;font-weight:800;color:#8B5A00;margin-top:4px}
 .logo{font-size:32px;font-weight:bold;color:#FFEFD0;margin-bottom:6px}
 .subtitle{font-size:14px;color:#888}
-.welcome-img{width:100%;border-radius:18px;margin:12px 0;display:block;border:2px solid #fff}
+.welcome-box{width:100%;border-radius:18px;margin:12px 0;background:linear-gradient(135deg,#FFD9A0,#FFEFD0,#FFC98A);padding:18px 12px;text-align:center;color:#5a3a00;border:2px solid #fff}
+.welcome-box .fam{font-size:52px;line-height:1}
+.welcome-box b{font-size:17px;display:block;margin:6px 0 2px}
+.welcome-box p{font-size:12px;opacity:.8}
 .login-card{background:#FFEFD0;color:#000;border-radius:20px;padding:30px 25px}
 .login-title{font-size:22px;font-weight:600;margin-bottom:8px;text-align:center}
 .login-desc{font-size:13px;color:#6b4a1f;text-align:center;line-height:1.5;margin-bottom:18px}
@@ -95,18 +99,18 @@ input:focus{border-color:#000}
 </head>
 <body>
 
-<!-- ===== КІРУ - КОДПЕН ===== -->
+<!-- ===== КІРУ - КОД: TUGAN-2027 ===== -->
 <div id="loginPage" class="login-page">
   <div class="login-container">
     <div class="logo-section">
-      <img class="logo-img" src="data:image/svg+xml;utf8,[STRIPPED]" alt="Туыс-Туған">
+      <div class="logo-circle">👨‍👩‍👧‍👦<span>ТУЫС</span></div>
       <div class="logo">Туыс-Туған</div>
       <div class="subtitle">Сүйікті адамдармен байланыста бол</div>
     </div>
     <div class="login-card">
       <div class="login-title">Қош келдіңіз!</div>
       <p class="login-desc">Отбасыңызбен бірге естеліктерді бөлісіңіз,<br>жылы дастарханның дәмін бірге сезініңіз.</p>
-      <img class="welcome-img" src="data:image/svg+xml;utf8,[STRIPPED]" alt="Отбасы">
+      <div class="welcome-box"><div class="fam">👨‍👩‍👧‍👦 🍲 🫖</div><b>Отбасы • Дастархан • Естелік</b><p>Жылы кездесулер осында</p></div>
       <input id="myName" placeholder="Атыңды жаз (мысалы: Ержан)">
       <input id="myCode" placeholder="Құпия кодты жаз" autocomplete="off">
       <button class="btn btn-primary" onclick="kiru()">КІРУ →</button>
@@ -147,10 +151,10 @@ input:focus{border-color:#000}
     <div class="profile">
       <div class="profile-top">
         <div class="dots" onclick="toggleMenu(event)">⋮</div>
-        <div id="hiddenMenu" class="hidden-menu hide"><div onclick="alert('Нұсқа: 1.0')">ℹ️ Нұсқа туралы</div><div onclick="alert('Шақыру коды: TUGAN-2026')">🔑 Шақыру коды</div><div onclick="shigu()">🚪 Шығу</div></div>
+        <div id="hiddenMenu" class="hidden-menu hide"><div onclick="alert('Нұсқа: 1.0')">ℹ️ Нұсқа туралы</div><div onclick="alert('Шақыру коды: TUGAN-2027')">🔑 Шақыру коды</div><div onclick="shigu()">🚪 Шығу</div></div>
         <div class="profile-top-row">
           <div class="prof-avatar-wrap" onclick="document.getElementById('avatarInput').click()"><img id="myAvatar" src="" class="prof-avatar"><div class="prof-add">📷<span>Аватар қосу</span></div></div>
-          <div><h2 id="profName" style="font-size:28px">Ержан</h2><p style="opacity:.8;font-size:14px">ID: tuys_<span id="myId">2026</span></p><input type="file" id="avatarInput" accept="image/*" style="display:none"></div>
+          <div><h2 id="profName" style="font-size:28px">Ержан</h2><p style="opacity:.8;font-size:14px">ID: tuys_<span id="myId">2027</span></p><input type="file" id="avatarInput" accept="image/*" style="display:none"></div>
         </div>
         <div class="profile-stats">
           <div class="stat" onclick="openPeople('likes')"><b id="cntLikes">0</b><span>Лайк</span></div>
@@ -312,8 +316,8 @@ function loadPostsFromDB(cb){
 }
 function saveStates(){ var o={}; posts.forEach(function(p){ o[p.id]={liked:p.liked,saved:p.saved,comments:p.comments}; }); localStorage.setItem('tuys_states',JSON.stringify(o)); }
 openDB(function(){ loadPostsFromDB(function(){ if(myName) showApp(); }); });
-function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2026'; document.getElementById('bioText').innerText=myBio; render(); updateCounts(); renderChatList(); }
-function kiru(){ var n=document.getElementById('myName').value.trim(); var c=document.getElementById('myCode').value.trim().toUpperCase(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} if(c!=='TUGAN-2026'){document.getElementById('errorMsg').innerText='Код қате! Дұрыс кодты жаз.';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
+function showApp(){ document.getElementById('loginPage').classList.add('hide'); document.getElementById('appPage').classList.remove('hide'); document.getElementById('profName').innerText=myName; document.getElementById('myAvatar').src=myAvatar; document.getElementById('myId').innerText=myName.length+'2027'; document.getElementById('bioText').innerText=myBio; render(); updateCounts(); renderChatList(); }
+function kiru(){ var n=document.getElementById('myName').value.trim(); var c=document.getElementById('myCode').value.trim().toUpperCase(); if(!n){document.getElementById('errorMsg').innerText='Атыңды жаз!';return;} if(c!=='TUGAN-2027'){document.getElementById('errorMsg').innerText='Код қате! Дұрыс кодты жаз.';return;} myName=n; localStorage.setItem('tuys_name',myName); showApp(); }
 function updateCounts(){
   var likes=0; posts.forEach(function(p){ if(p.author===myName) likes+=p.likes; });
   document.getElementById('cntLikes').innerText=likes;
