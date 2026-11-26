@@ -4,200 +4,154 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Туыстар</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>body{background:#F8F7F4;font-family:sans-serif}.hide{display:none}.active{color:#000!important;border-top:2px solid #000}</style>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:sans-serif;background:#f2f2f2}
+.box{max-width:380px;margin:20px auto;background:#fff;padding:20px;border-radius:20px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin-bottom:10px;font-size:16px}
+button{width:100%;padding:12px;background:#000;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:bold}
+.hide{display:none}
+.post{background:#fff;max-width:380px;margin:10px auto;padding:12px;border-radius:16px}
+.post img{width:100%;border-radius:12px}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:380px;background:#fff;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #eee}
+.nav button{background:none;color:#000;font-size:14px;width:auto}
+</style>
 </head>
 <body>
 
-<!-- КІРУ -->
-<div id="login" class="min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-xl">
-    <div class="text-5xl text-center">👨‍👩‍👧‍👦</div>
-    <h1 class="text-2xl font-black text-center mt-2">ТУЫСТАР</h1>
-    <p class="text-center text-gray-500 text-sm mb-4">Тек шақырумен кіруге болады</p>
-    <input id="uName" placeholder="Аты-жөнің" class="w-full border p-3 rounded-xl mb-3 outline-none">
-    <input id="uCode" value="TUGAN-2026" placeholder="Шақыру коды" class="w-full border p-3 rounded-xl mb-3 bg-yellow-50 outline-none">
-    <button onclick="doLogin()" class="w-full bg-black text-white p-3 rounded-xl font-bold">Кіру →</button>
-    <p class="text-center text-xs text-gray-400 mt-3">Демо код: TUGAN-2026</p>
+<!-- КІРУ БЕТІ -->
+<div id="loginPage">
+  <div class="box" style="margin-top:60px;text-align:center">
+    <div style="font-size:50px">👨‍👩‍👧‍👦</div>
+    <h2>ТУЫСТАР</h2>
+    <p style="color:gray;font-size:14px">Тек шақырумен кіруге болады</p>
+    <input id="myName" placeholder="Атыңды жаз: Аружан">
+    <input id="myCode" placeholder="Шақыру коды" value="TUGAN-2026">
+    <button onclick="kiru()">КІРУ →</button>
+    <p id="errorMsg" style="color:red;font-size:14px"></p>
+    <p style="font-size:12px;color:gray">Код: TUGAN-2026<br>Аты бос болмасын!</p>
   </div>
 </div>
 
-<!-- APP -->
-<div id="app" class="hide max-w-md mx-auto min-h-screen pb-24">
-  <div class="sticky top-0 bg-white p-4 flex justify-between items-center shadow-sm z-10">
-    <b>Туыстар 👨‍👩‍👧‍👦</b>
-    <span id="topName" class="text-sm font-bold"></span>
-  </div>
+<!-- НЕГІЗГІ БЕТ -->
+<div id="appPage" class="hide">
+  <div style="background:#fff;padding:15px;text-align:center;font-weight:bold;position:sticky;top:0">Туыстар 👨‍👩‍👧‍👦 | <span id="showName"></span></div>
 
-  <!-- ЛЕНТА -->
-  <div id="p-feed" class="p-3">
-    <div class="bg-white rounded-2xl p-3 shadow-sm mb-3">
-      <input id="cap" placeholder="Не жаңалық?" class="w-full bg-gray-100 rounded-full px-4 py-2 text-sm outline-none">
-      <div id="prev" class="mt-2 hide"></div>
-      <div class="flex gap-2 mt-3">
-        <label class="flex-1 text-center bg-gray-100 py-2 rounded-xl text-sm cursor-pointer">📷 Фото / Видео
-          <input type="file" id="fileIn" accept="image/*,video/*" class="hidden">
-        </label>
-        <button onclick="doPost()" class="flex-1 bg-black text-white py-2 rounded-xl text-sm font-bold">Жариялау</button>
-      </div>
+  <div id="page1">
+    <div class="box">
+      <input id="postText" placeholder="Не жаңалық?">
+      <input type="file" id="postFile" accept="image/*,video/*">
+      <div id="preview"></div>
+      <button onclick="postJasau()" style="margin-top:10px">Жариялау</button>
     </div>
     <div id="feed"></div>
   </div>
 
-  <!-- ЧАТ ТІЗІМ -->
-  <div id="p-chat" class="p-3 hide">
-    <h2 class="font-bold mb-3">Хаттар 💬</h2>
-    <div id="chatList"></div>
-  </div>
-
-  <!-- ЧАТ БӨЛМЕ -->
-  <div id="p-room" class="p-3 hide">
-    <button onclick="show('chat')" class="text-sm mb-2">← Артқа</button>
-    <h2 id="roomName" class="font-bold mb-3"></h2>
-    <div id="roomMsgs" class="space-y-2 min-h-[50vh]"></div>
-    <div class="flex gap-2 mt-3">
-      <input id="msgIn" placeholder="Хат жаз..." class="flex-1 border p-3 rounded-xl bg-white outline-none">
-      <button onclick="doSend()" class="bg-black text-white px-4 rounded-xl">➤</button>
+  <div id="page2" class="hide">
+    <div class="box"><b>Хаттар 💬</b><br><br>
+      <div onclick="chatAsh('Апа')" style="padding:10px;border-bottom:1px solid #eee">👤 Апа ›</div>
+      <div onclick="chatAsh('Аға')" style="padding:10px;border-bottom:1px solid #eee">👤 Аға ›</div>
+      <div onclick="chatAsh('Әпке')" style="padding:10px">👤 Әпке ›</div>
+    </div>
+    <div id="chatBox" class="box hide">
+      <b id="chatName"></b>
+      <div id="chatMsgs" style="min-height:100px;margin:10px 0"></div>
+      <input id="chatInput" placeholder="Хат жаз...">
+      <button onclick="hatJiberu()">Жіберу</button>
     </div>
   </div>
 
-  <!-- ПРОФИЛЬ -->
-  <div id="p-profile" class="p-4 hide text-center">
-    <div class="text-6xl">👤</div>
-    <h2 id="profName" class="text-xl font-bold mt-2"></h2>
-    <p class="text-gray-500 text-sm">Туыс • Жабық желі</p>
-    <div class="bg-white rounded-2xl p-4 mt-4 text-left">
-      <b>🔑 Шақыру кодың:</b>
-      <p class="bg-yellow-50 border p-2 rounded-lg text-center font-bold mt-2">TUGAN-2026</p>
-      <p class="text-xs text-gray-500 mt-2">Осы кодты туысыңа жібер.</p>
+  <div id="page3" class="hide">
+    <div class="box" style="text-align:center">
+      <div style="font-size:60px">👤</div>
+      <h3 id="profName"></h3>
+      <p>Туыс • Жабық желі мүшесі</p>
+      <p style="background:#fff8c5;padding:10px;border-radius:10px"><b>Шақыру кодың: TUGAN-2026</b></p>
+      <button onclick="shigu()" style="background:#ffe0e0;color:red;margin-top:10px">Шығу</button>
     </div>
-    <button onclick="doLogout()" class="mt-4 bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm">Шығу</button>
-    <h3 class="font-bold text-left mt-6 mb-2">Менің посттарым</h3>
-    <div id="myPosts" class="grid grid-cols-3 gap-2"></div>
   </div>
 
-  <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t flex justify-around py-3 text-gray-400 text-[11px] font-bold">
-    <button onclick="show('feed')" id="t-feed" class="active">🏠<br>Лента</button>
-    <button onclick="show('chat')" id="t-chat">💬<br>Хаттар</button>
-    <button onclick="show('profile')" id="t-profile">👤<br>Профиль</button>
+  <div style="height:70px"></div>
+  <div class="nav">
+    <button onclick="bet(1)">🏠 Лента</button>
+    <button onclick="bet(2)">💬 Хаттар</button>
+    <button onclick="bet(3)">👤 Профиль</button>
   </div>
 </div>
 
 <script>
-let DB = JSON.parse(localStorage.getItem('tuys2') || 'null');
-if(!DB){
-  DB = {
-    me: null,
-    users: [{name:'Апа'},{name:'Аға'},{name:'Әпке'}],
-    posts: [
-      {author:'Апа', text:'Бүгін бауырсақ пісірдім 😋', img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600', type:'image', likes:5, comments:[{a:'Аға',t:'Керемет!'}]},
-      {author:'Аға', text:'Ауылда қар жауып жатыр ❄️', img:'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=600', type:'image', likes:3, comments:[]}
-    ],
-    msgs: {}
-  };
-  saveDB();
-}
-function saveDB(){ localStorage.setItem('tuys2', JSON.stringify(DB)); }
-let tmpImg=null, tmpType='image', curChat=null;
+var posts = [
+  {author:'Апа', text:'Бүгін бауырсақ пісірдім 😋', img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600'},
+  {author:'Аға', text:'Ауылда қар жауып жатыр ❄️', img:'https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=600'}
+];
+var myName = '';
+var tmpImg = '';
+var curChat = '';
 
-function doLogin(){
-  let n = document.getElementById('uName').value.trim();
-  let c = document.getElementById('uCode').value.trim().toUpperCase();
-  if(!n) return alert('Атыңды жаз!');
-  if(c!=='TUGAN-2026' && c!=='OTBAS-123') return alert('Код қате!');
-  DB.me = {name:n}; saveDB(); start();
-}
-function doLogout(){ DB.me=null; saveDB(); location.reload(); }
-function start(){
-  if(!DB.me) return;
-  document.getElementById('login').classList.add('hide');
-  document.getElementById('app').classList.remove('hide');
-  document.getElementById('topName').innerText = DB.me.name;
-  document.getElementById('profName').innerText = DB.me.name;
-  renderFeed(); renderChats(); renderMine();
-}
-if(DB.me) start();
+function kiru(){
+  var name = document.getElementById('myName').value;
+  var code = document.getElementById('myCode').value;
+  // Бос орындарды алып тастаймыз
+  name = name.trim();
+  code = code.trim().toUpperCase();
 
-document.getElementById('fileIn').addEventListener('change', function(e){
-  let f = e.target.files[0]; if(!f) return;
-  let r = new FileReader();
-  r.onload = function(ev){
-    tmpImg = ev.target.result;
-    tmpType = f.type.indexOf('video')===0 ? 'video' : 'image';
-    let p = document.getElementById('prev');
-    p.classList.remove('hide');
-    p.innerHTML = tmpType==='video' ? '<video src="'+tmpImg+'" controls class="w-full rounded-xl"></video>' : '<img src="'+tmpImg+'" class="w-full rounded-xl">';
-  };
+  if(name === ''){
+    document.getElementById('errorMsg').innerText = 'Атыңды жазшы!';
+    return;
+  }
+  if(code !== 'TUGAN-2026'){
+    document.getElementById('errorMsg').innerText = 'Код қате! TUGAN-2026 деп жаз';
+    return;
+  }
+  myName = name;
+  document.getElementById('loginPage').classList.add('hide');
+  document.getElementById('appPage').classList.remove('hide');
+  document.getElementById('showName').innerText = myName;
+  document.getElementById('profName').innerText = myName;
+  render();
+}
+
+function render(){
+  var h = '';
+  for(var i=0;i<posts.length;i++){
+    h += '<div class="post"><b>'+posts[i].author+'</b><p>'+posts[i].text+'</p><img src="'+posts[i].img+'"></div>';
+  }
+  document.getElementById('feed').innerHTML = h;
+}
+
+document.getElementById('postFile').addEventListener('change', function(e){
+  var f = e.target.files[0];
+  var r = new FileReader();
+  r.onload = function(ev){ tmpImg = ev.target.result; document.getElementById('preview').innerHTML = '<img src="'+tmpImg+'" style="width:100%;border-radius:12px;margin-top:10px">'; };
   r.readAsDataURL(f);
 });
 
-function doPost(){
-  let t = document.getElementById('cap').value.trim();
-  if(!tmpImg && !t) return alert('Мәтін немесе фото жаз!');
-  DB.posts.unshift({author:DB.me.name, text:t||'Жаңа пост ❤️', img:tmpImg||'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600', type:tmpType, likes:0, comments:[]});
-  tmpImg=null; document.getElementById('cap').value=''; document.getElementById('prev').innerHTML=''; document.getElementById('prev').classList.add('hide');
-  saveDB(); renderFeed(); renderMine(); alert('Жарияланды ✅');
+function postJasau(){
+  var t = document.getElementById('postText').value;
+  if(!t && !tmpImg){ alert('Мәтін немесе сурет керек!'); return; }
+  posts.unshift({author:myName, text:t||'Жаңа пост ❤️', img: tmpImg || 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600'});
+  tmpImg=''; document.getElementById('postText').value=''; document.getElementById('preview').innerHTML='';
+  render(); alert('Жарияланды ✅');
 }
 
-function renderFeed(){
-  let h = '';
-  DB.posts.forEach(function(p,i){
-    let media = p.type==='video' ? '<video src="'+p.img+'" controls class="w-full rounded-xl"></video>' : '<img src="'+p.img+'" class="w-full rounded-xl">';
-    let cm = '';
-    p.comments.forEach(function(c){ cm += '<div class="text-sm bg-gray-50 p-2 rounded-lg"><b>'+c.a+':</b> '+c.t+'</div>'; });
-    h += '<div class="bg-white rounded-2xl p-3 mb-3 shadow-sm">'
-      + '<b class="text-sm">'+p.author+'</b><p class="text-sm my-2">'+p.text+'</p>'+media
-      + '<div class="flex gap-4 mt-2 text-sm"><button onclick="likeIt('+i+')">❤️ '+p.likes+'</button><span>💬 '+p.comments.length+'</span></div>'
-      + '<div class="mt-2 space-y-1">'+cm+'</div>'
-      + '<div class="flex gap-2 mt-2"><input id="ci'+i+'" placeholder="Пікір..." class="flex-1 bg-gray-100 rounded-full px-3 py-2 text-sm outline-none"><button onclick="addC('+i+')" class="bg-black text-white px-3 rounded-full text-sm">Жібер</button></div>'
-      + '</div>';
-  });
-  document.getElementById('feed').innerHTML = h;
+function bet(n){
+  document.getElementById('page1').classList.add('hide');
+  document.getElementById('page2').classList.add('hide');
+  document.getElementById('page3').classList.add('hide');
+  document.getElementById('page'+n).classList.remove('hide');
 }
-function likeIt(i){ DB.posts[i].likes++; saveDB(); renderFeed(); }
-function addC(i){
-  let v = document.getElementById('ci'+i).value.trim(); if(!v) return;
-  DB.posts[i].comments.push({a:DB.me.name, t:v}); saveDB(); renderFeed();
+function chatAsh(name){
+  curChat = name;
+  document.getElementById('chatBox').classList.remove('hide');
+  document.getElementById('chatName').innerText = name;
+  document.getElementById('chatMsgs').innerHTML = '<div>Сәлем! 👋</div>';
 }
-
-function renderChats(){
-  let h = '';
-  DB.users.forEach(function(u){
-    if(u.name===DB.me.name) return;
-    h += '<div onclick="openRoom(\''+u.name+'\')" class="flex items-center gap-3 bg-white p-3 rounded-2xl mb-2 cursor-pointer"><div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-xl">👤</div><b>'+u.name+'</b><span class="ml-auto">›</span></div>';
-  });
-  document.getElementById('chatList').innerHTML = h;
+function hatJiberu(){
+  var v = document.getElementById('chatInput').value;
+  if(!v) return;
+  document.getElementById('chatMsgs').innerHTML += '<div style="background:#000;color:#fff;padding:8px;border-radius:10px;margin:5px 0">'+v+'</div>';
+  document.getElementById('chatInput').value='';
 }
-function openRoom(name){ curChat=name; document.getElementById('roomName').innerText=name; show('room'); renderMsgs(); }
-function renderMsgs(){
-  let arr = DB.msgs[curChat]||[];
-  let h = '';
-  arr.forEach(function(m){ h += '<div class="bg-white p-3 rounded-2xl max-w-[80%] '+(m.me?'ml-auto bg-black text-white':'')+'">'+m.t+'</div>'; });
-  document.getElementById('roomMsgs').innerHTML = h || '<p class="text-gray-400 text-center text-sm">Әлі хат жоқ</p>';
-}
-function doSend(){
-  let v = document.getElementById('msgIn').value.trim(); if(!v) return;
-  if(!DB.msgs[curChat]) DB.msgs[curChat]=[];
-  DB.msgs[curChat].push({me:true, t:v});
-  document.getElementById('msgIn').value=''; saveDB(); renderMsgs();
-  setTimeout(function(){ DB.msgs[curChat].push({me:false, t:'Жақсы, жаным! 😊'}); saveDB(); renderMsgs(); }, 800);
-}
-
-function renderMine(){
-  let h = '';
-  DB.posts.forEach(function(p){
-    if(p.author!==DB.me.name) return;
-    h += p.type==='video' ? '<video src="'+p.img+'" class="w-full aspect-square object-cover rounded-xl"></video>' : '<img src="'+p.img+'" class="w-full aspect-square object-cover rounded-xl">';
-  });
-  document.getElementById('myPosts').innerHTML = h || '<p class="col-span-3 text-gray-400 text-sm">Әлі пост жоқ</p>';
-}
-
-function show(p){
-  ['feed','chat','room','profile'].forEach(function(x){ document.getElementById('p-'+x).classList.add('hide'); });
-  document.getElementById('p-'+p).classList.remove('hide');
-  ['feed','chat','profile'].forEach(function(t){ let el=document.getElementById('t-'+t); if(el) el.classList.remove('active'); });
-  let tb = document.getElementById('t-'+p); if(tb) tb.classList.add('active');
-}
+function shigu(){ location.reload(); }
 </script>
 </body>
 </html>
